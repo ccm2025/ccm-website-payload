@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_give_page_pdf_links",
+  "info": {
+    "displayName": "PDF Link"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "pdf": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "files"
+      ]
+    }
+  },
+  "config": {}
+}

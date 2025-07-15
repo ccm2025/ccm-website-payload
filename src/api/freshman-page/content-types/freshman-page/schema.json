@@ -1,0 +1,51 @@
+{
+  "kind": "singleType",
+  "collectionName": "freshman_pages",
+  "info": {
+    "singularName": "freshman-page",
+    "pluralName": "freshman-pages",
+    "displayName": "Freshman Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "hero_title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "hero_image": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "info_sections": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "support-page.info-section",
+      "repeatable": true
+    }
+  }
+}

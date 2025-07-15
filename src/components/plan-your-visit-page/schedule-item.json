@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_plan_your_visit_page_schedule_items",
+  "info": {
+    "displayName": "Schedule Item"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_about_page_history_stories",
+  "info": {
+    "displayName": "History Story"
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}
