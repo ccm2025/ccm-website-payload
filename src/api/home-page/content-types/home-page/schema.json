@@ -25,12 +25,14 @@
       "required": true
     },
     "hero_subtitle": {
-      "type": "richtext",
+      "type": "component",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
+      "component": "shared.styled-text",
+      "repeatable": true,
       "required": true
     },
     "hero_button_text": {
@@ -55,12 +57,14 @@
       ]
     },
     "introduction_part1": {
-      "type": "richtext",
+      "type": "component",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
+      "component": "shared.styled-text",
+      "repeatable": true,
       "required": true
     },
     "introduction_video_url": {
@@ -73,12 +77,14 @@
       "required": false
     },
     "introduction_part2": {
-      "type": "richtext",
+      "type": "component",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
+      "component": "shared.styled-text",
+      "repeatable": true,
       "required": true
     },
     "meet_title": {
@@ -101,13 +107,15 @@
       "repeatable": true,
       "required": true
     },
-    "meet_conclusion": {
-      "type": "text",
+    "conclusion": {
+      "type": "component",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
+      "component": "shared.styled-text",
+      "repeatable": true,
       "required": true
     }
   }
