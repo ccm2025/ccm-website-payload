@@ -428,7 +428,10 @@ export interface ApiAboutPageAboutPage extends Struct.SingleTypeSchema {
           localized: true;
         };
       }>;
-    introduction_content: Schema.Attribute.Text &
+    introduction_content: Schema.Attribute.Component<
+      'shared.styled-text',
+      true
+    > &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -497,6 +500,13 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
+    content: Schema.Attribute.Component<'shared.styled-text', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -507,13 +517,6 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
           localized: false;
         };
       }>;
-    description: Schema.Attribute.Text &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     image: Schema.Attribute.Media<'images'> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -522,14 +525,15 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'>;
-    location: Schema.Attribute.String &
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.String &
       Schema.Attribute.Required &
+      Schema.Attribute.Unique &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
-          localized: true;
+          localized: false;
         };
       }>;
-    publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
@@ -827,7 +831,7 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    email: Schema.Attribute.Email &
+    email: Schema.Attribute.Text &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -842,13 +846,6 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
       }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::global.global'>;
-    phone: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -892,6 +889,13 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     };
   };
   attributes: {
+    conclusion: Schema.Attribute.Component<'shared.styled-text', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -908,7 +912,7 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
           localized: true;
         };
       }>;
-    hero_subtitle: Schema.Attribute.RichText &
+    hero_subtitle: Schema.Attribute.Component<'shared.styled-text', true> &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -922,14 +926,14 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
           localized: true;
         };
       }>;
-    introduction_part1: Schema.Attribute.RichText &
+    introduction_part1: Schema.Attribute.Component<'shared.styled-text', true> &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
-    introduction_part2: Schema.Attribute.RichText &
+    introduction_part2: Schema.Attribute.Component<'shared.styled-text', true> &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -948,13 +952,6 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
       'api::home-page.home-page'
     >;
     meet_cards: Schema.Attribute.Component<'gatherings-page.category', true> &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    meet_conclusion: Schema.Attribute.Text &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {

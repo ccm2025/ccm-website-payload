@@ -55,12 +55,14 @@
       "required": true
     },
     "introduction_content": {
-      "type": "text",
+      "type": "component",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
+      "component": "shared.styled-text",
+      "repeatable": true,
       "required": true
     },
     "history_subtitle": {

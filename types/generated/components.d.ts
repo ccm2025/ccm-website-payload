@@ -6,7 +6,8 @@ export interface AboutPageHistoryStory extends Struct.ComponentSchema {
     displayName: 'History Story';
   };
   attributes: {
-    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    content: Schema.Attribute.Component<'shared.styled-text', true> &
+      Schema.Attribute.Required;
     image: Schema.Attribute.Media<'images'>;
   };
 }
@@ -30,8 +31,10 @@ export interface GatheringsPageCategory extends Struct.ComponentSchema {
   };
   attributes: {
     image: Schema.Attribute.Media<'images'>;
-    link: Schema.Attribute.String;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
+    slug: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -58,6 +61,31 @@ export interface PlanYourVisitPageScheduleItem extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedStyledText extends Struct.ComponentSchema {
+  collectionName: 'components_shared_styled_texts';
+  info: {
+    displayName: 'Styled Text';
+  };
+  attributes: {
+    color: Schema.Attribute.Enumeration<
+      ['Default', 'Website-Theme-Color1', 'Website-Theme-Color2']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Default'>;
+    font_size: Schema.Attribute.Enumeration<
+      ['Small', 'Normal', 'Large', 'Extra-Large']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Normal'>;
+    font_style: Schema.Attribute.Enumeration<
+      ['Normal', 'Italic', 'Bold', 'Underline']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Normal'>;
+    text: Schema.Attribute.Text & Schema.Attribute.Required;
+  };
+}
+
 export interface SupportPageInfoSection extends Struct.ComponentSchema {
   collectionName: 'components_support_page_info_sections';
   info: {
@@ -81,6 +109,7 @@ declare module '@strapi/strapi' {
       'gatherings-page.category': GatheringsPageCategory;
       'give-page.pdf-link': GivePagePdfLink;
       'plan-your-visit-page.schedule-item': PlanYourVisitPageScheduleItem;
+      'shared.styled-text': SharedStyledText;
       'support-page.info-section': SupportPageInfoSection;
     }
   }

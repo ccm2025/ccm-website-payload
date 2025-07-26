@@ -33,24 +33,6 @@
       },
       "required": true
     },
-    "location": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "required": true
-    },
-    "description": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "required": true
-    },
     "image": {
       "type": "media",
       "pluginOptions": {
@@ -62,6 +44,27 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "content": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.styled-text",
+      "repeatable": true,
+      "required": true
+    },
+    "slug": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "unique": true
     }
   }
 }
