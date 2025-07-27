@@ -56,12 +56,14 @@
       "required": true
     },
     "introduction_content": {
-      "type": "richtext",
+      "type": "component",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
+      "component": "shared.styled-text",
+      "repeatable": true,
       "required": true
     },
     "zelle_title": {
@@ -74,13 +76,14 @@
       "required": true
     },
     "zelle_content": {
-      "type": "richtext",
+      "type": "component",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "required": true
+      "component": "shared.styled-text",
+      "repeatable": true
     },
     "check_title": {
       "type": "string",
@@ -92,12 +95,14 @@
       "required": true
     },
     "check_content": {
-      "type": "richtext",
+      "type": "component",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
+      "component": "shared.styled-text",
+      "repeatable": true,
       "required": true
     },
     "letter_images": {
@@ -116,7 +121,7 @@
       "type": "component",
       "pluginOptions": {
         "i18n": {
-          "localized": true
+          "localized": false
         }
       },
       "component": "give-page.pdf-link",

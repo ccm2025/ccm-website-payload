@@ -13,10 +13,6 @@
       "type": "string",
       "required": true
     },
-    "content": {
-      "type": "text",
-      "required": true
-    },
     "image": {
       "type": "media",
       "multiple": false,
@@ -29,6 +25,12 @@
     },
     "button_url": {
       "type": "string"
+    },
+    "content": {
+      "type": "component",
+      "component": "shared.styled-text",
+      "repeatable": true,
+      "required": true
     }
   },
   "config": {}

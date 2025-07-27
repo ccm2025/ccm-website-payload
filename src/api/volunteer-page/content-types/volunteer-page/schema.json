@@ -55,12 +55,14 @@
       "required": true
     },
     "introduction_content": {
-      "type": "richtext",
+      "type": "component",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
+      "component": "shared.styled-text",
+      "repeatable": true,
       "required": true
     },
     "application_button_text": {
@@ -80,7 +82,7 @@
         }
       }
     },
-    "volunteer_section_title": {
+    "volunteer_title": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -89,13 +91,16 @@
       },
       "required": true
     },
-    "volunteer_section_content": {
-      "type": "richtext",
+    "volunteer_content": {
+      "type": "component",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "component": "shared.styled-text",
+      "repeatable": true,
+      "required": true
     }
   }
 }
