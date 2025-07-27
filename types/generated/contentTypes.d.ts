@@ -709,7 +709,7 @@ export interface ApiGivePageGivePage extends Struct.SingleTypeSchema {
     };
   };
   attributes: {
-    check_content: Schema.Attribute.RichText &
+    check_content: Schema.Attribute.Component<'shared.styled-text', true> &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -739,7 +739,10 @@ export interface ApiGivePageGivePage extends Struct.SingleTypeSchema {
           localized: true;
         };
       }>;
-    introduction_content: Schema.Attribute.RichText &
+    introduction_content: Schema.Attribute.Component<
+      'shared.styled-text',
+      true
+    > &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -774,15 +777,14 @@ export interface ApiGivePageGivePage extends Struct.SingleTypeSchema {
     pdf_links: Schema.Attribute.Component<'give-page.pdf-link', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
-          localized: true;
+          localized: false;
         };
       }>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    zelle_content: Schema.Attribute.RichText &
-      Schema.Attribute.Required &
+    zelle_content: Schema.Attribute.Component<'shared.styled-text', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1174,7 +1176,10 @@ export interface ApiVolunteerPageVolunteerPage extends Struct.SingleTypeSchema {
           localized: true;
         };
       }>;
-    introduction_content: Schema.Attribute.RichText &
+    introduction_content: Schema.Attribute.Component<
+      'shared.styled-text',
+      true
+    > &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -1204,13 +1209,14 @@ export interface ApiVolunteerPageVolunteerPage extends Struct.SingleTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    volunteer_section_content: Schema.Attribute.RichText &
+    volunteer_content: Schema.Attribute.Component<'shared.styled-text', true> &
+      Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
-    volunteer_section_title: Schema.Attribute.String &
+    volunteer_title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {

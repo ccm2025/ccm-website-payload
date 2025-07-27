@@ -94,7 +94,8 @@ export interface SupportPageInfoSection extends Struct.ComponentSchema {
   attributes: {
     button_text: Schema.Attribute.String;
     button_url: Schema.Attribute.String;
-    content: Schema.Attribute.Text & Schema.Attribute.Required;
+    content: Schema.Attribute.Component<'shared.styled-text', true> &
+      Schema.Attribute.Required;
     image: Schema.Attribute.Media<'images'>;
     subtitle: Schema.Attribute.String & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
