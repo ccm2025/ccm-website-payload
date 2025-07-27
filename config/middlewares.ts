@@ -8,7 +8,7 @@ export default [
         useDefaults: true,
         directives: {
           "connect-src": ["'self'", "https://*"],
-          "frame-ancestors": ["'self'", "http://localhost:5173"],
+          "frame-ancestors": ["'self'", "http://localhost:5173", "https://ccm-website-frontend.ccm-tech-internal.workers.dev"],
         },
       },
     },
