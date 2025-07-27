@@ -105,18 +105,6 @@
       "repeatable": true,
       "required": true
     },
-    "letter_images": {
-      "type": "media",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "multiple": true,
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "pdf_links": {
       "type": "component",
       "pluginOptions": {
