@@ -5,20 +5,18 @@
   },
   "options": {},
   "attributes": {
-    "title": {
-      "type": "string",
-      "required": true
-    },
-    "description": {
-      "type": "string",
-      "required": true
-    },
     "image": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
         "images"
       ]
+    },
+    "description": {
+      "type": "component",
+      "component": "shared.styled-text",
+      "repeatable": true,
+      "required": true
     }
   },
   "config": {}

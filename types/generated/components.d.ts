@@ -55,9 +55,9 @@ export interface PlanYourVisitPageScheduleItem extends Struct.ComponentSchema {
     displayName: 'Schedule Item';
   };
   attributes: {
-    description: Schema.Attribute.String & Schema.Attribute.Required;
+    description: Schema.Attribute.Component<'shared.styled-text', true> &
+      Schema.Attribute.Required;
     image: Schema.Attribute.Media<'images'>;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 

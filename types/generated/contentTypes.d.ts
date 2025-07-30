@@ -1030,20 +1030,13 @@ export interface ApiPlanYourVisitPagePlanYourVisitPage
       'oneToMany',
       'api::plan-your-visit-page.plan-your-visit-page'
     >;
-    location_address: Schema.Attribute.RichText &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     location_map_image: Schema.Attribute.Media<'images'> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
-    location_title: Schema.Attribute.String &
+    location_text: Schema.Attribute.Component<'shared.styled-text', true> &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
