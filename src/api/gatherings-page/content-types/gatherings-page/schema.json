@@ -54,6 +54,16 @@
       },
       "required": true
     },
+    "categories": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "gatherings-page.category",
+      "repeatable": true
+    },
     "events_subtitle": {
       "type": "string",
       "pluginOptions": {
@@ -65,6 +75,15 @@
     },
     "events_title": {
       "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "events_empty_text": {
+      "type": "text",
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -90,15 +109,14 @@
       },
       "required": true
     },
-    "categories": {
-      "type": "component",
+    "past_events_empty_text": {
+      "type": "text",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "component": "gatherings-page.category",
-      "repeatable": true
+      "required": true
     }
   }
 }
