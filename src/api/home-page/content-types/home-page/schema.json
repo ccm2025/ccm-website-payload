@@ -103,9 +103,10 @@
           "localized": true
         }
       },
-      "component": "gatherings-page.category",
+      "component": "events-page.category",
       "repeatable": true,
-      "required": true
+      "required": true,
+      "max": 3
     },
     "conclusion": {
       "type": "component",

@@ -1,10 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "gatherings_pages",
+  "collectionName": "events_pages",
   "info": {
-    "singularName": "gatherings-page",
-    "pluralName": "gatherings-pages",
-    "displayName": "Gatherings Page"
+    "singularName": "events-page",
+    "pluralName": "events-pages",
+    "displayName": "Events Page"
   },
   "options": {
     "draftAndPublish": true
@@ -61,10 +61,12 @@
           "localized": true
         }
       },
-      "component": "gatherings-page.category",
-      "repeatable": true
+      "component": "events-page.category",
+      "repeatable": true,
+      "required": true,
+      "max": 3
     },
-    "events_subtitle": {
+    "upcoming_events_subtitle": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -73,7 +75,7 @@
       },
       "required": true
     },
-    "events_title": {
+    "upcoming_events_title": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -82,8 +84,8 @@
       },
       "required": true
     },
-    "events_empty_text": {
-      "type": "text",
+    "upcoming_events_empty_text": {
+      "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -110,7 +112,7 @@
       "required": true
     },
     "past_events_empty_text": {
-      "type": "text",
+      "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": true

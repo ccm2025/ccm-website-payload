@@ -24,8 +24,8 @@ export interface AboutPageTeamMember extends Struct.ComponentSchema {
   };
 }
 
-export interface GatheringsPageCategory extends Struct.ComponentSchema {
-  collectionName: 'components_gatherings_page_categories';
+export interface EventsPageCategory extends Struct.ComponentSchema {
+  collectionName: 'components_events_page_categories';
   info: {
     displayName: 'Category';
   };
@@ -107,7 +107,7 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'about-page.history-story': AboutPageHistoryStory;
       'about-page.team-member': AboutPageTeamMember;
-      'gatherings-page.category': GatheringsPageCategory;
+      'events-page.category': EventsPageCategory;
       'give-page.pdf-link': GivePagePdfLink;
       'plan-your-visit-page.schedule-item': PlanYourVisitPageScheduleItem;
       'shared.styled-text': SharedStyledText;

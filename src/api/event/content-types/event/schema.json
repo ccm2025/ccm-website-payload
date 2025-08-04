@@ -33,7 +33,7 @@
       },
       "required": true
     },
-    "image": {
+    "hero_image": {
       "type": "media",
       "pluginOptions": {
         "i18n": {
@@ -55,6 +55,19 @@
       "component": "shared.styled-text",
       "repeatable": true,
       "required": true
+    },
+    "content_media": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
     },
     "slug": {
       "type": "string",
