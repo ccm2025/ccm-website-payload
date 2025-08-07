@@ -16,9 +16,10 @@
     "transfer": "strapi transfer"
   },
   "dependencies": {
-    "@strapi/plugin-cloud": "5.20.0",
-    "@strapi/plugin-users-permissions": "5.20.0",
-    "@strapi/strapi": "5.20.0",
+    "@openstudio/strapi-media-deletion-middleware": "^1.1.0",
+    "@strapi/plugin-cloud": "5.21.0",
+    "@strapi/plugin-users-permissions": "5.21.0",
+    "@strapi/strapi": "5.21.0",
     "better-sqlite3": "11.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

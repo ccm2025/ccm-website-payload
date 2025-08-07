@@ -56,7 +56,7 @@
       "repeatable": true,
       "required": true
     },
-    "content_media": {
+    "content_image": {
       "type": "media",
       "pluginOptions": {
         "i18n": {
@@ -65,9 +65,16 @@
       },
       "multiple": false,
       "allowedTypes": [
-        "images",
-        "videos"
+        "images"
       ]
+    },
+    "content_video_url": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "slug": {
       "type": "string",
