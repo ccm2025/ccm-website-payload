@@ -61,6 +61,17 @@ export interface PlanYourVisitPageScheduleItem extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedNavigation extends Struct.ComponentSchema {
+  collectionName: 'components_shared_navigations';
+  info: {
+    displayName: 'Navigation';
+  };
+  attributes: {
+    slug: Schema.Attribute.String & Schema.Attribute.Required;
+    text: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SharedStyledText extends Struct.ComponentSchema {
   collectionName: 'components_shared_styled_texts';
   info: {
@@ -110,6 +121,7 @@ declare module '@strapi/strapi' {
       'events-page.category': EventsPageCategory;
       'give-page.pdf-link': GivePagePdfLink;
       'plan-your-visit-page.schedule-item': PlanYourVisitPageScheduleItem;
+      'shared.navigation': SharedNavigation;
       'shared.styled-text': SharedStyledText;
       'support-page.info-section': SupportPageInfoSection;
     }

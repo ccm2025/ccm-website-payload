@@ -8,7 +8,11 @@ export default [
         useDefaults: true,
         directives: {
           "connect-src": ["'self'", "https://*"],
-          "frame-ancestors": ["'self'", "http://localhost:5173", "https://ccm-website-frontend.ccm-tech-internal.workers.dev"],
+          "frame-ancestors": [
+            "'self'",
+            "http://localhost:5173",
+            "https://ccm-website-frontend.ccm-tech-internal.workers.dev",
+          ],
         },
       },
     },
@@ -20,4 +24,7 @@ export default [
   "strapi::session",
   "strapi::favicon",
   "strapi::public",
+  {
+    resolve: "@openstudio/strapi-media-deletion-middleware",
+  },
 ];
