@@ -38,12 +38,11 @@ export default {
         }
       };
 
-      updateWeeklyMeeting("sunday-meetings");
-      updateWeeklyMeeting("prayer-meetings");
+      updateWeeklyMeeting("sunday-fellowship");
+      updateWeeklyMeeting("prayer-meeting");
     },
     options: {
       rule: "0 0 * * *",
-      tz: "America/New_York",
     },
   },
 };
