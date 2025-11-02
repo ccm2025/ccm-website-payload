@@ -1,12 +1,11 @@
 {
   "name": "ccm-website-backend",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "private": true,
   "description": "A Strapi application",
   "scripts": {
     "build": "strapi build",
     "console": "strapi console",
-    "deploy": "strapi deploy",
     "dev": "strapi develop",
     "develop": "strapi develop",
     "start": "strapi start",
@@ -17,9 +16,7 @@
   },
   "dependencies": {
     "@openstudio/strapi-media-deletion-middleware": "^1.1.0",
-    "@strapi/plugin-cloud": "5.28.0",
-    "@strapi/plugin-users-permissions": "5.28.0",
-    "@strapi/strapi": "5.28.0",
+    "@strapi/strapi": "5.30.0",
     "better-sqlite3": "11.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -27,7 +24,7 @@
     "styled-components": "^6.1.19"
   },
   "devDependencies": {
-    "@types/node": "^20.19.22",
+    "@types/node": "^20.19.24",
     "@types/react": "^18.3.26",
     "@types/react-dom": "^18.3.7",
     "typescript": "^5.9.3"
