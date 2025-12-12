@@ -1,10 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "freshman_pages",
+  "collectionName": "ministry_pages",
   "info": {
-    "singularName": "freshman-page",
-    "pluralName": "freshman-pages",
-    "displayName": "Freshman Page"
+    "singularName": "ministry-page",
+    "pluralName": "ministry-pages",
+    "displayName": "Ministry Page"
   },
   "options": {
     "draftAndPublish": true
@@ -32,7 +32,6 @@
         }
       },
       "multiple": false,
-      "required": false,
       "allowedTypes": [
         "images"
       ]

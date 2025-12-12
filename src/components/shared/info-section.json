@@ -1,5 +1,5 @@
 {
-  "collectionName": "components_support_page_info_sections",
+  "collectionName": "components_shared_info_sections",
   "info": {
     "displayName": "Info Section"
   },
@@ -7,7 +7,7 @@
   "attributes": {
     "subtitle": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "title": {
       "type": "string",

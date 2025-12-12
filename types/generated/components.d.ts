@@ -24,20 +24,6 @@ export interface AboutPageTeamMember extends Struct.ComponentSchema {
   };
 }
 
-export interface EventsPageCategory extends Struct.ComponentSchema {
-  collectionName: 'components_events_page_categories';
-  info: {
-    displayName: 'Category';
-  };
-  attributes: {
-    image: Schema.Attribute.Media<'images'>;
-    slug: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
 export interface GivePagePdfLink extends Struct.ComponentSchema {
   collectionName: 'components_give_page_pdf_links';
   info: {
@@ -58,6 +44,36 @@ export interface PlanYourVisitPageScheduleItem extends Struct.ComponentSchema {
     description: Schema.Attribute.Component<'shared.styled-text', true> &
       Schema.Attribute.Required;
     image: Schema.Attribute.Media<'images'>;
+  };
+}
+
+export interface SharedCategory extends Struct.ComponentSchema {
+  collectionName: 'components_shared_categories';
+  info: {
+    displayName: 'Category';
+  };
+  attributes: {
+    image: Schema.Attribute.Media<'images'>;
+    slug: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedInfoSection extends Struct.ComponentSchema {
+  collectionName: 'components_shared_info_sections';
+  info: {
+    displayName: 'Info Section';
+  };
+  attributes: {
+    button_text: Schema.Attribute.String;
+    button_url: Schema.Attribute.String;
+    content: Schema.Attribute.Component<'shared.styled-text', true> &
+      Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images'>;
+    subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -97,33 +113,17 @@ export interface SharedStyledText extends Struct.ComponentSchema {
   };
 }
 
-export interface SupportPageInfoSection extends Struct.ComponentSchema {
-  collectionName: 'components_support_page_info_sections';
-  info: {
-    displayName: 'Info Section';
-  };
-  attributes: {
-    button_text: Schema.Attribute.String;
-    button_url: Schema.Attribute.String;
-    content: Schema.Attribute.Component<'shared.styled-text', true> &
-      Schema.Attribute.Required;
-    image: Schema.Attribute.Media<'images'>;
-    subtitle: Schema.Attribute.String & Schema.Attribute.Required;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'about-page.history-story': AboutPageHistoryStory;
       'about-page.team-member': AboutPageTeamMember;
-      'events-page.category': EventsPageCategory;
       'give-page.pdf-link': GivePagePdfLink;
       'plan-your-visit-page.schedule-item': PlanYourVisitPageScheduleItem;
+      'shared.category': SharedCategory;
+      'shared.info-section': SharedInfoSection;
       'shared.navigation': SharedNavigation;
       'shared.styled-text': SharedStyledText;
-      'support-page.info-section': SupportPageInfoSection;
     }
   }
 }

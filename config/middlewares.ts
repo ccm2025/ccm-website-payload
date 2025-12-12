@@ -24,7 +24,4 @@ export default [
   "strapi::session",
   "strapi::favicon",
   "strapi::public",
-  {
-    resolve: "@openstudio/strapi-media-deletion-middleware",
-  },
 ];
