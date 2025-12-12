@@ -1,10 +1,10 @@
 {
-  "kind": "singleType",
-  "collectionName": "freshman_pages",
+  "kind": "collectionType",
+  "collectionName": "ministries",
   "info": {
-    "singularName": "freshman-page",
-    "pluralName": "freshman-pages",
-    "displayName": "Freshman Page"
+    "singularName": "ministry",
+    "pluralName": "ministries",
+    "displayName": "Ministry"
   },
   "options": {
     "draftAndPublish": true
@@ -15,7 +15,7 @@
     }
   },
   "attributes": {
-    "hero_title": {
+    "title": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -32,21 +32,43 @@
         }
       },
       "multiple": false,
-      "required": false,
       "allowedTypes": [
         "images"
       ]
     },
-    "info_sections": {
+    "content": {
       "type": "component",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "component": "shared.info-section",
+      "component": "shared.styled-text",
       "repeatable": true,
       "required": true
+    },
+    "content_image": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "slug": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "unique": true,
+      "regex": "^[a-z0-9]+(-[a-z0-9]+)*$"
     }
   }
 }

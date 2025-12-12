@@ -43,8 +43,9 @@
           "localized": true
         }
       },
-      "component": "support-page.info-section",
-      "repeatable": true
+      "component": "shared.info-section",
+      "repeatable": true,
+      "required": true
     }
   }
 }

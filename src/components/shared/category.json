@@ -1,5 +1,5 @@
 {
-  "collectionName": "components_events_page_categories",
+  "collectionName": "components_shared_categories",
   "info": {
     "displayName": "Category"
   },
@@ -12,9 +12,7 @@
     "image": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "slug": {
       "type": "string",

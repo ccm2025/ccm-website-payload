@@ -52,9 +52,7 @@
         }
       },
       "multiple": false,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "introduction_part1": {
       "type": "component",
@@ -103,7 +101,7 @@
           "localized": true
         }
       },
-      "component": "events-page.category",
+      "component": "shared.category",
       "repeatable": true,
       "required": true,
       "max": 3

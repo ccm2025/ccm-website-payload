@@ -36,36 +36,6 @@
         "images"
       ]
     },
-    "categories_subtitle": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "required": true
-    },
-    "categories_title": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "required": true
-    },
-    "categories": {
-      "type": "component",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "events-page.category",
-      "repeatable": true,
-      "required": true,
-      "max": 3
-    },
     "upcoming_events_subtitle": {
       "type": "string",
       "pluginOptions": {
