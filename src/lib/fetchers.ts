@@ -25,9 +25,6 @@ export async function fetchGlobal<TSlug extends GlobalSlug>(
     locale,
     ...options,
   })
-  if (!global) {
-    throw new Error(`Global Not Found: '${slug}'.`)
-  }
   return global
 }
 

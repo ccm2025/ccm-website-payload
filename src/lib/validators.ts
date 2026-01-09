@@ -17,30 +17,3 @@ export function validateLang(lang: unknown): Config['locale'] {
   }
   return lang
 }
-
-/**
- * Validate slug format (alphanumeric, hyphens, underscores only)
- * Returns true if valid, false otherwise
- */
-export function isValidSlug(slug: unknown): slug is string {
-  if (typeof slug !== 'string') return false
-  // Allow: letters, numbers, hyphens, underscores
-  return /^[a-zA-Z0-9_-]+$/.test(slug) && slug.length > 0 && slug.length <= 255
-}
-
-/**
- * Validate slug, throw if invalid
- */
-export function validateSlug(slug: unknown): string {
-  if (!isValidSlug(slug)) {
-    throw new Error(`Invalid slug format: ${slug}`)
-  }
-  return slug
-}
-
-/**
- * Safe wrapper to get slug param with validation
- */
-export function getValidatedSlug(params: Record<string, unknown>): string {
-  return validateSlug(params.slug)
-}

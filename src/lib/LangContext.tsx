@@ -1,6 +1,6 @@
 'use client'
 
-import { ALLOWED_LANGS } from '@/lib/types'
+import { ALLOWED_LANGS } from '@/payload.config'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { createContext, useContext, useMemo, type ReactNode } from 'react'
 

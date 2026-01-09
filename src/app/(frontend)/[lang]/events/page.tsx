@@ -51,7 +51,7 @@ export default async function EventsPage({ params }: { params: Promise<{ lang: s
   return (
     <main>
       {/* Hero Section */}
-      <section className="relative flex h-64 items-center justify-center text-center text-white md:h-80">
+      <section className="relative flex h-64 sm:h-72 md:h-80 items-center justify-center text-center text-white">
         <div className="absolute inset-0">
           {typeof page.hero_image === 'object' && (
             <Image
@@ -64,31 +64,31 @@ export default async function EventsPage({ params }: { params: Promise<{ lang: s
           )}
           <div className="absolute inset-0 bg-black/20" />
         </div>
-        <div className="relative z-10 px-4">
-          <h1 className="text-4xl font-bold uppercase tracking-tight md:text-6xl">
+        <div className="relative z-10 px-4 sm:px-6 md:px-8">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight">
             {page.hero_title}
           </h1>
         </div>
       </section>
 
       {/* Upcoming Events */}
-      <section className="bg-gray-50 py-16 md:py-20">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-4xl text-center">
-            <h2 className="text-lg font-semibold text-[rgb(var(--website-theme-color2))] md:text-xl">
+      <section className="bg-gray-50 py-10 sm:py-14 md:py-16">
+        <div className="container mx-auto max-w-6xl px-6 sm:px-8 md:px-12 lg:px-16">
+          <div className="mx-auto max-w-6xl text-center">
+            <p className="text-sm sm:text-base md:text-base font-semibold text-[rgb(var(--website-theme-color2))] tracking-wide">
               {page.upcoming_events_subtitle}
-            </h2>
-            <p className="mt-2 text-3xl font-bold tracking-wider text-[rgb(var(--website-theme-color1))] md:text-4xl">
+            </p>
+            <p className="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold tracking-wider text-[rgb(var(--website-theme-color1))]">
               {page.upcoming_events_title}
             </p>
           </div>
 
           {page.upcoming_events.length > 0 ? (
-            <div className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-6">
+            <div className="mx-auto mt-12 grid max-w-6xl grid-cols-1 gap-6 sm:gap-8 md:gap-10">
               {page.upcoming_events.map((event) => (
                 <Link key={event.id} href={`/${lang}/events/${event.slug}`}>
-                  <div className="grid grid-cols-1 gap-4 md:grid-cols-4 md:gap-6">
-                    <div className="md:col-span-1">
+                  <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-5 md:gap-8">
+                    <div className="md:col-span-2">
                       {typeof event.hero_image === 'object' && (
                         <Image
                           src={event.hero_image.url}
@@ -99,7 +99,7 @@ export default async function EventsPage({ params }: { params: Promise<{ lang: s
                         />
                       )}
                     </div>
-                    <div className="md:col-span-2">
+                    <div className="md:col-span-3">
                       <h3 className="text-2xl font-bold text-[rgb(var(--website-theme-color1))]">
                         {event.title}
                       </h3>
@@ -119,19 +119,19 @@ export default async function EventsPage({ params }: { params: Promise<{ lang: s
       </section>
 
       {/* Past Events */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-4xl text-center">
-            <h2 className="text-lg font-semibold text-[rgb(var(--website-theme-color2))] md:text-xl">
+      <section className="bg-white py-10 sm:py-14 md:py-16">
+        <div className="container mx-auto max-w-6xl px-6 sm:px-8 md:px-12 lg:px-16">
+          <div className="mx-auto max-w-6xl text-center">
+            <p className="text-sm sm:text-base md:text-base font-semibold text-[rgb(var(--website-theme-color2))] tracking-wide">
               {page.past_events_subtitle}
-            </h2>
-            <p className="mt-2 text-3xl font-bold tracking-wider text-[rgb(var(--website-theme-color1))] md:text-4xl">
+            </p>
+            <p className="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold tracking-wider text-[rgb(var(--website-theme-color1))]">
               {page.past_events_title}
             </p>
           </div>
 
           {page.past_events.length > 0 ? (
-            <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-8">
               {page.past_events.map((event) => (
                 <Link
                   key={event.id}

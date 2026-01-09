@@ -1,14 +1,10 @@
+import { isAllowedLang } from '@/lib'
 import { NextRequest, NextResponse } from 'next/server'
-import { ALLOWED_LANGS, type AllowedLang } from '@/lib/types'
 
 const AUTHNET_API_LOGIN_ID = process.env.AUTHNET_API_LOGIN_ID
 const AUTHNET_TRANSACTION_KEY = process.env.AUTHNET_TRANSACTION_KEY
 const AUTHNET_RETURN_URL = process.env.SITE_URL
 const AUTHNET_ENDPOINT = 'https://api.authorize.net/xml/v1/request.api'
-
-function validateLang(lang: unknown): lang is AllowedLang {
-  return typeof lang === 'string' && ALLOWED_LANGS.includes(lang as AllowedLang)
-}
 
 function validateAmount(amount: unknown): number | null {
   const num = Number(amount)
@@ -28,7 +24,7 @@ export async function POST(request: NextRequest) {
 
   const { lang, amount } = body as { lang: string; amount: string }
 
-  if (!validateLang(lang)) {
+  if (!isAllowedLang(lang)) {
     console.warn('Suspicious request with invalid lang:', {
       lang,
       ip: request.headers.get('x-forwarded-for'),

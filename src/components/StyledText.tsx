@@ -1,4 +1,9 @@
-import type { StyledText } from '@/lib/types'
+export interface StyledText {
+  text: string
+  font_size?: 'Small' | 'Normal' | 'Large' | 'Extra-Large'
+  color?: 'Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2'
+  font_style?: 'Normal' | 'Italic' | 'Bold' | 'Underline'
+}
 
 interface StyledTextComponentProps {
   data: StyledText[] | null | undefined
