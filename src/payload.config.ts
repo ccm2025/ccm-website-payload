@@ -1,16 +1,28 @@
-import fs from 'fs'
-import path from 'path'
+import { CloudflareContext, getCloudflareContext } from '@opennextjs/cloudflare'
 import { sqliteD1Adapter } from '@payloadcms/db-d1-sqlite'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { r2Storage } from '@payloadcms/storage-r2'
+import fs from 'fs'
+import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
-import { CloudflareContext, getCloudflareContext } from '@opennextjs/cloudflare'
 import { GetPlatformProxyOptions } from 'wrangler'
-import { r2Storage } from '@payloadcms/storage-r2'
 
-import { Users } from './collections/Users'
+import { Events } from './collections/Events'
 import { Media } from './collections/Media'
-import migrations from './db/migrations'
+import { Ministries } from './collections/Ministries'
+import { Users } from './collections/Users'
+import { AboutPage } from './globals/AboutPage'
+import { EventsPage } from './globals/EventsPage'
+import { FreshmanPage } from './globals/FreshmanPage'
+import { GivePage } from './globals/GivePage'
+import { Global } from './globals/Global'
+import { HomePage } from './globals/HomePage'
+import { MinistryPage } from './globals/MinistryPage'
+import { PlanYourVisitPage } from './globals/PlanYourVisitPage'
+import { SupportPage } from './globals/SupportPage'
+import { ThankYouPage } from './globals/ThankYouPage'
+import { VolunteerPage } from './globals/VolunteerPage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -24,6 +36,8 @@ const cloudflare =
     ? await getCloudflareContextFromWrangler()
     : await getCloudflareContext({ async: true })
 
+export const ALLOWED_LANGS = ['en', 'zh-Hans']
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -31,7 +45,24 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Events, Ministries],
+  globals: [
+    Global,
+    HomePage,
+    AboutPage,
+    GivePage,
+    PlanYourVisitPage,
+    SupportPage,
+    VolunteerPage,
+    FreshmanPage,
+    ThankYouPage,
+    MinistryPage,
+    EventsPage,
+  ],
+  localization: {
+    locales: ALLOWED_LANGS,
+    defaultLocale: ALLOWED_LANGS[0],
+  },
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
