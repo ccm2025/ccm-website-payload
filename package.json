@@ -1,39 +1,75 @@
 {
-  "name": "ccm-website-backend",
-  "version": "0.4.8",
-  "private": true,
-  "description": "A Strapi application",
+  "name": "ccm-website-payload",
+  "version": "0.5.1",
+  "description": "A blank template to get started with Payload 3.0",
+  "license": "MIT",
+  "type": "module",
   "scripts": {
-    "build": "strapi build",
-    "console": "strapi console",
-    "dev": "strapi develop",
-    "develop": "strapi develop",
-    "start": "strapi start",
-    "strapi": "strapi",
-    "upgrade": "npx @strapi/upgrade latest",
-    "upgrade:dry": "npx @strapi/upgrade latest --dry",
-    "transfer": "strapi transfer"
+    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
+    "deploy": "npm run deploy:database && npm run deploy:app",
+    "deploy:app": "opennextjs-cloudflare build --env=$CLOUDFLARE_ENV && opennextjs-cloudflare deploy --env=$CLOUDFLARE_ENV",
+    "deploy:database": "cross-env NODE_ENV=production PAYLOAD_SECRET=ignore payload migrate && wrangler d1 execute D1 --command 'PRAGMA optimize' --env=$CLOUDFLARE_ENV --remote",
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "devsafe": "rm -rf .next && rm -rf .open-next && cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
+    "generate:types": "npm run generate:types:cloudflare && npm run generate:types:payload",
+    "generate:types:cloudflare": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "generate:types:payload": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
+    "generate:migrations": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:create",
+    "ii": "npm install",
+    "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
+    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview --env=$CLOUDFLARE_ENV",
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "test": "npm run test:int && npm run test:e2e",
+    "test:e2e": "cross-env NODE_OPTIONS=--no-deprecation playwright test",
+    "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts"
   },
   "dependencies": {
-    "@strapi/strapi": "5.31.3",
-    "better-sqlite3": "11.3.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.30.2",
-    "styled-components": "^6.1.19"
+    "@opennextjs/cloudflare": "^1.11.0",
+    "@payloadcms/db-d1-sqlite": "3.70.0",
+    "@payloadcms/next": "3.70.0",
+    "@payloadcms/richtext-lexical": "3.70.0",
+    "@payloadcms/storage-r2": "3.70.0",
+    "@payloadcms/ui": "3.70.0",
+    "cross-env": "^7.0.3",
+    "graphql": "^16.12.0",
+    "lucide-react": "^0.562.0",
+    "next": "15.4.10",
+    "payload": "3.70.0",
+    "react": "19.2.1",
+    "react-dom": "19.2.1"
   },
   "devDependencies": {
-    "@types/node": "^20.19.26",
-    "@types/react": "^18.3.27",
-    "@types/react-dom": "^18.3.7",
-    "typescript": "^5.9.3"
+    "@playwright/test": "1.56.1",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@testing-library/react": "16.3.0",
+    "@types/node": "^22.5.4",
+    "@types/react": "19.2.1",
+    "@types/react-dom": "19.2.1",
+    "@vitejs/plugin-react": "4.5.2",
+    "eslint": "^9.16.0",
+    "eslint-config-next": "15.4.7",
+    "jsdom": "26.1.0",
+    "playwright": "1.56.1",
+    "playwright-core": "1.56.1",
+    "postcss": "^8.5.6",
+    "prettier": "^3.4.2",
+    "tailwindcss": "^4.1.18",
+    "typescript": "5.7.3",
+    "vite-tsconfig-paths": "5.1.4",
+    "vitest": "3.2.3",
+    "wrangler": "^4.58.0"
   },
   "engines": {
-    "node": ">=18.0.0 <=22.x.x",
-    "npm": ">=6.0.0"
+    "node": ">=20.9.0",
+    "npm": ">=10"
   },
-  "strapi": {
-    "uuid": "02b05fc8-20b3-48ff-b906-56d055c62b93",
-    "installId": "21454fc5fe0169395b7e953c577276ab6a8fe1628ece00c6caeb4a0404310056"
+  "cloudflare": {
+    "bindings": {
+      "PAYLOAD_SECRET": {
+        "description": "Generate a random string using `openssl rand -hex 32`"
+      }
+    }
   }
 }
