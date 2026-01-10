@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
-  "name": "ccm-website",
+  "name": "ccm-website-payload",
   "compatibility_date": "2025-08-15",
   "compatibility_flags": [
     // Enable Node.js API
@@ -21,14 +21,14 @@
       "binding": "D1",
       "database_id": "bf5e16fd-7dac-450d-ab71-75b777dcf9fa",
       "database_name": "payload-db",
-      "remote": false,
+      "remote": true,
     },
   ],
   "r2_buckets": [
     {
       "binding": "R2",
       "bucket_name": "payload-assets",
-      "remote": false,
+      "remote": true,
     },
   ],
 }
