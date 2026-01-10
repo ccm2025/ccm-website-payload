@@ -1,7 +1,6 @@
 import { StyledText } from '@/components/StyledText'
 import { fetchCollection, fetchGlobal, validateLang } from '@/lib'
 import { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 
 async function loadPage(lang: string) {
@@ -54,12 +53,10 @@ export default async function EventsPage({ params }: { params: Promise<{ lang: s
       <section className="relative flex h-64 sm:h-72 md:h-80 items-center justify-center text-center text-white">
         <div className="absolute inset-0">
           {typeof page.hero_image === 'object' && (
-            <Image
+            <img
               src={page.hero_image.url}
               alt={page.hero_image.nickname}
-              fill
-              className="object-cover"
-              priority
+              className="h-full w-full object-cover"
             />
           )}
           <div className="absolute inset-0 bg-black/20" />
@@ -90,11 +87,9 @@ export default async function EventsPage({ params }: { params: Promise<{ lang: s
                   <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-5 md:gap-8">
                     <div className="md:col-span-2">
                       {typeof event.hero_image === 'object' && (
-                        <Image
+                        <img
                           src={event.hero_image.url}
                           alt={event.hero_image.nickname}
-                          width={300}
-                          height={200}
                           className="h-auto w-full rounded-lg object-cover shadow-md"
                         />
                       )}
@@ -140,11 +135,10 @@ export default async function EventsPage({ params }: { params: Promise<{ lang: s
                 >
                   <div className="absolute inset-0 overflow-hidden">
                     {typeof event.hero_image === 'object' && (
-                      <Image
+                      <img
                         src={event.hero_image.url}
                         alt={event.hero_image.nickname}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                       />
                     )}
                     <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent" />

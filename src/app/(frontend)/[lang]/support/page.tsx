@@ -1,7 +1,6 @@
 import { StyledText } from '@/components/StyledText'
 import { fetchGlobal, validateLang } from '@/lib'
 import { Metadata } from 'next'
-import Image from 'next/image'
 
 async function loadPage(lang: string) {
   return await fetchGlobal('support-page', validateLang(lang))
@@ -30,12 +29,10 @@ export default async function SupportPage({ params }: { params: Promise<{ lang: 
       <section className="relative flex h-64 sm:h-72 md:h-80 items-center justify-center text-center text-white">
         <div className="absolute inset-0">
           {typeof page.hero_image === 'object' && (
-            <Image
+            <img
               src={page.hero_image.url}
               alt={page.hero_image.nickname}
-              fill
-              className="object-cover"
-              priority
+              className="h-full w-full object-cover"
             />
           )}
           <div className="absolute inset-0 bg-black/20" />
@@ -55,11 +52,9 @@ export default async function SupportPage({ params }: { params: Promise<{ lang: 
               <div className="grid grid-cols-1 items-center gap-6 sm:gap-8 md:grid-cols-2 md:gap-10 lg:gap-14">
                 <div className={`w-full ${i % 2 !== 0 ? 'md:order-last' : ''}`}>
                   {typeof section.image === 'object' && (
-                    <Image
+                    <img
                       src={section.image.url}
                       alt={section.image.nickname}
-                      width={600}
-                      height={400}
                       className="h-auto w-full rounded-xl shadow-lg object-cover"
                     />
                   )}

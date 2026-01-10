@@ -3,7 +3,6 @@ import { StyledText } from '@/components/StyledText'
 import { fetchGlobal, validateLang } from '@/lib'
 import { Download } from 'lucide-react'
 import { Metadata } from 'next'
-import Image from 'next/image'
 
 async function loadPage(lang: string) {
   return await fetchGlobal('give-page', validateLang(lang))
@@ -32,12 +31,10 @@ export default async function GivePage({ params }: { params: Promise<{ lang: str
       <section className="relative flex h-64 sm:h-72 md:h-80 items-center justify-center text-center text-white">
         <div className="absolute inset-0">
           {typeof page.hero_image === 'object' && (
-            <Image
+            <img
               src={page.hero_image.url}
               alt={page.hero_image.nickname}
-              fill
-              className="object-cover"
-              priority
+              className="h-full w-full object-cover"
             />
           )}
           <div className="absolute inset-0 bg-black/20"></div>

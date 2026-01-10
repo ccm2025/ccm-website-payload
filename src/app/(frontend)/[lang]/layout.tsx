@@ -1,6 +1,5 @@
 import { LayoutClient } from '@/components/LayoutClient'
 import { fetchGlobal, isAllowedLang, validateLang } from '@/lib'
-import { LangProvider } from '@/lib/LangContext'
 import { MenuProvider } from '@/lib/MenuContext'
 import { redirect } from 'next/navigation'
 
@@ -25,11 +24,9 @@ export default async function LangLayout({
 
   return (
     <MenuProvider>
-      <LangProvider lang={lang}>
-        <LayoutClient lang={lang} data={page}>
-          {children}
-        </LayoutClient>
-      </LangProvider>
+      <LayoutClient lang={lang} data={page}>
+        {children}
+      </LayoutClient>
     </MenuProvider>
   )
 }

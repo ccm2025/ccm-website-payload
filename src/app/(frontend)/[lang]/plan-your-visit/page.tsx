@@ -1,7 +1,6 @@
 import { StyledText } from '@/components/StyledText'
 import { fetchGlobal, validateLang } from '@/lib'
 import { Metadata } from 'next'
-import Image from 'next/image'
 
 async function loadPage(lang: string) {
   return await fetchGlobal('plan-your-visit-page', validateLang(lang))
@@ -30,12 +29,10 @@ export default async function PlanYourVisitPage({ params }: { params: Promise<{ 
       <section className="relative flex h-64 sm:h-72 md:h-80 items-center justify-center text-center text-white">
         <div className="absolute inset-0">
           {typeof page.hero_image === 'object' && (
-            <Image
+            <img
               src={page.hero_image.url}
               alt={page.hero_image.nickname}
-              fill
-              className="object-cover"
-              priority
+              className="h-full w-full object-cover"
             />
           )}
           <div className="absolute inset-0 bg-black/20" />
@@ -68,11 +65,9 @@ export default async function PlanYourVisitPage({ params }: { params: Promise<{ 
               </div>
               <div className="flex justify-center md:justify-end md:col-span-2">
                 {typeof item.image === 'object' && (
-                  <Image
+                  <img
                     src={item.image.url}
                     alt={item.image.nickname}
-                    width={480}
-                    height={320}
                     className="h-auto w-full rounded-xl shadow-lg object-cover"
                   />
                 )}
@@ -116,11 +111,9 @@ export default async function PlanYourVisitPage({ params }: { params: Promise<{ 
                   className={`flex justify-center md:col-span-2 ${i % 2 === 1 ? 'md:order-2' : ''}`}
                 >
                   {typeof item.image === 'object' && (
-                    <Image
+                    <img
                       src={item.image.url}
                       alt={item.image.nickname}
-                      width={480}
-                      height={320}
                       className="h-auto w-full rounded-xl shadow-lg object-cover"
                     />
                   )}

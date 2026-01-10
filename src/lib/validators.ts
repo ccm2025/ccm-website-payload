@@ -1,5 +1,5 @@
+import { ALLOWED_LANGS } from '@/lib/constants'
 import { Config } from '@/payload-types'
-import { ALLOWED_LANGS } from '@/payload.config'
 
 /**
  * Return if a given language is allowed

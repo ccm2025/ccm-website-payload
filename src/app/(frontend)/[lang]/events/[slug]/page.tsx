@@ -1,7 +1,6 @@
 import { StyledText } from '@/components/StyledText'
 import { fetchCollection, validateLang } from '@/lib'
 import { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
@@ -45,12 +44,10 @@ export default async function EventDetailPage({
       <section className="relative flex h-64 items-center justify-center text-center text-white md:h-80">
         <div className="absolute inset-0">
           {typeof page.hero_image === 'object' && (
-            <Image
+            <img
               src={page.hero_image.url}
               alt={page.hero_image.nickname}
-              fill
-              className="object-cover"
-              priority
+              className="h-full w-full object-cover"
             />
           )}
           <div className="absolute inset-0 bg-black/20" />
@@ -81,11 +78,9 @@ export default async function EventDetailPage({
           <StyledText data={page.content} />
 
           {page.content_image && typeof page.content_image === 'object' && (
-            <Image
+            <img
               src={page.content_image.url}
               alt={page.content_image.nickname}
-              width={800}
-              height={500}
               className="mt-8 w-full rounded-lg shadow-md"
             />
           )}

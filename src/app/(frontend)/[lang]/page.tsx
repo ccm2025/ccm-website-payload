@@ -1,7 +1,6 @@
 import { StyledText } from '@/components/StyledText'
 import { fetchGlobal, validateLang } from '@/lib'
 import { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 
 async function loadPage(lang: string) {
@@ -31,12 +30,10 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
       <section className="relative flex h-[calc(100vh-80px)] min-h-125 items-center justify-center text-center text-white">
         <div className="absolute inset-0">
           {typeof page.hero_background_image === 'object' && (
-            <Image
+            <img
               src={page.hero_background_image.url}
               alt={page.hero_background_image.nickname}
-              fill
-              className="object-cover"
-              priority
+              className="h-full w-full object-cover"
             />
           )}
           <div className="absolute inset-0 bg-black/20" />
@@ -105,11 +102,10 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
               >
                 <div className="absolute inset-0">
                   {typeof card.image === 'object' && (
-                    <Image
+                    <img
                       src={card.image.url}
                       alt={card.image.nickname}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                   )}
                   <div className="absolute inset-0 bg-black/30" />

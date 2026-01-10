@@ -10,7 +10,6 @@ import { GetPlatformProxyOptions } from 'wrangler'
 
 import { Events } from './collections/Events'
 import { Media } from './collections/Media'
-import { Ministries } from './collections/Ministries'
 import { Users } from './collections/Users'
 import { AboutPage } from './globals/AboutPage'
 import { EventsPage } from './globals/EventsPage'
@@ -18,7 +17,6 @@ import { FreshmanPage } from './globals/FreshmanPage'
 import { GivePage } from './globals/GivePage'
 import { Global } from './globals/Global'
 import { HomePage } from './globals/HomePage'
-import { MinistryPage } from './globals/MinistryPage'
 import { PlanYourVisitPage } from './globals/PlanYourVisitPage'
 import { SupportPage } from './globals/SupportPage'
 import { ThankYouPage } from './globals/ThankYouPage'
@@ -36,7 +34,7 @@ const cloudflare =
     ? await getCloudflareContextFromWrangler()
     : await getCloudflareContext({ async: true })
 
-export const ALLOWED_LANGS = ['en', 'zh-Hans']
+import { ALLOWED_LANGS } from '@/lib/constants'
 
 export default buildConfig({
   admin: {
@@ -45,7 +43,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Events, Ministries],
+  collections: [Users, Media, Events],
   globals: [
     Global,
     HomePage,
@@ -56,7 +54,6 @@ export default buildConfig({
     VolunteerPage,
     FreshmanPage,
     ThankYouPage,
-    MinistryPage,
     EventsPage,
   ],
   localization: {

@@ -1,17 +1,28 @@
 'use client'
 
-import { useLang } from '@/lib/LangContext'
+import { ALLOWED_LANGS } from '@/lib/constants'
 import { Languages } from 'lucide-react'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 interface LangButtonProps {
   variant?: 'header' | 'menu'
 }
 
 export function LangButton({ variant = 'header' }: LangButtonProps) {
-  const { otherLang, buildHref } = useLang()
+  const [currentLang, setCurrentLang] = useState<string>('')
+  const [nextLangUrl, setNextLangUrl] = useState<string>('')
 
-  if (!otherLang) return null
+  useEffect(() => {
+    const pathSegments = window.location.pathname.split('/').filter(Boolean)
+    const firstSegment = pathSegments[0]
+    const lang = ALLOWED_LANGS.includes(firstSegment) ? firstSegment : ALLOWED_LANGS[0]
+    setCurrentLang(lang)
+
+    const nextLang = ALLOWED_LANGS.find((l) => l !== lang) || ALLOWED_LANGS[0]
+    const url = `/${nextLang}${window.location.pathname.replace(new RegExp(`^\/(${ALLOWED_LANGS.join('|')})`), '')}`
+    setNextLangUrl(url)
+  }, [])
 
   const langLabels: Record<string, string> = {
     en: 'EN',
@@ -27,17 +38,19 @@ export function LangButton({ variant = 'header' }: LangButtonProps) {
     menu: 'w-full space-x-2 border-2 border-white bg-white/10 px-4 py-3 text-base text-white hover:bg-white hover:text-[rgb(var(--website-theme-color2))]',
   }
 
+  const nextLang = ALLOWED_LANGS.find((lang) => lang !== currentLang) || ALLOWED_LANGS[0]
+
   return (
     <Link
-      href={buildHref(otherLang)}
+      href={nextLangUrl}
       className={`${baseClasses} ${variantClasses[variant]}`}
-      aria-label={`Switch to ${langLabels[otherLang]}`}
+      aria-label={`Switch to ${nextLang}`}
     >
       <Languages
         className={`transition-transform duration-300 group-hover:rotate-12 ${variant === 'header' ? 'w-4 h-4 sm:w-5 sm:h-5' : 'w-5 h-5'}`}
       />
       <span className={variant === 'header' ? 'hidden xs:inline sm:inline' : ''}>
-        {langLabels[otherLang]}
+        {langLabels[nextLang]}
       </span>
     </Link>
   )

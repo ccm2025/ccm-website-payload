@@ -70,7 +70,6 @@ export interface Config {
     users: User;
     media: Media;
     events: Event;
-    ministries: Ministry;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -81,7 +80,6 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
-    ministries: MinistriesSelect<false> | MinistriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -101,7 +99,6 @@ export interface Config {
     'volunteer-page': VolunteerPage;
     'freshman-page': FreshmanPage;
     'thank-you-page': ThankYouPage;
-    'ministry-page': MinistryPage;
     'events-page': EventsPage;
   };
   globalsSelect: {
@@ -114,7 +111,6 @@ export interface Config {
     'volunteer-page': VolunteerPageSelect<false> | VolunteerPageSelect<true>;
     'freshman-page': FreshmanPageSelect<false> | FreshmanPageSelect<true>;
     'thank-you-page': ThankYouPageSelect<false> | ThankYouPageSelect<true>;
-    'ministry-page': MinistryPageSelect<false> | MinistryPageSelect<true>;
     'events-page': EventsPageSelect<false> | EventsPageSelect<true>;
   };
   locale: 'en' | 'zh-Hans';
@@ -214,27 +210,6 @@ export interface Event {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ministries".
- */
-export interface Ministry {
-  id: number;
-  title: string;
-  slug: string;
-  hero_image: number | Media;
-  content: {
-    text: string;
-    font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-    color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-    font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-    id?: string | null;
-  }[];
-  content_image?: (number | null) | Media;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -268,10 +243,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'events';
         value: number | Event;
-      } | null)
-    | ({
-        relationTo: 'ministries';
-        value: number | Ministry;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -375,28 +346,6 @@ export interface EventsSelect<T extends boolean = true> {
       };
   content_image?: T;
   content_video_url?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ministries_select".
- */
-export interface MinistriesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  hero_image?: T;
-  content?:
-    | T
-    | {
-        text?: T;
-        font_size?: T;
-        color?: T;
-        font_style?: T;
-        id?: T;
-      };
-  content_image?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -740,32 +689,6 @@ export interface ThankYouPage {
     font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
     color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
     font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-    id?: string | null;
-  }[];
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ministry-page".
- */
-export interface MinistryPage {
-  id: number;
-  hero_title: string;
-  hero_image: number | Media;
-  info_sections: {
-    title: string;
-    subtitle?: string | null;
-    content: {
-      text: string;
-      font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-      color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-      font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-      id?: string | null;
-    }[];
-    image: number | Media;
-    button_text?: string | null;
-    button_url?: string | null;
     id?: string | null;
   }[];
   updatedAt?: string | null;
@@ -1135,36 +1058,6 @@ export interface ThankYouPageSelect<T extends boolean = true> {
         font_size?: T;
         color?: T;
         font_style?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ministry-page_select".
- */
-export interface MinistryPageSelect<T extends boolean = true> {
-  hero_title?: T;
-  hero_image?: T;
-  info_sections?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-        content?:
-          | T
-          | {
-              text?: T;
-              font_size?: T;
-              color?: T;
-              font_style?: T;
-              id?: T;
-            };
-        image?: T;
-        button_text?: T;
-        button_url?: T;
         id?: T;
       };
   updatedAt?: T;

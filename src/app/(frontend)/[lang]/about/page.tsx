@@ -1,7 +1,6 @@
 import { StyledText } from '@/components/StyledText'
 import { fetchGlobal, validateLang } from '@/lib'
 import { Metadata } from 'next'
-import Image from 'next/image'
 import { Fragment } from 'react'
 
 async function loadPage(lang: string) {
@@ -31,12 +30,10 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
       <section className="relative flex h-64 sm:h-72 md:h-80 items-center justify-center text-center text-white">
         <div className="absolute inset-0">
           {typeof page.hero_image === 'object' && (
-            <Image
+            <img
               src={page.hero_image.url}
               alt={page.hero_image.nickname}
-              fill
-              className="object-cover"
-              priority
+              className="h-full w-full object-cover"
             />
           )}
           <div className="absolute inset-0 bg-black/20" />
@@ -78,11 +75,9 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
                 <Fragment key={section.id}>
                   <div className="w-full">
                     {typeof section.image === 'object' && (
-                      <Image
+                      <img
                         src={section.image.url}
                         alt={section.image.nickname}
-                        width={600}
-                        height={400}
                         className="h-auto w-full rounded-lg object-cover shadow-md"
                       />
                     )}
@@ -114,11 +109,9 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
               {page.team_section.map((member) => (
                 <div key={member.id} className="text-center">
                   {typeof member.avatar === 'object' && (
-                    <Image
+                    <img
                       src={member.avatar.url}
                       alt={member.avatar.nickname}
-                      width={160}
-                      height={160}
                       className="mx-auto h-32 w-32 sm:h-36 sm:w-36 md:h-40 md:w-40 rounded-full border-4 border-white object-cover shadow-lg"
                     />
                   )}
