@@ -1,40 +1,47 @@
-import { CloudflareContext, getCloudflareContext } from '@opennextjs/cloudflare'
-import { sqliteD1Adapter } from '@payloadcms/db-d1-sqlite'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import { r2Storage } from '@payloadcms/storage-r2'
 import fs from 'fs'
 import path from 'path'
+import { sqliteD1Adapter } from '@payloadcms/db-d1-sqlite'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
+import { CloudflareContext, getCloudflareContext } from '@opennextjs/cloudflare'
 import { GetPlatformProxyOptions } from 'wrangler'
+import { r2Storage } from '@payloadcms/storage-r2'
 
-import { Events } from './collections/Events'
-import { Media } from './collections/Media'
 import { Users } from './collections/Users'
-import { AboutPage } from './globals/AboutPage'
-import { EventsPage } from './globals/EventsPage'
-import { FreshmanPage } from './globals/FreshmanPage'
-import { GivePage } from './globals/GivePage'
-import { Global } from './globals/Global'
-import { HomePage } from './globals/HomePage'
-import { PlanYourVisitPage } from './globals/PlanYourVisitPage'
-import { SupportPage } from './globals/SupportPage'
-import { ThankYouPage } from './globals/ThankYouPage'
-import { VolunteerPage } from './globals/VolunteerPage'
+import { Media } from './collections/Media'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 const realpath = (value: string) => (fs.existsSync(value) ? fs.realpathSync(value) : undefined)
 
-const isCLI = process.argv.some((value) => realpath(value).endsWith(path.join('payload', 'bin.js')))
+const isCLI = process.argv.some(value => realpath(value).endsWith(path.join('payload', 'bin.js')))
 const isProduction = process.env.NODE_ENV === 'production'
+
+const createLog =
+  (level: string, fn: typeof console.log) => (objOrMsg: object | string, msg?: string) => {
+    if (typeof objOrMsg === 'string') {
+      fn(JSON.stringify({ level, msg: objOrMsg }))
+    } else {
+      fn(JSON.stringify({ level, ...objOrMsg, msg: msg ?? (objOrMsg as { msg?: string }).msg }))
+    }
+  }
+
+const cloudflareLogger = {
+  level: process.env.PAYLOAD_LOG_LEVEL || 'info',
+  trace: createLog('trace', console.debug),
+  debug: createLog('debug', console.debug),
+  info: createLog('info', console.log),
+  warn: createLog('warn', console.warn),
+  error: createLog('error', console.error),
+  fatal: createLog('fatal', console.error),
+  silent: () => {},
+} as any // Use PayloadLogger type when it's exported
 
 const cloudflare =
   isCLI || !isProduction
     ? await getCloudflareContextFromWrangler()
     : await getCloudflareContext({ async: true })
-
-import { ALLOWED_LANGS } from '@/lib/constants'
 
 export default buildConfig({
   admin: {
@@ -43,23 +50,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Events],
-  globals: [
-    Global,
-    HomePage,
-    AboutPage,
-    GivePage,
-    PlanYourVisitPage,
-    SupportPage,
-    VolunteerPage,
-    FreshmanPage,
-    ThankYouPage,
-    EventsPage,
-  ],
-  localization: {
-    locales: ALLOWED_LANGS,
-    defaultLocale: ALLOWED_LANGS[0],
-  },
+  collections: [Users, Media],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -68,6 +59,7 @@ export default buildConfig({
   db: sqliteD1Adapter({
     binding: cloudflare.env.D1,
   }),
+  logger: isProduction ? cloudflareLogger : undefined,
   plugins: [
     r2Storage({
       bucket: cloudflare.env.R2,
@@ -83,6 +75,6 @@ function getCloudflareContextFromWrangler(): Promise<CloudflareContext> {
       getPlatformProxy({
         environment: process.env.CLOUDFLARE_ENV,
         remoteBindings: isProduction,
-      } satisfies GetPlatformProxyOptions),
+      } satisfies GetPlatformProxyOptions)
   )
 }

@@ -1,7 +1,7 @@
 import { withPayload } from '@payloadcms/next/withPayload'
-import type { NextConfig } from 'next'
 
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   // Packages with Cloudflare Workers (workerd) specific code
   // Read more: https://opennext.js.org/cloudflare/howtos/workerd
   serverExternalPackages: ['jose', 'pg-cloudflare'],
@@ -15,12 +15,6 @@ const nextConfig: NextConfig = {
     }
 
     return webpackConfig
-  },
-
-  experimental: {
-    serverActions: {
-      bodySizeLimit: '5mb',
-    },
   },
 }
 

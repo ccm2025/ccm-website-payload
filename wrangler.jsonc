@@ -2,24 +2,17 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
   "name": "ccm-website-payload",
+  "account_id": "3d8f9763dc23cf40e5515b89ba5720b5",
   "compatibility_date": "2025-08-15",
-  "compatibility_flags": [
-    // Enable Node.js API
-    // see https://developers.cloudflare.com/workers/configuration/compatibility-flags/#nodejs-compatibility-flag
-    "nodejs_compat",
-    // Allow to fetch URLs in your app
-    // see https://developers.cloudflare.com/workers/configuration/compatibility-flags/#global-fetch-strictly-public
-    "global_fetch_strictly_public",
-  ],
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS",
   },
-  "account_id": "3d8f9763dc23cf40e5515b89ba5720b5",
   "d1_databases": [
     {
       "binding": "D1",
-      "database_id": "bf5e16fd-7dac-450d-ab71-75b777dcf9fa",
+      "database_id": "17634508-5fd0-4685-802a-27b3f4e55c2a",
       "database_name": "payload-db",
       "remote": true,
     },
