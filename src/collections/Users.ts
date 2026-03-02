@@ -1,3 +1,4 @@
+import { adminOnlyAccess, authenticatedAccess } from '@/access'
 import type { CollectionConfig } from 'payload'
 
 export const Users: CollectionConfig = {
@@ -6,8 +7,19 @@ export const Users: CollectionConfig = {
     useAsTitle: 'email',
   },
   auth: true,
+  access: {
+    read: authenticatedAccess,
+    create: adminOnlyAccess,
+    update: adminOnlyAccess,
+    delete: adminOnlyAccess,
+  },
   fields: [
-    // Email added by default
-    // Add more fields as needed
+    {
+      name: 'role',
+      type: 'select',
+      options: ['admin', 'editor'],
+      required: true,
+      saveToJWT: true,
+    },
   ],
 }
