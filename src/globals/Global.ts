@@ -9,6 +9,12 @@ export const Global: GlobalConfig = {
   },
   fields: [
     {
+      name: 'website_icon',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+    },
+    {
       name: 'website_title_cn',
       type: 'text',
       required: true,

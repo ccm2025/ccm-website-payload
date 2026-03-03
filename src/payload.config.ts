@@ -8,6 +8,8 @@ import { CloudflareContext, getCloudflareContext } from '@opennextjs/cloudflare'
 import { GetPlatformProxyOptions } from 'wrangler'
 import { r2Storage } from '@payloadcms/storage-r2'
 
+import { ALLOWED_LANGS } from './lib/constants'
+
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Events } from './collections/Events'
@@ -24,7 +26,6 @@ import {
   ThankYouPage,
   VolunteerPage,
 } from './globals'
-import { ALLOWED_LANGS } from './lib/constants'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)

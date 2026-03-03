@@ -114,6 +114,9 @@ export interface Config {
     'volunteer-page': VolunteerPageSelect<false> | VolunteerPageSelect<true>;
   };
   locale: 'en' | 'zh-Hans';
+  widgets: {
+    collections: CollectionsWidget;
+  };
   user: User;
   jobs: {
     tasks: unknown;
@@ -523,6 +526,7 @@ export interface GivePage {
  */
 export interface Global {
   id: number;
+  website_icon: number | Media;
   website_title_cn: string;
   website_title_en: string;
   contact_title: string;
@@ -862,6 +866,7 @@ export interface GivePageSelect<T extends boolean = true> {
  * via the `definition` "global_select".
  */
 export interface GlobalSelect<T extends boolean = true> {
+  website_icon?: T;
   website_title_cn?: T;
   website_title_en?: T;
   contact_title?: T;
@@ -1080,6 +1085,16 @@ export interface VolunteerPageSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "collections_widget".
+ */
+export interface CollectionsWidget {
+  data?: {
+    [k: string]: unknown;
+  };
+  width: 'full';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
