@@ -48,13 +48,15 @@ export function LayoutClient({ lang, data, children }: LayoutClientProps) {
           <div className="flex h-20 sm:h-24 md:h-25 items-center justify-between">
             {/* Logo */}
             <Link href={`/${lang}`} className="flex items-center space-x-2 sm:space-x-3">
-              <img
-                src="/logo.jpg"
-                alt={data.website_title_en}
-                className="rounded-full"
-                width="120"
-                height="120"
-              />
+              {typeof data.website_icon === 'object' && (
+                <img
+                  src={data.website_icon.url}
+                  alt={data.website_title_en}
+                  className="rounded-full"
+                  width="120"
+                  height="120"
+                />
+              )}
               <div>
                 <div className="text-lg sm:text-xl md:text-2xl font-medium tracking-wider text-[rgb(var(--website-theme-color1))]">
                   {data.website_title_cn}
@@ -101,13 +103,15 @@ export function LayoutClient({ lang, data, children }: LayoutClientProps) {
           <div className="grid grid-cols-1 gap-8 sm:gap-10 md:gap-12 text-center md:grid-cols-2 md:text-left lg:grid-cols-4">
             <div className="flex flex-col items-center md:items-start">
               <Link href={`/${lang}`} className="flex items-center space-x-3">
-                <img
-                  src="/logo.jpg"
-                  alt={data.website_title_en}
-                  className="rounded-full bg-white"
-                  width="40"
-                  height="40"
-                />
+                {typeof data.website_icon === 'object' && (
+                  <img
+                    src={data.website_icon.url}
+                    alt={data.website_title_en}
+                    className="rounded-full bg-white"
+                    width="40"
+                    height="40"
+                  />
+                )}
                 <div>
                   <div className="text-lg font-bold leading-tight text-white">
                     {data.website_title_cn}
