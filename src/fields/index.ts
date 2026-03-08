@@ -1,2 +1,2 @@
-export * from './infoSectionField'
-export * from './styledTextField'
+// Fields index - currently empty
+// Add field exports here when needed

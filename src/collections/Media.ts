@@ -1,21 +1,21 @@
-import { editorOrAdminAccess, publicAccess } from '@/access'
+import { publicAccess, contentManagerAccess, adminOnlyAccessField } from '@/access'
 import type { CollectionConfig } from 'payload'
 
 export const Media: CollectionConfig = {
   slug: 'media',
   admin: {
-    useAsTitle: 'nickname',
-    defaultColumns: ['nickname', 'mimeType', 'filesize', 'createdAt'],
+    useAsTitle: 'alt',
+    defaultColumns: ['alt', 'uploadedBy', 'createdAt'],
   },
   access: {
     read: publicAccess,
-    create: editorOrAdminAccess,
-    update: editorOrAdminAccess,
-    delete: editorOrAdminAccess,
+    create: contentManagerAccess,
+    update: contentManagerAccess,
+    delete: contentManagerAccess,
   },
   fields: [
     {
-      name: 'nickname',
+      name: 'alt',
       type: 'text',
       required: true,
     },
@@ -26,9 +26,12 @@ export const Media: CollectionConfig = {
       admin: {
         readOnly: true,
       },
-      hidden: true,
+      access: {
+        update: adminOnlyAccessField,
+      },
     },
   ],
+  timestamps: true,
   hooks: {
     beforeValidate: [
       ({ req, data, originalDoc }) => {
@@ -40,6 +43,7 @@ export const Media: CollectionConfig = {
     ],
   },
   upload: {
+    // These are not supported on Workers yet due to lack of sharp
     crop: false,
     focalPoint: false,
     mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'application/pdf'],

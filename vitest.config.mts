@@ -5,25 +5,18 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 export default defineConfig({
   plugins: [tsconfigPaths(), react()],
   test: {
-    environment: 'node', // Changed from jsdom to avoid browser conflicts
+    environment: 'node',
     setupFiles: ['./vitest.setup.ts'],
-    include: ['tests/unit/**/*.spec.ts', 'tests/integration/**/*.spec.ts'],
-    coverage: {
-      provider: 'v8',
-      include: [
-        'src/collections/**',
-        'src/globals/**',
-        'src/lib/**',
-        'src/access/**',
-        'src/fields/**',
-      ],
-      exclude: [
-        'src/payload-types.ts',
-        'src/app/**', // Exclude Next.js app router files
-        'tests/**',
-      ],
-      reporter: ['text', 'html', 'json'],
+    include: ['tests/**/*.test.ts'],
+    globals: true,
+    pool: 'forks',
+    fileParallelism: false, // 禁用文件并行执行
+    sequence: {
+      concurrent: false, // 禁用并发测试
     },
-    testTimeout: 30000,
+    testTimeout: 10000, // 增加超时时间
+  },
+  define: {
+    global: 'globalThis',
   },
 })

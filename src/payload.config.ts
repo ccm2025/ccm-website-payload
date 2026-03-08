@@ -8,31 +8,34 @@ import { CloudflareContext, getCloudflareContext } from '@opennextjs/cloudflare'
 import { GetPlatformProxyOptions } from 'wrangler'
 import { r2Storage } from '@payloadcms/storage-r2'
 
-import { ALLOWED_LANGS } from './lib/constants'
-
-import { Users } from './collections/Users'
-import { Media } from './collections/Media'
-import { Events } from './collections/Events'
-
-import {
-  AboutPage,
-  EventsPage,
-  FreshmanPage,
-  GivePage,
-  Global,
-  HomePage,
-  PlanYourVisitPage,
-  SupportPage,
-  ThankYouPage,
-  VolunteerPage,
-} from './globals'
+import { Users, Media, Events } from '@/collections'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 const realpath = (value: string) => (fs.existsSync(value) ? fs.realpathSync(value) : undefined)
 
-const isCLI = process.argv.some(value => realpath(value).endsWith(path.join('payload', 'bin.js')))
+const isCLI = process.argv.some((value) => realpath(value).endsWith(path.join('payload', 'bin.js')))
 const isProduction = process.env.NODE_ENV === 'production'
+
+const createLog =
+  (level: string, fn: typeof console.log) => (objOrMsg: object | string, msg?: string) => {
+    if (typeof objOrMsg === 'string') {
+      fn(JSON.stringify({ level, msg: objOrMsg }))
+    } else {
+      fn(JSON.stringify({ level, ...objOrMsg, msg: msg ?? (objOrMsg as { msg?: string }).msg }))
+    }
+  }
+
+const cloudflareLogger = {
+  level: process.env.PAYLOAD_LOG_LEVEL || 'info',
+  trace: createLog('trace', console.debug),
+  debug: createLog('debug', console.debug),
+  info: createLog('info', console.log),
+  warn: createLog('warn', console.warn),
+  error: createLog('error', console.error),
+  fatal: createLog('fatal', console.error),
+  silent: () => {},
+} as any // Use PayloadLogger type when it's exported
 
 const cloudflare =
   isCLI || !isProduction
@@ -47,23 +50,6 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Events],
-  globals: [
-    AboutPage,
-    EventsPage,
-    FreshmanPage,
-    GivePage,
-    Global,
-    HomePage,
-    PlanYourVisitPage,
-    SupportPage,
-    ThankYouPage,
-    VolunteerPage,
-  ],
-  localization: {
-    locales: ALLOWED_LANGS.map(lang => lang as string),
-    defaultLocale: ALLOWED_LANGS[0],
-    fallback: true,
-  },
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -72,7 +58,7 @@ export default buildConfig({
   db: sqliteD1Adapter({
     binding: cloudflare.env.D1,
   }),
-  logger: isProduction ? 'sync' : undefined,
+  logger: isProduction ? cloudflareLogger : undefined,
   plugins: [
     r2Storage({
       bucket: cloudflare.env.R2,
@@ -88,6 +74,6 @@ function getCloudflareContextFromWrangler(): Promise<CloudflareContext> {
       getPlatformProxy({
         environment: process.env.CLOUDFLARE_ENV,
         remoteBindings: isProduction,
-      } satisfies GetPlatformProxyOptions)
+      } satisfies GetPlatformProxyOptions),
   )
 }
