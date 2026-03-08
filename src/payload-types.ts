@@ -88,32 +88,10 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'zh-Hans') | ('en' | 'zh-Hans')[];
-  globals: {
-    'about-page': AboutPage;
-    'events-page': EventsPage;
-    'freshman-page': FreshmanPage;
-    'give-page': GivePage;
-    global: Global;
-    'home-page': HomePage;
-    'plan-your-visit-page': PlanYourVisitPage;
-    'support-page': SupportPage;
-    'thank-you-page': ThankYouPage;
-    'volunteer-page': VolunteerPage;
-  };
-  globalsSelect: {
-    'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
-    'events-page': EventsPageSelect<false> | EventsPageSelect<true>;
-    'freshman-page': FreshmanPageSelect<false> | FreshmanPageSelect<true>;
-    'give-page': GivePageSelect<false> | GivePageSelect<true>;
-    global: GlobalSelect<false> | GlobalSelect<true>;
-    'home-page': HomePageSelect<false> | HomePageSelect<true>;
-    'plan-your-visit-page': PlanYourVisitPageSelect<false> | PlanYourVisitPageSelect<true>;
-    'support-page': SupportPageSelect<false> | SupportPageSelect<true>;
-    'thank-you-page': ThankYouPageSelect<false> | ThankYouPageSelect<true>;
-    'volunteer-page': VolunteerPageSelect<false> | VolunteerPageSelect<true>;
-  };
-  locale: 'en' | 'zh-Hans';
+  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'zh' | 'zh-TW') | ('en' | 'zh' | 'zh-TW')[];
+  globals: {};
+  globalsSelect: {};
+  locale: 'en' | 'zh' | 'zh-TW';
   widgets: {
     collections: CollectionsWidget;
   };
@@ -147,7 +125,17 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
-  role: 'admin' | 'editor';
+  firstName: string;
+  lastName: string;
+  role: 'admin' | 'editor' | 'member';
+  /**
+   * Toggle to activate/deactivate user account
+   */
+  isActive?: boolean | null;
+  /**
+   * Last login time
+   */
+  lastLoginAt?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -173,7 +161,7 @@ export interface User {
  */
 export interface Media {
   id: number;
-  nickname: string;
+  alt: string;
   uploadedBy?: (number | null) | User;
   updatedAt: string;
   createdAt: string;
@@ -191,21 +179,88 @@ export interface Media {
  */
 export interface Event {
   id: number;
+  /**
+   * Event title
+   */
   title: string;
+  /**
+   * URL-friendly identifier, must be unique
+   */
   slug: string;
+  /**
+   * Event date
+   */
   date: string;
-  hero_image: number | Media;
-  content?:
+  time?: {
+    /**
+     * Start time (24-hour format)
+     */
+    start?: string | null;
+    /**
+     * End time (24-hour format)
+     */
+    end?: string | null;
+  };
+  location?: {
+    /**
+     * Venue name
+     */
+    venue?: string | null;
+    /**
+     * Detailed address
+     */
+    address?: string | null;
+  };
+  /**
+   * Event description
+   */
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Event image gallery
+   */
+  gallery?:
     | {
-        text: string;
-        font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-        color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-        font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
+        image: number | Media;
+        caption?: string | null;
         id?: string | null;
       }[]
     | null;
-  content_image?: (number | null) | Media;
+  /**
+   * Event video link (YouTube, Vimeo, etc.)
+   */
   content_video_url?: string | null;
+  registration?: {
+    /**
+     * Whether registration is required
+     */
+    required?: boolean | null;
+    /**
+     * Registration link
+     */
+    url?: string | null;
+    /**
+     * Registration deadline
+     */
+    deadline?: string | null;
+  };
+  /**
+   * Event creator
+   */
+  createdBy?: (number | null) | User;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -293,7 +348,11 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  firstName?: T;
+  lastName?: T;
   role?: T;
+  isActive?: T;
+  lastLoginAt?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -316,7 +375,7 @@ export interface UsersSelect<T extends boolean = true> {
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
-  nickname?: T;
+  alt?: T;
   uploadedBy?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -336,18 +395,35 @@ export interface EventsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   date?: T;
-  hero_image?: T;
-  content?:
+  time?:
     | T
     | {
-        text?: T;
-        font_size?: T;
-        color?: T;
-        font_style?: T;
+        start?: T;
+        end?: T;
+      };
+  location?:
+    | T
+    | {
+        venue?: T;
+        address?: T;
+      };
+  description?: T;
+  gallery?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
         id?: T;
       };
-  content_image?: T;
   content_video_url?: T;
+  registration?:
+    | T
+    | {
+        required?: T;
+        url?: T;
+        deadline?: T;
+      };
+  createdBy?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -391,700 +467,6 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "about-page".
- */
-export interface AboutPage {
-  id: number;
-  hero_title: string;
-  hero_image: number | Media;
-  introduction_subtitle: string;
-  introduction_title: string;
-  introduction_content: {
-    text: string;
-    font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-    color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-    font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-    id?: string | null;
-  }[];
-  history_subtitle: string;
-  history_title: string;
-  history_section: {
-    content: {
-      text: string;
-      font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-      color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-      font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-      id?: string | null;
-    }[];
-    image: number | Media;
-    id?: string | null;
-  }[];
-  team_subtitle: string;
-  team_title: string;
-  team_section: {
-    name: string;
-    description: string;
-    avatar: number | Media;
-    id?: string | null;
-  }[];
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events-page".
- */
-export interface EventsPage {
-  id: number;
-  hero_title: string;
-  hero_image: number | Media;
-  upcoming_events_subtitle: string;
-  upcoming_events_title: string;
-  upcoming_events_empty_text: string;
-  past_events_subtitle: string;
-  past_events_title: string;
-  past_events_empty_text: string;
-  default_event_image: number | Media;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "freshman-page".
- */
-export interface FreshmanPage {
-  id: number;
-  hero_title: string;
-  hero_image: number | Media;
-  info_sections: {
-    title: string;
-    subtitle?: string | null;
-    content: {
-      text: string;
-      font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-      color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-      font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-      id?: string | null;
-    }[];
-    image: number | Media;
-    button_text?: string | null;
-    button_url?: string | null;
-    id?: string | null;
-  }[];
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "give-page".
- */
-export interface GivePage {
-  id: number;
-  hero_title: string;
-  hero_image: number | Media;
-  introduction_subtitle: string;
-  introduction_title: string;
-  introduction_content: {
-    text: string;
-    font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-    color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-    font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-    id?: string | null;
-  }[];
-  zelle_title: string;
-  zelle_content: {
-    text: string;
-    font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-    color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-    font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-    id?: string | null;
-  }[];
-  check_title: string;
-  check_content: {
-    text: string;
-    font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-    color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-    font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-    id?: string | null;
-  }[];
-  pdf_links?:
-    | {
-        title: string;
-        pdf: number | Media;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "global".
- */
-export interface Global {
-  id: number;
-  website_icon: number | Media;
-  website_title_cn: string;
-  website_title_en: string;
-  contact_title: string;
-  address: string;
-  email: string;
-  instagram_url?: string | null;
-  youtube_url?: string | null;
-  nav_title: string;
-  involve_title: string;
-  nav?:
-    | {
-        text: string;
-        slug: string;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "home-page".
- */
-export interface HomePage {
-  id: number;
-  hero_title: string;
-  hero_subtitle: {
-    text: string;
-    font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-    color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-    font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-    id?: string | null;
-  }[];
-  hero_button_text: string;
-  hero_background_image: number | Media;
-  introduction_part1: {
-    text: string;
-    font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-    color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-    font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-    id?: string | null;
-  }[];
-  introduction_video_url: string;
-  introduction_part2: {
-    text: string;
-    font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-    color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-    font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-    id?: string | null;
-  }[];
-  meet_title: string;
-  meet_cards: {
-    title: string;
-    image: number | Media;
-    slug: string;
-    id?: string | null;
-  }[];
-  conclusion: {
-    text: string;
-    font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-    color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-    font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-    id?: string | null;
-  }[];
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "plan-your-visit-page".
- */
-export interface PlanYourVisitPage {
-  id: number;
-  hero_title: string;
-  hero_image: number | Media;
-  introduction_subtitle: string;
-  introduction_title: string;
-  introduction_content: {
-    title: string;
-    subtitle?: string | null;
-    content: {
-      text: string;
-      font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-      color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-      font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-      id?: string | null;
-    }[];
-    image: number | Media;
-    id?: string | null;
-  }[];
-  location_map_link: string;
-  location_description: {
-    text: string;
-    font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-    color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-    font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-    id?: string | null;
-  }[];
-  hours_title: string;
-  hours_content: {
-    title: string;
-    subtitle?: string | null;
-    content: {
-      text: string;
-      font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-      color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-      font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-      id?: string | null;
-    }[];
-    image: number | Media;
-    id?: string | null;
-  }[];
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "support-page".
- */
-export interface SupportPage {
-  id: number;
-  hero_title: string;
-  hero_image: number | Media;
-  info_sections: {
-    title: string;
-    subtitle?: string | null;
-    content: {
-      text: string;
-      font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-      color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-      font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-      id?: string | null;
-    }[];
-    image: number | Media;
-    id?: string | null;
-  }[];
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "thank-you-page".
- */
-export interface ThankYouPage {
-  id: number;
-  hero_title: string;
-  hero_image: number | Media;
-  content_title: string;
-  content: {
-    text: string;
-    font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-    color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-    font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-    id?: string | null;
-  }[];
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "volunteer-page".
- */
-export interface VolunteerPage {
-  id: number;
-  hero_title: string;
-  hero_image: number | Media;
-  introduction_subtitle: string;
-  introduction_title: string;
-  introduction_content: {
-    text: string;
-    font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-    color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-    font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-    id?: string | null;
-  }[];
-  application_button_text: string;
-  application_button_url: string;
-  volunteer_title: string;
-  volunteer_content: {
-    text: string;
-    font_size?: ('Small' | 'Normal' | 'Large' | 'Extra-Large') | null;
-    color?: ('Default' | 'Website-Theme-Color1' | 'Website-Theme-Color2') | null;
-    font_style?: ('Normal' | 'Italic' | 'Bold' | 'Underline') | null;
-    id?: string | null;
-  }[];
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "about-page_select".
- */
-export interface AboutPageSelect<T extends boolean = true> {
-  hero_title?: T;
-  hero_image?: T;
-  introduction_subtitle?: T;
-  introduction_title?: T;
-  introduction_content?:
-    | T
-    | {
-        text?: T;
-        font_size?: T;
-        color?: T;
-        font_style?: T;
-        id?: T;
-      };
-  history_subtitle?: T;
-  history_title?: T;
-  history_section?:
-    | T
-    | {
-        content?:
-          | T
-          | {
-              text?: T;
-              font_size?: T;
-              color?: T;
-              font_style?: T;
-              id?: T;
-            };
-        image?: T;
-        id?: T;
-      };
-  team_subtitle?: T;
-  team_title?: T;
-  team_section?:
-    | T
-    | {
-        name?: T;
-        description?: T;
-        avatar?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events-page_select".
- */
-export interface EventsPageSelect<T extends boolean = true> {
-  hero_title?: T;
-  hero_image?: T;
-  upcoming_events_subtitle?: T;
-  upcoming_events_title?: T;
-  upcoming_events_empty_text?: T;
-  past_events_subtitle?: T;
-  past_events_title?: T;
-  past_events_empty_text?: T;
-  default_event_image?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "freshman-page_select".
- */
-export interface FreshmanPageSelect<T extends boolean = true> {
-  hero_title?: T;
-  hero_image?: T;
-  info_sections?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-        content?:
-          | T
-          | {
-              text?: T;
-              font_size?: T;
-              color?: T;
-              font_style?: T;
-              id?: T;
-            };
-        image?: T;
-        button_text?: T;
-        button_url?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "give-page_select".
- */
-export interface GivePageSelect<T extends boolean = true> {
-  hero_title?: T;
-  hero_image?: T;
-  introduction_subtitle?: T;
-  introduction_title?: T;
-  introduction_content?:
-    | T
-    | {
-        text?: T;
-        font_size?: T;
-        color?: T;
-        font_style?: T;
-        id?: T;
-      };
-  zelle_title?: T;
-  zelle_content?:
-    | T
-    | {
-        text?: T;
-        font_size?: T;
-        color?: T;
-        font_style?: T;
-        id?: T;
-      };
-  check_title?: T;
-  check_content?:
-    | T
-    | {
-        text?: T;
-        font_size?: T;
-        color?: T;
-        font_style?: T;
-        id?: T;
-      };
-  pdf_links?:
-    | T
-    | {
-        title?: T;
-        pdf?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "global_select".
- */
-export interface GlobalSelect<T extends boolean = true> {
-  website_icon?: T;
-  website_title_cn?: T;
-  website_title_en?: T;
-  contact_title?: T;
-  address?: T;
-  email?: T;
-  instagram_url?: T;
-  youtube_url?: T;
-  nav_title?: T;
-  involve_title?: T;
-  nav?:
-    | T
-    | {
-        text?: T;
-        slug?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "home-page_select".
- */
-export interface HomePageSelect<T extends boolean = true> {
-  hero_title?: T;
-  hero_subtitle?:
-    | T
-    | {
-        text?: T;
-        font_size?: T;
-        color?: T;
-        font_style?: T;
-        id?: T;
-      };
-  hero_button_text?: T;
-  hero_background_image?: T;
-  introduction_part1?:
-    | T
-    | {
-        text?: T;
-        font_size?: T;
-        color?: T;
-        font_style?: T;
-        id?: T;
-      };
-  introduction_video_url?: T;
-  introduction_part2?:
-    | T
-    | {
-        text?: T;
-        font_size?: T;
-        color?: T;
-        font_style?: T;
-        id?: T;
-      };
-  meet_title?: T;
-  meet_cards?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        slug?: T;
-        id?: T;
-      };
-  conclusion?:
-    | T
-    | {
-        text?: T;
-        font_size?: T;
-        color?: T;
-        font_style?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "plan-your-visit-page_select".
- */
-export interface PlanYourVisitPageSelect<T extends boolean = true> {
-  hero_title?: T;
-  hero_image?: T;
-  introduction_subtitle?: T;
-  introduction_title?: T;
-  introduction_content?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-        content?:
-          | T
-          | {
-              text?: T;
-              font_size?: T;
-              color?: T;
-              font_style?: T;
-              id?: T;
-            };
-        image?: T;
-        id?: T;
-      };
-  location_map_link?: T;
-  location_description?:
-    | T
-    | {
-        text?: T;
-        font_size?: T;
-        color?: T;
-        font_style?: T;
-        id?: T;
-      };
-  hours_title?: T;
-  hours_content?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-        content?:
-          | T
-          | {
-              text?: T;
-              font_size?: T;
-              color?: T;
-              font_style?: T;
-              id?: T;
-            };
-        image?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "support-page_select".
- */
-export interface SupportPageSelect<T extends boolean = true> {
-  hero_title?: T;
-  hero_image?: T;
-  info_sections?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-        content?:
-          | T
-          | {
-              text?: T;
-              font_size?: T;
-              color?: T;
-              font_style?: T;
-              id?: T;
-            };
-        image?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "thank-you-page_select".
- */
-export interface ThankYouPageSelect<T extends boolean = true> {
-  hero_title?: T;
-  hero_image?: T;
-  content_title?: T;
-  content?:
-    | T
-    | {
-        text?: T;
-        font_size?: T;
-        color?: T;
-        font_style?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "volunteer-page_select".
- */
-export interface VolunteerPageSelect<T extends boolean = true> {
-  hero_title?: T;
-  hero_image?: T;
-  introduction_subtitle?: T;
-  introduction_title?: T;
-  introduction_content?:
-    | T
-    | {
-        text?: T;
-        font_size?: T;
-        color?: T;
-        font_style?: T;
-        id?: T;
-      };
-  application_button_text?: T;
-  application_button_url?: T;
-  volunteer_title?: T;
-  volunteer_content?:
-    | T
-    | {
-        text?: T;
-        font_size?: T;
-        color?: T;
-        font_style?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

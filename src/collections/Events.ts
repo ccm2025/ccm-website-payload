@@ -1,21 +1,24 @@
-import { editorOrAdminAccess, publicAccess } from '@/access'
-import { styledTextField } from '@/fields'
-import type { CollectionConfig } from 'payload'
-import { ValidationError } from 'payload'
+import { contentManagerAccess, publicAccess, adminOnlyAccessField } from '@/access'
+import { type CollectionConfig, ValidationError } from 'payload'
 
 export const Events: CollectionConfig = {
   slug: 'events',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'date', 'slug'],
+    defaultColumns: ['title', 'date', 'slug', 'createdAt'],
   },
   access: {
     read: publicAccess,
-    create: editorOrAdminAccess,
-    update: editorOrAdminAccess,
-    delete: editorOrAdminAccess,
+    create: contentManagerAccess,
+    update: contentManagerAccess,
+    delete: contentManagerAccess,
   },
-  versions: { drafts: true },
+  versions: {
+    drafts: {
+      autosave: false,
+      validate: false,
+    },
+  },
   labels: {
     singular: 'Event',
     plural: 'Events',
@@ -42,6 +45,12 @@ export const Events: CollectionConfig = {
             })
           }
         }
+
+        // Auto-set createdBy field
+        if (operation === 'create' && req.user) {
+          data.createdBy = req.user.id
+        }
+
         return data
       },
     ],
@@ -52,12 +61,18 @@ export const Events: CollectionConfig = {
       type: 'text',
       required: true,
       localized: true,
+      admin: {
+        description: 'Event title',
+      },
     },
     {
       name: 'slug',
       type: 'text',
       required: true,
       index: true,
+      admin: {
+        description: 'URL-friendly identifier, must be unique',
+      },
     },
     {
       name: 'date',
@@ -68,24 +83,182 @@ export const Events: CollectionConfig = {
         date: {
           pickerAppearance: 'dayOnly',
         },
+        description: 'Event date',
       },
     },
     {
-      name: 'hero_image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
+      name: 'time',
+      type: 'group',
+      fields: [
+        {
+          name: 'start',
+          type: 'text',
+          validate: (value: string | undefined) => {
+            if (value && value.trim()) {
+              const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/
+              return timeRegex.test(value) || 'Please enter time in HH:MM format (24-hour)'
+            }
+            return true
+          },
+          admin: {
+            placeholder: 'eg. 14:00',
+            description: 'Start time (24-hour format)',
+          },
+        },
+        {
+          name: 'end',
+          type: 'text',
+          validate: (value: string | undefined) => {
+            if (value && value.trim()) {
+              const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/
+              return timeRegex.test(value) || 'Please enter time in HH:MM format (24-hour)'
+            }
+            return true
+          },
+          admin: {
+            placeholder: 'eg. 17:00',
+            description: 'End time (24-hour format)',
+          },
+        },
+      ],
     },
-    styledTextField({ name: 'content', localized: true }),
     {
-      name: 'content_image',
-      type: 'upload',
-      relationTo: 'media',
+      name: 'location',
+      type: 'group',
+      fields: [
+        {
+          name: 'venue',
+          type: 'text',
+          localized: true,
+          admin: {
+            description: 'Venue name',
+          },
+        },
+        {
+          name: 'address',
+          type: 'textarea',
+          localized: true,
+          admin: {
+            description: 'Detailed address',
+          },
+        },
+      ],
+    },
+    {
+      name: 'description',
+      type: 'richText',
+      required: true,
       localized: true,
+      admin: {
+        description: 'Event description',
+      },
+    },
+    {
+      name: 'gallery',
+      type: 'array',
+      minRows: 0,
+      maxRows: 10,
+      fields: [
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        },
+        {
+          name: 'caption',
+          type: 'text',
+          localized: true,
+        },
+      ],
+      admin: {
+        description: 'Event image gallery',
+      },
     },
     {
       name: 'content_video_url',
       type: 'text',
+      validate: (value: string | undefined) => {
+        if (value && value.trim()) {
+          // Basic URL validation
+          try {
+            new URL(value)
+            return true
+          } catch {
+            return 'Please enter a valid URL'
+          }
+        }
+        return true
+      },
+      admin: {
+        description: 'Event video link (YouTube, Vimeo, etc.)',
+      },
+    },
+    {
+      name: 'registration',
+      type: 'group',
+      fields: [
+        {
+          name: 'required',
+          type: 'checkbox',
+          defaultValue: false,
+          admin: {
+            description: 'Whether registration is required',
+          },
+        },
+        {
+          name: 'url',
+          type: 'text',
+          validate: (value: string | undefined, { siblingData }: any) => {
+            // If registration is required, URL must be provided and valid
+            if (siblingData?.required) {
+              if (!value || !value.trim()) {
+                return 'Registration URL is required when registration is enabled'
+              }
+              try {
+                new URL(value)
+                return true
+              } catch {
+                return 'Please enter a valid registration URL'
+              }
+            }
+            // If registration not required but URL provided, validate it
+            if (value && value.trim()) {
+              try {
+                new URL(value)
+                return true
+              } catch {
+                return 'Please enter a valid URL'
+              }
+            }
+            return true
+          },
+          admin: {
+            condition: (data, siblingData) => siblingData?.required,
+            description: 'Registration link',
+          },
+        },
+        {
+          name: 'deadline',
+          type: 'date',
+          admin: {
+            condition: (data, siblingData) => siblingData?.required,
+            description: 'Registration deadline',
+          },
+        },
+      ],
+    },
+    {
+      name: 'createdBy',
+      type: 'relationship',
+      relationTo: 'users',
+      admin: {
+        readOnly: true,
+        description: 'Event creator',
+      },
+      access: {
+        update: adminOnlyAccessField,
+      },
     },
   ],
   timestamps: true,
