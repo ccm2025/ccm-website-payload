@@ -23,22 +23,35 @@
     "test": "pnpm run test:unit && pnpm run test:e2e",
     "test:e2e": "cross-env NODE_OPTIONS=\"--no-deprecation --import=tsx/esm\" playwright test --config=playwright.config.ts",
     "test:unit": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts",
-    "login": "wrangler login"
+    "login": "wrangler login",
+    "danger:clean": "rm -rf node_modules .next .open-next dist",
+    "danger:drop:d1:local": "echo 'WARNING: This will completely drop all tables in remote D1!' && echo 'Press Ctrl+C to cancel, Enter to continue...' && read && rm -rf .wrangler",
+    "danger:drop:d1:remote": "echo 'WARNING: This will completely drop all tables in remote D1!' && echo 'Press Ctrl+C to cancel, Enter to continue...' && read && pnpx tsx scripts/drop-tables-remote.ts",
+    "migrate:create": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:create",
+    "sync:d1:up": "pnpm run danger:drop:d1:remote && pnpm run sync:d1:up:schema && pnpm run sync:d1:up:data",
+    "sync:d1:up:schema": "wrangler d1 export D1 --output=./temp-local-export.sql --no-data && wrangler d1 execute D1 --file=./temp-local-export.sql --env=$CLOUDFLARE_ENV --remote && rm -f ./temp-local-export.sql",
+    "sync:d1:up:data": "wrangler d1 export D1 --output=./temp-local-export.sql --no-schema && wrangler d1 execute D1 --file=./temp-local-export.sql --env=$CLOUDFLARE_ENV --remote && rm -f ./temp-local-export.sql",
+    "sync:d1:down": "pnpm run danger:drop:d1:local && pnpm run sync:d1:down:schema && pnpm run sync:d1:down:data",
+    "sync:d1:down:schema": "wrangler d1 export D1 --env=$CLOUDFLARE_ENV --remote --output=./temp-remote-export.sql --no-data && wrangler d1 execute D1 --file=./temp-remote-export.sql --local && rm -f ./temp-remote-export.sql",
+    "sync:d1:down:data": "wrangler d1 export D1 --env=$CLOUDFLARE_ENV --remote --output=./temp-remote-export.sql --no-schema && wrangler d1 execute D1 --file=./temp-remote-export.sql --local && rm -f ./temp-remote-export.sql"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "^1.11.0",
+    "@payloadcms/db-d1-sqlite": "^3.79.0",
     "@payloadcms/next": "^3.79.0",
     "@payloadcms/richtext-lexical": "^3.79.0",
     "@payloadcms/storage-r2": "^3.79.0",
     "@payloadcms/ui": "^3.79.0",
+    "@tailwindcss/postcss": "^4.2.1",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.7",
     "graphql": "^16.8.1",
+    "lucide-react": "^0.577.0",
     "next": "~15.4.11",
     "payload": "^3.79.0",
     "react": "~19.2.1",
     "react-dom": "~19.2.1",
-    "@payloadcms/db-d1-sqlite": "^3.79.0"
+    "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",

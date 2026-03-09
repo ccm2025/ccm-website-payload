@@ -1,0 +1,11 @@
+// Export all globals for use in payload.config.ts
+export { SiteGlobal } from './SiteGlobal'
+export { HomePage } from './HomePage'
+export { AboutPage } from './AboutPage'
+export { EventsPage } from './EventsPage'
+export { VolunteerPage } from './VolunteerPage'
+export { GivePage } from './GivePage'
+export { SupportPage } from './SupportPage'
+export { FreshmanPage } from './FreshmanPage'
+export { PlanYourVisitPage } from './PlanYourVisitPage'
+export { ThankYouPage } from './ThankYouPage'
