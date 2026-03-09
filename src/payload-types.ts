@@ -88,10 +88,32 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'zh' | 'zh-TW') | ('en' | 'zh' | 'zh-TW')[];
-  globals: {};
-  globalsSelect: {};
-  locale: 'en' | 'zh' | 'zh-TW';
+  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'zh-Hans') | ('en' | 'zh-Hans')[];
+  globals: {
+    global: Global;
+    'home-page': HomePage;
+    'about-page': AboutPage;
+    'events-page': EventsPage;
+    'volunteer-page': VolunteerPage;
+    'give-page': GivePage;
+    'support-page': SupportPage;
+    'freshman-page': FreshmanPage;
+    'plan-your-visit-page': PlanYourVisitPage;
+    'thank-you-page': ThankYouPage;
+  };
+  globalsSelect: {
+    global: GlobalSelect<false> | GlobalSelect<true>;
+    'home-page': HomePageSelect<false> | HomePageSelect<true>;
+    'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
+    'events-page': EventsPageSelect<false> | EventsPageSelect<true>;
+    'volunteer-page': VolunteerPageSelect<false> | VolunteerPageSelect<true>;
+    'give-page': GivePageSelect<false> | GivePageSelect<true>;
+    'support-page': SupportPageSelect<false> | SupportPageSelect<true>;
+    'freshman-page': FreshmanPageSelect<false> | FreshmanPageSelect<true>;
+    'plan-your-visit-page': PlanYourVisitPageSelect<false> | PlanYourVisitPageSelect<true>;
+    'thank-you-page': ThankYouPageSelect<false> | ThankYouPageSelect<true>;
+  };
+  locale: 'en' | 'zh-Hans';
   widgets: {
     collections: CollectionsWidget;
   };
@@ -467,6 +489,1083 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global".
+ */
+export interface Global {
+  id: number;
+  navigation?: {
+    /**
+     * Site logo
+     */
+    logo?: (number | null) | Media;
+    menuItems?:
+      | {
+          label: string;
+          /**
+           * Internal path (e.g., /about) or external URL
+           */
+          href: string;
+          openInNewTab?: boolean | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  footer?: {
+    /**
+     * Footer description text
+     */
+    description?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    contactInfo?: {
+      address?: string | null;
+      phone?: string | null;
+      email?: string | null;
+    };
+    socialMedia?:
+      | {
+          platform: 'facebook' | 'instagram' | 'twitter' | 'linkedin' | 'youtube';
+          url: string;
+          id?: string | null;
+        }[]
+      | null;
+    copyrightText?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page".
+ */
+export interface HomePage {
+  id: number;
+  hero: {
+    /**
+     * Main hero title
+     */
+    hero_title: string;
+    /**
+     * Hero subtitle content
+     */
+    hero_subtitle?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    /**
+     * Hero background image
+     */
+    hero_background_image: number | Media;
+    /**
+     * Hero call-to-action button text
+     */
+    hero_button_text?: string | null;
+  };
+  content: {
+    /**
+     * First introduction section
+     */
+    introduction_part1: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    /**
+     * YouTube embed URL for introduction video
+     */
+    introduction_video_url?: string | null;
+    /**
+     * Second introduction section (after video)
+     */
+    introduction_part2?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    /**
+     * Conclusion section
+     */
+    conclusion?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  meet: {
+    /**
+     * Title for the meet with us section
+     */
+    meet_title: string;
+    meet_cards?:
+      | {
+          title: string;
+          /**
+           * URL slug (e.g., "about", "events")
+           */
+          slug: string;
+          image: number | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page".
+ */
+export interface AboutPage {
+  id: number;
+  hero: {
+    hero_title: string;
+    hero_image: number | Media;
+  };
+  introduction: {
+    introduction_subtitle?: string | null;
+    introduction_title: string;
+    introduction_content: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+  };
+  history?: {
+    history_subtitle?: string | null;
+    history_title?: string | null;
+    history_section?:
+      | {
+          image: number | Media;
+          content: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+        }[]
+      | null;
+  };
+  team?: {
+    team_subtitle?: string | null;
+    team_title?: string | null;
+    team_section?:
+      | {
+          name: string;
+          position?: string | null;
+          photo: number | Media;
+          bio?: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events-page".
+ */
+export interface EventsPage {
+  id: number;
+  hero: {
+    hero_title: string;
+    hero_image: number | Media;
+  };
+  upcomingEvents: {
+    upcoming_events_subtitle?: string | null;
+    upcoming_events_title: string;
+    /**
+     * Message to show when no upcoming events
+     */
+    no_events_message?: string | null;
+  };
+  pastEvents: {
+    past_events_subtitle?: string | null;
+    past_events_title: string;
+    view_all_text?: string | null;
+    /**
+     * Message to show when no past events
+     */
+    past_events_empty_text?: string | null;
+  };
+  seo?: {
+    /**
+     * Meta description for events page
+     */
+    description?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "volunteer-page".
+ */
+export interface VolunteerPage {
+  id: number;
+  hero: {
+    hero_title: string;
+    hero_image: number | Media;
+  };
+  introduction: {
+    introduction_subtitle?: string | null;
+    introduction_title: string;
+    introduction_content: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+  };
+  application?: {
+    application_button_text?: string | null;
+    /**
+     * URL to volunteer application form
+     */
+    application_button_url?: string | null;
+  };
+  volunteer?: {
+    volunteer_title?: string | null;
+    volunteer_content?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "give-page".
+ */
+export interface GivePage {
+  id: number;
+  hero: {
+    hero_title: string;
+    hero_image: number | Media;
+  };
+  content: {
+    introduction_subtitle?: string | null;
+    introduction_title: string;
+    introduction_content: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    donation_button_text?: string | null;
+    /**
+     * URL to donation form or payment processor
+     */
+    donation_button_url?: string | null;
+  };
+  payment_methods?: {
+    zelle_title?: string | null;
+    zelle_content?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    check_title?: string | null;
+    check_content?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  resources?: {
+    pdf_links?:
+      | {
+          title: string;
+          file: number | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "support-page".
+ */
+export interface SupportPage {
+  id: number;
+  hero: {
+    hero_title: string;
+    hero_image: number | Media;
+  };
+  content?: {
+    info_sections?:
+      | {
+          /**
+           * Small subtitle above heading
+           */
+          title?: string | null;
+          /**
+           * Main section heading
+           */
+          subtitle?: string | null;
+          content: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          image?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "freshman-page".
+ */
+export interface FreshmanPage {
+  id: number;
+  hero: {
+    hero_title: string;
+    hero_subtitle?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    hero_image: number | Media;
+  };
+  content: {
+    introduction_title: string;
+    introduction_content: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    resources_title?: string | null;
+    resources_content?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    info_sections?:
+      | {
+          title: string;
+          subtitle?: string | null;
+          content: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          image?: (number | null) | Media;
+          button_text?: string | null;
+          button_url?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "plan-your-visit-page".
+ */
+export interface PlanYourVisitPage {
+  id: number;
+  hero: {
+    hero_title: string;
+    hero_image: number | Media;
+  };
+  introduction: {
+    introduction_subtitle?: string | null;
+    introduction_title: string;
+    introduction_content?:
+      | {
+          content: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          image?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  location?: {
+    /**
+     * Google Maps embed URL for the iframe src
+     */
+    location_map_link?: string | null;
+    location_description?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  hours?: {
+    hours_title?: string | null;
+    hours_content?:
+      | {
+          content: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          image?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "thank-you-page".
+ */
+export interface ThankYouPage {
+  id: number;
+  hero: {
+    hero_title: string;
+    hero_subtitle?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    hero_image: number | Media;
+  };
+  content: {
+    content_title: string;
+    content: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+  };
+  navigation?: {
+    home_button_text?: string | null;
+    contact_button_text?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global_select".
+ */
+export interface GlobalSelect<T extends boolean = true> {
+  navigation?:
+    | T
+    | {
+        logo?: T;
+        menuItems?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              openInNewTab?: T;
+              id?: T;
+            };
+      };
+  footer?:
+    | T
+    | {
+        description?: T;
+        contactInfo?:
+          | T
+          | {
+              address?: T;
+              phone?: T;
+              email?: T;
+            };
+        socialMedia?:
+          | T
+          | {
+              platform?: T;
+              url?: T;
+              id?: T;
+            };
+        copyrightText?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page_select".
+ */
+export interface HomePageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        hero_title?: T;
+        hero_subtitle?: T;
+        hero_background_image?: T;
+        hero_button_text?: T;
+      };
+  content?:
+    | T
+    | {
+        introduction_part1?: T;
+        introduction_video_url?: T;
+        introduction_part2?: T;
+        conclusion?: T;
+      };
+  meet?:
+    | T
+    | {
+        meet_title?: T;
+        meet_cards?:
+          | T
+          | {
+              title?: T;
+              slug?: T;
+              image?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page_select".
+ */
+export interface AboutPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        hero_title?: T;
+        hero_image?: T;
+      };
+  introduction?:
+    | T
+    | {
+        introduction_subtitle?: T;
+        introduction_title?: T;
+        introduction_content?: T;
+      };
+  history?:
+    | T
+    | {
+        history_subtitle?: T;
+        history_title?: T;
+        history_section?:
+          | T
+          | {
+              image?: T;
+              content?: T;
+              id?: T;
+            };
+      };
+  team?:
+    | T
+    | {
+        team_subtitle?: T;
+        team_title?: T;
+        team_section?:
+          | T
+          | {
+              name?: T;
+              position?: T;
+              photo?: T;
+              bio?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events-page_select".
+ */
+export interface EventsPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        hero_title?: T;
+        hero_image?: T;
+      };
+  upcomingEvents?:
+    | T
+    | {
+        upcoming_events_subtitle?: T;
+        upcoming_events_title?: T;
+        no_events_message?: T;
+      };
+  pastEvents?:
+    | T
+    | {
+        past_events_subtitle?: T;
+        past_events_title?: T;
+        view_all_text?: T;
+        past_events_empty_text?: T;
+      };
+  seo?:
+    | T
+    | {
+        description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "volunteer-page_select".
+ */
+export interface VolunteerPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        hero_title?: T;
+        hero_image?: T;
+      };
+  introduction?:
+    | T
+    | {
+        introduction_subtitle?: T;
+        introduction_title?: T;
+        introduction_content?: T;
+      };
+  application?:
+    | T
+    | {
+        application_button_text?: T;
+        application_button_url?: T;
+      };
+  volunteer?:
+    | T
+    | {
+        volunteer_title?: T;
+        volunteer_content?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "give-page_select".
+ */
+export interface GivePageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        hero_title?: T;
+        hero_image?: T;
+      };
+  content?:
+    | T
+    | {
+        introduction_subtitle?: T;
+        introduction_title?: T;
+        introduction_content?: T;
+        donation_button_text?: T;
+        donation_button_url?: T;
+      };
+  payment_methods?:
+    | T
+    | {
+        zelle_title?: T;
+        zelle_content?: T;
+        check_title?: T;
+        check_content?: T;
+      };
+  resources?:
+    | T
+    | {
+        pdf_links?:
+          | T
+          | {
+              title?: T;
+              file?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "support-page_select".
+ */
+export interface SupportPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        hero_title?: T;
+        hero_image?: T;
+      };
+  content?:
+    | T
+    | {
+        info_sections?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              content?: T;
+              image?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "freshman-page_select".
+ */
+export interface FreshmanPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        hero_title?: T;
+        hero_subtitle?: T;
+        hero_image?: T;
+      };
+  content?:
+    | T
+    | {
+        introduction_title?: T;
+        introduction_content?: T;
+        resources_title?: T;
+        resources_content?: T;
+        info_sections?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              content?: T;
+              image?: T;
+              button_text?: T;
+              button_url?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "plan-your-visit-page_select".
+ */
+export interface PlanYourVisitPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        hero_title?: T;
+        hero_image?: T;
+      };
+  introduction?:
+    | T
+    | {
+        introduction_subtitle?: T;
+        introduction_title?: T;
+        introduction_content?:
+          | T
+          | {
+              content?: T;
+              image?: T;
+              id?: T;
+            };
+      };
+  location?:
+    | T
+    | {
+        location_map_link?: T;
+        location_description?: T;
+      };
+  hours?:
+    | T
+    | {
+        hours_title?: T;
+        hours_content?:
+          | T
+          | {
+              content?: T;
+              image?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "thank-you-page_select".
+ */
+export interface ThankYouPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        hero_title?: T;
+        hero_subtitle?: T;
+        hero_image?: T;
+      };
+  content?:
+    | T
+    | {
+        content_title?: T;
+        content?: T;
+      };
+  navigation?:
+    | T
+    | {
+        home_button_text?: T;
+        contact_button_text?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

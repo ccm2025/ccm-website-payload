@@ -12,7 +12,7 @@
   "d1_databases": [
     {
       "binding": "D1",
-      "database_id": "a6447442-3aaf-473f-be5f-0e19b68d1271",
+      "database_id": "0e22f8dc-56be-4cf7-ac1a-054bdac89d73",
       "database_name": "payload-db",
       "remote": true,
     },
