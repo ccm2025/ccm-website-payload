@@ -46,6 +46,7 @@ export const Media: CollectionConfig = {
     // These are not supported on Workers yet due to lack of sharp
     crop: false,
     focalPoint: false,
-    mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'application/pdf'],
+    pasteURL: false,
+    mimeTypes: ['image/jpeg', 'image/webp', 'image/gif', 'application/pdf'],
   },
 }
