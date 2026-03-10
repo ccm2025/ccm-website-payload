@@ -6,12 +6,12 @@ import { useMenu } from '@/lib/MenuContext'
 import { StyledText } from './StyledText'
 
 interface LayoutClientProps {
-  lang: string
+  locale: string
   data: Global | null
   children: React.ReactNode
 }
 
-export function LayoutClient({ lang, data, children }: LayoutClientProps) {
+export function LayoutClient({ locale, data, children }: LayoutClientProps) {
   const { isMenuOpen, toggleMenu } = useMenu()
 
   const nav = data?.navigation
@@ -23,7 +23,7 @@ export function LayoutClient({ lang, data, children }: LayoutClientProps) {
     <>
       <header>
         <nav>
-          <Link href={`/${lang}`}>
+          <Link href={`/${locale}`}>
             {logoUrl ? (
               <img src={logoUrl} alt="Site logo" style={{ height: 40 }} />
             ) : (

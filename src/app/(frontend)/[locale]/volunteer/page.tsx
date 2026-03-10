@@ -1,27 +1,27 @@
 import { StyledText } from '@/components/StyledText'
-import { fetchGlobal, validateLang } from '@/lib'
+import { fetchGlobal, validateLocale } from '@/lib'
 import { Metadata } from 'next'
 
-async function loadPage(lang: string) {
-  return await fetchGlobal('volunteer-page', validateLang(lang))
+async function loadPage(locale: string) {
+  return await fetchGlobal('volunteer-page', validateLocale(locale))
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ lang: string }>
+  params: Promise<{ locale: string }>
 }): Promise<Metadata> {
-  const { lang } = await params
-  const page = await loadPage(lang)
+  const { locale } = await params
+  const page = await loadPage(locale)
 
   return {
     title: page.hero.hero_title,
   }
 }
 
-export default async function VolunteerPage({ params }: { params: Promise<{ lang: string }> }) {
-  const { lang } = await params
-  const page = await loadPage(lang)
+export default async function VolunteerPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const page = await loadPage(locale)
 
   return (
     <main>

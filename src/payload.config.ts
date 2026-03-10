@@ -3,8 +3,13 @@ import { sqliteD1Adapter } from '@payloadcms/db-d1-sqlite'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
-import { getCloudflareContext, initOpenNextCloudflareForDev } from '@opennextjs/cloudflare'
+import {
+  CloudflareContext,
+  getCloudflareContext,
+  initOpenNextCloudflareForDev,
+} from '@opennextjs/cloudflare'
 import { r2Storage } from '@payloadcms/storage-r2'
+import { GetPlatformProxyOptions } from 'wrangler'
 
 import { Users, Media, Events } from '@/collections'
 import {
@@ -20,10 +25,13 @@ import {
   ThankYouPage,
 } from '@/globals'
 
+import TextColorFeature from './features/TextColor'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 const isProduction = process.env.NODE_ENV === 'production'
+const isDev = process.env.npm_lifecycle_event === 'dev'
 
 const createLog =
   (level: string, fn: typeof console.log) => (objOrMsg: object | string, msg?: string) => {
@@ -45,8 +53,15 @@ const cloudflareLogger = {
   silent: () => {},
 } as any // Use PayloadLogger type when it's exported
 
-if (!isProduction) await initOpenNextCloudflareForDev()
-const cloudflare = await getCloudflareContext({ async: true })
+let cloudflare: CloudflareContext
+if (!isProduction && !isDev) {
+  cloudflare = await getCloudflareContextFromWrangler()
+} else {
+  if (isDev) await initOpenNextCloudflareForDev()
+  cloudflare = await getCloudflareContext({ async: true })
+}
+
+export const supportedLocales = ['en', 'zh-Hans']
 
 export default buildConfig({
   admin: {
@@ -69,10 +84,12 @@ export default buildConfig({
     ThankYouPage,
   ],
   localization: {
-    locales: ['en', 'zh-Hans'],
-    defaultLocale: 'en',
+    locales: supportedLocales,
+    defaultLocale: supportedLocales[0],
   },
-  editor: lexicalEditor(),
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [...defaultFeatures, TextColorFeature],
+  }),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
@@ -88,3 +105,14 @@ export default buildConfig({
     }),
   ],
 })
+
+// Adapted from https://github.com/opennextjs/opennextjs-cloudflare/blob/d00b3a13e42e65aad76fba41774815726422cc39/packages/cloudflare/src/api/cloudflare-context.ts#L328C36-L328C46
+function getCloudflareContextFromWrangler(): Promise<CloudflareContext> {
+  return import(/* webpackIgnore: true */ `${'__wrangler'.replaceAll('_', '')}`).then(
+    ({ getPlatformProxy }) =>
+      getPlatformProxy({
+        environment: process.env.CLOUDFLARE_ENV,
+        remoteBindings: isProduction,
+      } satisfies GetPlatformProxyOptions),
+  )
+}
