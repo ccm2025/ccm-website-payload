@@ -1,6 +1,6 @@
 import { LayoutClient } from '@/components/LayoutClient'
 import { fetchGlobal, isAllowedLocale, validateLocale } from '@/lib'
-import { MenuProvider } from '@/lib/MenuContext'
+import { MenuProvider } from '@/components/MenuContext'
 import { redirect } from 'next/navigation'
 
 async function loadPage(locale: string) {
