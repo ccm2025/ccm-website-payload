@@ -1,11 +1,11 @@
 import { StyledText } from '@/components/StyledText'
-import { fetchCollection, fetchGlobal, validateLang } from '@/lib'
+import { fetchCollection, fetchGlobal, validateLocale } from '@/lib'
 import { Metadata } from 'next'
 import Link from 'next/link'
 
-async function loadPage(lang: string) {
-  const page = await fetchGlobal('events-page', validateLang(lang))
-  const upcomingEvents = await fetchCollection('events', validateLang(lang), {
+async function loadPage(locale: string) {
+  const page = await fetchGlobal('events-page', validateLocale(locale))
+  const upcomingEvents = await fetchCollection('events', validateLocale(locale), {
     where: {
       date: {
         greater_than_or_equal_to: new Date().toISOString(),
@@ -13,7 +13,7 @@ async function loadPage(lang: string) {
     },
     sort: '-date',
   })
-  const pastEvents = await fetchCollection('events', validateLang(lang), {
+  const pastEvents = await fetchCollection('events', validateLocale(locale), {
     where: {
       date: {
         less_than: new Date().toISOString(),
@@ -33,19 +33,19 @@ async function loadPage(lang: string) {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ lang: string }>
+  params: Promise<{ locale: string }>
 }): Promise<Metadata> {
-  const { lang } = await params
-  const page = await loadPage(lang)
+  const { locale } = await params
+  const page = await loadPage(locale)
 
   return {
     title: page.hero.hero_title,
   }
 }
 
-export default async function EventsPage({ params }: { params: Promise<{ lang: string }> }) {
-  const { lang } = await params
-  const page = await loadPage(lang)
+export default async function EventsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const page = await loadPage(locale)
 
   return (
     <main>
@@ -83,7 +83,7 @@ export default async function EventsPage({ params }: { params: Promise<{ lang: s
           {page.upcoming_events.length > 0 ? (
             <div className="mx-auto mt-12 grid max-w-6xl grid-cols-1 gap-6 sm:gap-8 md:gap-10">
               {page.upcoming_events.map((event) => (
-                <Link key={event.id} href={`/${lang}/events/${event.slug}`}>
+                <Link key={event.id} href={`/${locale}/events/${event.slug}`}>
                   <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-5 md:gap-8">
                     <div className="md:col-span-2">
                       {event.gallery &&
@@ -132,7 +132,7 @@ export default async function EventsPage({ params }: { params: Promise<{ lang: s
               {page.past_events.map((event) => (
                 <Link
                   key={event.id}
-                  href={`/${lang}/events/${event.slug}`}
+                  href={`/${locale}/events/${event.slug}`}
                   className="group relative block h-56 overflow-hidden rounded-lg shadow-lg"
                 >
                   <div className="absolute inset-0 overflow-hidden">

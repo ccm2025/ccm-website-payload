@@ -1,11 +1,11 @@
 import { StyledText } from '@/components/StyledText'
-import { fetchCollection, validateLang } from '@/lib'
+import { fetchCollection, validateLocale } from '@/lib'
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-async function loadPage(lang: string, slug: string) {
-  const events = await fetchCollection('events', validateLang(lang), {
+async function loadPage(locale: string, slug: string) {
+  const events = await fetchCollection('events', validateLocale(locale), {
     where: {
       slug: {
         equals: slug,
@@ -20,10 +20,10 @@ async function loadPage(lang: string, slug: string) {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ lang: string; slug: string }>
+  params: Promise<{ locale: string; slug: string }>
 }): Promise<Metadata> {
-  const { lang, slug } = await params
-  const page = await loadPage(lang, slug)
+  const { locale, slug } = await params
+  const page = await loadPage(locale, slug)
 
   return { title: page.title }
 }
@@ -31,10 +31,10 @@ export async function generateMetadata({
 export default async function EventDetailPage({
   params,
 }: {
-  params: Promise<{ lang: string; slug: string }>
+  params: Promise<{ locale: string; slug: string }>
 }) {
-  const { lang, slug } = await params
-  const page = await loadPage(lang, slug)
+  const { locale, slug } = await params
+  const page = await loadPage(locale, slug)
 
   if (!page) return notFound()
 
@@ -62,10 +62,10 @@ export default async function EventDetailPage({
         <div className="container mx-auto max-w-4xl px-4">
           <div className="mb-8">
             <Link
-              href={`/${lang}/events`}
+              href={`/${locale}/events`}
               className="inline-flex items-center gap-2 rounded-lg bg-[rgb(var(--website-theme-color1))] px-4 py-2 font-semibold text-white transition-colors duration-300 hover:bg-[rgb(var(--website-theme-color2))]"
             >
-              ← {lang === 'zh-Hans' ? '返回' : 'Back'}
+              ← {locale === 'zh-Hans' ? '返回' : 'Back'}
             </Link>
           </div>
 

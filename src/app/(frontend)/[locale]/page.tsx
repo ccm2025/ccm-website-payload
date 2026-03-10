@@ -1,28 +1,28 @@
 import { StyledText } from '@/components/StyledText'
-import { fetchGlobal, validateLang } from '@/lib'
+import { fetchGlobal, validateLocale } from '@/lib'
 import { Metadata } from 'next'
 import Link from 'next/link'
 
-async function loadPage(lang: string) {
-  return await fetchGlobal('home-page', validateLang(lang))
+async function loadPage(locale: string) {
+  return await fetchGlobal('home-page', validateLocale(locale))
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ lang: string }>
+  params: Promise<{ locale: string }>
 }): Promise<Metadata> {
-  const { lang } = await params
-  const page = await loadPage(lang)
+  const { locale } = await params
+  const page = await loadPage(locale)
 
   return {
     title: page.hero.hero_title,
   }
 }
 
-export default async function HomePage({ params }: { params: Promise<{ lang: string }> }) {
-  const { lang } = await params
-  const page = await loadPage(lang)
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const page = await loadPage(locale)
 
   return (
     <main>
@@ -45,7 +45,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
           <StyledText data={page.hero.hero_subtitle} />
           <Link
             className="mt-10 sm:mt-12 md:mt-14 inline-block rounded-full border-2 border-white px-6 sm:px-8 py-2 sm:py-3 text-base sm:text-lg font-semibold transition-all duration-300 hover:bg-white hover:text-[rgb(var(--website-theme-color2))]"
-            href={`/${lang}/plan-your-visit`}
+            href={`/${locale}/plan-your-visit`}
             aria-label={page.hero.hero_button_text}
           >
             {page.hero.hero_button_text}
@@ -97,7 +97,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
             {page.meet.meet_cards.map((card) => (
               <Link
                 key={card.id}
-                href={`/${lang}/${card.slug}`}
+                href={`/${locale}/${card.slug}`}
                 className="group relative flex h-56 sm:h-60 md:h-64 overflow-hidden rounded-lg shadow-lg"
               >
                 <div className="absolute inset-0">

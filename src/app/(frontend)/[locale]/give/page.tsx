@@ -1,29 +1,29 @@
 import { DonationForm } from '@/components/DonationForm'
 import { StyledText } from '@/components/StyledText'
-import { fetchGlobal, validateLang } from '@/lib'
+import { fetchGlobal, validateLocale } from '@/lib'
 import { Download } from 'lucide-react'
 import { Metadata } from 'next'
 
-async function loadPage(lang: string) {
-  return await fetchGlobal('give-page', validateLang(lang))
+async function loadPage(locale: string) {
+  return await fetchGlobal('give-page', validateLocale(locale))
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ lang: string }>
+  params: Promise<{ locale: string }>
 }): Promise<Metadata> {
-  const { lang } = await params
-  const page = await loadPage(lang)
+  const { locale } = await params
+  const page = await loadPage(locale)
 
   return {
     title: page.hero.hero_title,
   }
 }
 
-export default async function GivePage({ params }: { params: Promise<{ lang: string }> }) {
-  const { lang } = await params
-  const page = await loadPage(lang)
+export default async function GivePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const page = await loadPage(locale)
 
   return (
     <main>
@@ -80,7 +80,7 @@ export default async function GivePage({ params }: { params: Promise<{ lang: str
               </div>
             </div>
             <div className="space-y-8 sm:space-y-9 md:space-y-10">
-              <DonationForm lang={lang} />
+              <DonationForm lang={locale} />
             </div>
           </div>
         </div>
@@ -97,7 +97,7 @@ export default async function GivePage({ params }: { params: Promise<{ lang: str
                 <div className="aspect-video overflow-hidden rounded-lg shadow-lg md:aspect-17/11">
                   <iframe
                     src={
-                      lang === 'zh-Hans'
+                      locale === 'zh-Hans'
                         ? page.resources.pdf_links[0].file.url
                         : page.resources.pdf_links[1].file.url
                     }

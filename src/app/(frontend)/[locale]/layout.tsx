@@ -1,10 +1,10 @@
 import { LayoutClient } from '@/components/LayoutClient'
-import { fetchGlobal, isAllowedLang, validateLang } from '@/lib'
+import { fetchGlobal, isAllowedLocale, validateLocale } from '@/lib'
 import { MenuProvider } from '@/lib/MenuContext'
 import { redirect } from 'next/navigation'
 
-async function loadPage(lang: string) {
-  return await fetchGlobal('global', validateLang(lang))
+async function loadPage(locale: string) {
+  return await fetchGlobal('global', validateLocale(locale))
 }
 
 export default async function LangLayout({
@@ -12,19 +12,19 @@ export default async function LangLayout({
   params,
 }: {
   children: React.ReactNode
-  params: Promise<{ lang: string }>
+  params: Promise<{ locale: string }>
 }) {
-  const { lang } = await params
+  const { locale } = await params
 
-  if (!isAllowedLang(lang)) {
+  if (!isAllowedLocale(locale)) {
     return redirect('/en')
   }
 
-  const page = await loadPage(lang)
+  const page = await loadPage(locale)
 
   return (
     <MenuProvider>
-      <LayoutClient lang={lang} data={page}>
+      <LayoutClient locale={locale} data={page}>
         {children}
       </LayoutClient>
     </MenuProvider>

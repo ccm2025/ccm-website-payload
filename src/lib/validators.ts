@@ -1,19 +1,19 @@
-import { ALLOWED_LANGS } from '@/lib/constants'
 import { Config } from '@/payload-types'
+import { supportedLocales } from '@/payload.config'
 
 /**
- * Return if a given language is allowed
+ * Return if a given locale is allowed
  */
-export function isAllowedLang(lang: string): lang is Config['locale'] {
-  return ALLOWED_LANGS.includes(lang)
+export function isAllowedLocale(locale: string): locale is Config['locale'] {
+  return supportedLocales.includes(locale)
 }
 
 /**
- * Validate language, throw if invalid
+ * Validate locale, throw if invalid
  */
-export function validateLang(lang: unknown): Config['locale'] {
-  if (typeof lang !== 'string' || !isAllowedLang(lang)) {
-    throw new Error(`Invalid language: ${lang}`)
+export function validateLocale(locale: unknown): Config['locale'] {
+  if (typeof locale !== 'string' || !isAllowedLocale(locale)) {
+    throw new Error(`Invalid locale: ${locale}`)
   }
-  return lang
+  return locale
 }
