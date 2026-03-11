@@ -1,4 +1,5 @@
 import { publicAccess, contentManagerAccess } from '@/access'
+import { HeroField } from '@/fields'
 import { type GlobalConfig } from 'payload'
 
 export const ThankYouPage: GlobalConfig = {
@@ -11,30 +12,7 @@ export const ThankYouPage: GlobalConfig = {
     update: contentManagerAccess,
   },
   fields: [
-    {
-      name: 'hero',
-      type: 'group',
-      label: 'Hero Section',
-      fields: [
-        {
-          name: 'hero_title',
-          type: 'text',
-          required: true,
-          localized: true,
-        },
-        {
-          name: 'hero_subtitle',
-          type: 'richText',
-          localized: true,
-        },
-        {
-          name: 'hero_image',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-        },
-      ],
-    },
+    HeroField(),
     {
       name: 'content',
       type: 'group',

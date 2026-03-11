@@ -229,7 +229,7 @@ export function LayoutClient({ locale, data, children }: LayoutClientProps) {
             {/* Contact Info */}
             {footer?.contactInfo && (
               <div>
-                <h3 className="mb-4 text-xl font-bold text-white">Contact</h3>
+                <h3 className="mb-4 text-xl font-bold text-white">Contact Info</h3>
                 <div className="space-y-2 text-gray-300">
                   {footer.contactInfo.address && <p>{footer.contactInfo.address}</p>}
                   {footer.contactInfo.phone && <p>{footer.contactInfo.phone}</p>}

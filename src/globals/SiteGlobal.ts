@@ -105,6 +105,17 @@ export const SiteGlobal: GlobalConfig = {
               name: 'url',
               type: 'text',
               required: true,
+              validate: (value: string | undefined) => {
+                if (value && value.trim()) {
+                  try {
+                    new URL(value)
+                    return true
+                  } catch {
+                    return 'Please enter a valid URL'
+                  }
+                }
+                return true
+              },
             },
           ],
         },

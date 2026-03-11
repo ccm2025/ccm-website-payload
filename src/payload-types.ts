@@ -665,31 +665,26 @@ export interface AboutPage {
     backgroundImage: number | Media;
   };
   intro?: {
-    subtitle?: string | null;
-    title?: string | null;
-    content?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
+    root: {
+      type: string;
+      children: {
+        type: any;
         version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-  };
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   history?: {
     subtitle?: string | null;
     title?: string | null;
-    items?:
+    infoSections?:
       | {
-          image: number | Media;
-          description: {
+          content?: {
             root: {
               type: string;
               children: {
@@ -703,7 +698,22 @@ export interface AboutPage {
               version: number;
             };
             [k: string]: unknown;
-          };
+          } | null;
+          /**
+           * Enable this to use different images for different locales
+           */
+          localizeImage?: boolean | null;
+          /**
+           * This image will be used for all locales
+           */
+          image?: (number | null) | Media;
+          /**
+           * This image can be different for each locale
+           */
+          imageLocalized?: (number | null) | Media;
+          hasButton?: boolean | null;
+          buttonText?: string | null;
+          buttonUrl?: string | null;
           id?: string | null;
         }[]
       | null;
@@ -715,7 +725,7 @@ export interface AboutPage {
       | {
           name: string;
           position?: string | null;
-          photo: number | Media;
+          photo?: (number | null) | Media;
           id?: string | null;
         }[]
       | null;
@@ -766,53 +776,47 @@ export interface EventsPage {
 export interface VolunteerPage {
   id: number;
   hero: {
-    hero_title: string;
-    hero_image: number | Media;
-  };
-  introduction: {
-    introduction_subtitle?: string | null;
-    introduction_title: string;
-    introduction_content: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    };
-  };
-  application?: {
-    application_button_text?: string | null;
+    title?: string | null;
     /**
-     * URL to volunteer application form
+     * Hero background image
      */
-    application_button_url?: string | null;
+    backgroundImage: number | Media;
   };
-  volunteer?: {
-    volunteer_title?: string | null;
-    volunteer_content?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
+  infoSections?:
+    | {
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
           [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-  };
+        } | null;
+        /**
+         * Enable this to use different images for different locales
+         */
+        localizeImage?: boolean | null;
+        /**
+         * This image will be used for all locales
+         */
+        image?: (number | null) | Media;
+        /**
+         * This image can be different for each locale
+         */
+        imageLocalized?: (number | null) | Media;
+        hasButton?: boolean | null;
+        buttonText?: string | null;
+        buttonUrl?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -823,8 +827,11 @@ export interface VolunteerPage {
 export interface GivePage {
   id: number;
   hero: {
-    hero_title: string;
-    hero_image: number | Media;
+    title?: string | null;
+    /**
+     * Hero background image
+     */
+    backgroundImage: number | Media;
   };
   content: {
     introduction_subtitle?: string | null;
@@ -903,40 +910,47 @@ export interface GivePage {
 export interface SupportPage {
   id: number;
   hero: {
-    hero_title: string;
-    hero_image: number | Media;
+    title?: string | null;
+    /**
+     * Hero background image
+     */
+    backgroundImage: number | Media;
   };
-  content?: {
-    info_sections?:
-      | {
-          /**
-           * Small subtitle above heading
-           */
-          title?: string | null;
-          /**
-           * Main section heading
-           */
-          subtitle?: string | null;
-          content: {
-            root: {
-              type: string;
-              children: {
-                type: any;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
+  infoSections?:
+    | {
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
               version: number;
-            };
-            [k: string]: unknown;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
           };
-          image?: (number | null) | Media;
-          id?: string | null;
-        }[]
-      | null;
-  };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Enable this to use different images for different locales
+         */
+        localizeImage?: boolean | null;
+        /**
+         * This image will be used for all locales
+         */
+        image?: (number | null) | Media;
+        /**
+         * This image can be different for each locale
+         */
+        imageLocalized?: (number | null) | Media;
+        hasButton?: boolean | null;
+        buttonText?: string | null;
+        buttonUrl?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -947,83 +961,47 @@ export interface SupportPage {
 export interface FreshmanPage {
   id: number;
   hero: {
-    hero_title: string;
-    hero_subtitle?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    hero_image: number | Media;
+    title?: string | null;
+    /**
+     * Hero background image
+     */
+    backgroundImage: number | Media;
   };
-  content: {
-    introduction_title: string;
-    introduction_content: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    };
-    resources_title?: string | null;
-    resources_content?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    info_sections?:
-      | {
-          title: string;
-          subtitle?: string | null;
-          content: {
-            root: {
-              type: string;
-              children: {
-                type: any;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
+  infoSections?:
+    | {
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
               version: number;
-            };
-            [k: string]: unknown;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
           };
-          image?: (number | null) | Media;
-          button_text?: string | null;
-          button_url?: string | null;
-          id?: string | null;
-        }[]
-      | null;
-  };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Enable this to use different images for different locales
+         */
+        localizeImage?: boolean | null;
+        /**
+         * This image will be used for all locales
+         */
+        image?: (number | null) | Media;
+        /**
+         * This image can be different for each locale
+         */
+        imageLocalized?: (number | null) | Media;
+        hasButton?: boolean | null;
+        buttonText?: string | null;
+        buttonUrl?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1034,15 +1012,18 @@ export interface FreshmanPage {
 export interface PlanYourVisitPage {
   id: number;
   hero: {
-    hero_title: string;
-    hero_image: number | Media;
+    title?: string | null;
+    /**
+     * Hero background image
+     */
+    backgroundImage: number | Media;
   };
-  introduction: {
-    introduction_subtitle?: string | null;
-    introduction_title: string;
-    introduction_content?:
+  intro?: {
+    subtitle?: string | null;
+    title?: string | null;
+    infoSections?:
       | {
-          content: {
+          content?: {
             root: {
               type: string;
               children: {
@@ -1056,8 +1037,22 @@ export interface PlanYourVisitPage {
               version: number;
             };
             [k: string]: unknown;
-          };
+          } | null;
+          /**
+           * Enable this to use different images for different locales
+           */
+          localizeImage?: boolean | null;
+          /**
+           * This image will be used for all locales
+           */
           image?: (number | null) | Media;
+          /**
+           * This image can be different for each locale
+           */
+          imageLocalized?: (number | null) | Media;
+          hasButton?: boolean | null;
+          buttonText?: string | null;
+          buttonUrl?: string | null;
           id?: string | null;
         }[]
       | null;
@@ -1066,8 +1061,8 @@ export interface PlanYourVisitPage {
     /**
      * Google Maps embed URL for the iframe src
      */
-    location_map_link?: string | null;
-    location_description?: {
+    mapUrl?: string | null;
+    address?: {
       root: {
         type: string;
         children: {
@@ -1083,11 +1078,11 @@ export interface PlanYourVisitPage {
       [k: string]: unknown;
     } | null;
   };
-  hours?: {
-    hours_title?: string | null;
-    hours_content?:
+  schedule?: {
+    title?: string | null;
+    infoSections?:
       | {
-          content: {
+          content?: {
             root: {
               type: string;
               children: {
@@ -1101,8 +1096,22 @@ export interface PlanYourVisitPage {
               version: number;
             };
             [k: string]: unknown;
-          };
+          } | null;
+          /**
+           * Enable this to use different images for different locales
+           */
+          localizeImage?: boolean | null;
+          /**
+           * This image will be used for all locales
+           */
           image?: (number | null) | Media;
+          /**
+           * This image can be different for each locale
+           */
+          imageLocalized?: (number | null) | Media;
+          hasButton?: boolean | null;
+          buttonText?: string | null;
+          buttonUrl?: string | null;
           id?: string | null;
         }[]
       | null;
@@ -1117,23 +1126,11 @@ export interface PlanYourVisitPage {
 export interface ThankYouPage {
   id: number;
   hero: {
-    hero_title: string;
-    hero_subtitle?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    hero_image: number | Media;
+    title?: string | null;
+    /**
+     * Hero background image
+     */
+    backgroundImage: number | Media;
   };
   content: {
     content_title: string;
@@ -1252,23 +1249,22 @@ export interface AboutPageSelect<T extends boolean = true> {
         title?: T;
         backgroundImage?: T;
       };
-  intro?:
-    | T
-    | {
-        subtitle?: T;
-        title?: T;
-        content?: T;
-      };
+  intro?: T;
   history?:
     | T
     | {
         subtitle?: T;
         title?: T;
-        items?:
+        infoSections?:
           | T
           | {
+              content?: T;
+              localizeImage?: T;
               image?: T;
-              description?: T;
+              imageLocalized?: T;
+              hasButton?: T;
+              buttonText?: T;
+              buttonUrl?: T;
               id?: T;
             };
       };
@@ -1333,27 +1329,20 @@ export interface VolunteerPageSelect<T extends boolean = true> {
   hero?:
     | T
     | {
-        hero_title?: T;
-        hero_image?: T;
+        title?: T;
+        backgroundImage?: T;
       };
-  introduction?:
+  infoSections?:
     | T
     | {
-        introduction_subtitle?: T;
-        introduction_title?: T;
-        introduction_content?: T;
-      };
-  application?:
-    | T
-    | {
-        application_button_text?: T;
-        application_button_url?: T;
-      };
-  volunteer?:
-    | T
-    | {
-        volunteer_title?: T;
-        volunteer_content?: T;
+        content?: T;
+        localizeImage?: T;
+        image?: T;
+        imageLocalized?: T;
+        hasButton?: T;
+        buttonText?: T;
+        buttonUrl?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1367,8 +1356,8 @@ export interface GivePageSelect<T extends boolean = true> {
   hero?:
     | T
     | {
-        hero_title?: T;
-        hero_image?: T;
+        title?: T;
+        backgroundImage?: T;
       };
   content?:
     | T
@@ -1410,21 +1399,20 @@ export interface SupportPageSelect<T extends boolean = true> {
   hero?:
     | T
     | {
-        hero_title?: T;
-        hero_image?: T;
+        title?: T;
+        backgroundImage?: T;
       };
-  content?:
+  infoSections?:
     | T
     | {
-        info_sections?:
-          | T
-          | {
-              title?: T;
-              subtitle?: T;
-              content?: T;
-              image?: T;
-              id?: T;
-            };
+        content?: T;
+        localizeImage?: T;
+        image?: T;
+        imageLocalized?: T;
+        hasButton?: T;
+        buttonText?: T;
+        buttonUrl?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1438,28 +1426,20 @@ export interface FreshmanPageSelect<T extends boolean = true> {
   hero?:
     | T
     | {
-        hero_title?: T;
-        hero_subtitle?: T;
-        hero_image?: T;
+        title?: T;
+        backgroundImage?: T;
       };
-  content?:
+  infoSections?:
     | T
     | {
-        introduction_title?: T;
-        introduction_content?: T;
-        resources_title?: T;
-        resources_content?: T;
-        info_sections?:
-          | T
-          | {
-              title?: T;
-              subtitle?: T;
-              content?: T;
-              image?: T;
-              button_text?: T;
-              button_url?: T;
-              id?: T;
-            };
+        content?: T;
+        localizeImage?: T;
+        image?: T;
+        imageLocalized?: T;
+        hasButton?: T;
+        buttonText?: T;
+        buttonUrl?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1473,37 +1453,47 @@ export interface PlanYourVisitPageSelect<T extends boolean = true> {
   hero?:
     | T
     | {
-        hero_title?: T;
-        hero_image?: T;
+        title?: T;
+        backgroundImage?: T;
       };
-  introduction?:
+  intro?:
     | T
     | {
-        introduction_subtitle?: T;
-        introduction_title?: T;
-        introduction_content?:
+        subtitle?: T;
+        title?: T;
+        infoSections?:
           | T
           | {
               content?: T;
+              localizeImage?: T;
               image?: T;
+              imageLocalized?: T;
+              hasButton?: T;
+              buttonText?: T;
+              buttonUrl?: T;
               id?: T;
             };
       };
   location?:
     | T
     | {
-        location_map_link?: T;
-        location_description?: T;
+        mapUrl?: T;
+        address?: T;
       };
-  hours?:
+  schedule?:
     | T
     | {
-        hours_title?: T;
-        hours_content?:
+        title?: T;
+        infoSections?:
           | T
           | {
               content?: T;
+              localizeImage?: T;
               image?: T;
+              imageLocalized?: T;
+              hasButton?: T;
+              buttonText?: T;
+              buttonUrl?: T;
               id?: T;
             };
       };
@@ -1519,9 +1509,8 @@ export interface ThankYouPageSelect<T extends boolean = true> {
   hero?:
     | T
     | {
-        hero_title?: T;
-        hero_subtitle?: T;
-        hero_image?: T;
+        title?: T;
+        backgroundImage?: T;
       };
   content?:
     | T
