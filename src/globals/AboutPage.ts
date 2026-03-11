@@ -1,5 +1,5 @@
 import { publicAccess, contentManagerAccess } from '@/access'
-import { HeroField } from '@/fields'
+import { HeroField, InfoSectionsField } from '@/fields'
 import { type GlobalConfig } from 'payload'
 
 export const AboutPage: GlobalConfig = {
@@ -15,25 +15,9 @@ export const AboutPage: GlobalConfig = {
     HeroField(),
     {
       name: 'intro',
-      type: 'group',
+      type: 'richText',
       label: 'Introduction Section',
-      fields: [
-        {
-          name: 'subtitle',
-          type: 'text',
-          localized: true,
-        },
-        {
-          name: 'title',
-          type: 'text',
-          localized: true,
-        },
-        {
-          name: 'content',
-          type: 'richText',
-          localized: true,
-        },
-      ],
+      localized: true,
     },
     {
       name: 'history',
@@ -50,25 +34,7 @@ export const AboutPage: GlobalConfig = {
           type: 'text',
           localized: true,
         },
-        {
-          name: 'items',
-          type: 'array',
-          label: 'History Items',
-          fields: [
-            {
-              name: 'image',
-              type: 'upload',
-              relationTo: 'media',
-              required: true,
-            },
-            {
-              name: 'description',
-              type: 'richText',
-              required: true,
-              localized: true,
-            },
-          ],
-        },
+        InfoSectionsField(),
       ],
     },
     {
@@ -95,6 +61,7 @@ export const AboutPage: GlobalConfig = {
               name: 'name',
               type: 'text',
               required: true,
+              localized: true,
             },
             {
               name: 'position',
@@ -105,7 +72,6 @@ export const AboutPage: GlobalConfig = {
               name: 'photo',
               type: 'upload',
               relationTo: 'media',
-              required: true,
             },
           ],
         },

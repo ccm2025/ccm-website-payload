@@ -48,18 +48,12 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       {/* Introduction Section */}
       <section className="bg-white py-12 sm:py-16 md:py-20">
         <div className="container mx-auto max-w-5xl px-4 sm:px-6 md:px-8 text-center">
-          <h2 className="text-base sm:text-lg md:text-xl font-semibold text-[rgb(var(--website-theme-color2))]">
-            {page.intro.subtitle}
-          </h2>
-          <p className="mt-2 mb-6 text-2xl sm:text-3xl md:text-4xl font-bold tracking-wide text-[rgb(var(--website-theme-color1))]">
-            {page.intro.title}
-          </p>
-          <StyledText data={page.intro.content} />
+          <StyledText data={page.intro} />
         </div>
       </section>
 
       {/* History Section */}
-      {page.history.items && page.history.items.length > 0 && (
+      {page.history.infoSections && page.history.infoSections.length > 0 && (
         <section className="bg-gray-50 py-12 sm:py-16 md:py-20">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="mx-auto max-w-4xl text-center">
@@ -71,19 +65,19 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               </p>
             </div>
             <div className="mt-8 sm:mt-10 md:mt-12 grid grid-cols-1 items-center gap-6 sm:gap-8 md:grid-cols-2 md:gap-12">
-              {page.history.items.map((item) => (
-                <Fragment key={item.id}>
+              {page.history.infoSections.map((section) => (
+                <Fragment key={section.id}>
                   <div className="w-full">
-                    {typeof item.image === 'object' && (
+                    {typeof section.image === 'object' && (
                       <img
-                        src={item.image.url}
-                        alt={item.image.alt}
+                        src={section.image.url}
+                        alt={section.image.alt}
                         className="h-auto w-full rounded-lg object-cover shadow-md"
                       />
                     )}
                   </div>
                   <div className="rounded-lg bg-yellow-50 p-6 md:p-8">
-                    <StyledText data={item.description} />
+                    <StyledText data={section.content} />
                   </div>
                 </Fragment>
               ))}
@@ -108,7 +102,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             <div className="mt-8 sm:mt-10 md:mt-12 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12">
               {page.team.members.map((member) => (
                 <div key={member.id} className="text-center">
-                  {typeof member.photo === 'object' && (
+                  {member.photo && typeof member.photo === 'object' && (
                     <img
                       src={member.photo.url}
                       alt={member.photo.alt}

@@ -1,4 +1,5 @@
 import { publicAccess, contentManagerAccess } from '@/access'
+import { HeroField, InfoSectionsField } from '@/fields'
 import { type GlobalConfig } from 'payload'
 
 export const PlanYourVisitPage: GlobalConfig = {
@@ -11,60 +12,23 @@ export const PlanYourVisitPage: GlobalConfig = {
     update: contentManagerAccess,
   },
   fields: [
+    HeroField(),
     {
-      name: 'hero',
-      type: 'group',
-      label: 'Hero Section',
-      fields: [
-        {
-          name: 'hero_title',
-          type: 'text',
-          required: true,
-          localized: true,
-        },
-        {
-          name: 'hero_image',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-        },
-      ],
-    },
-    {
-      name: 'introduction',
+      name: 'intro',
       type: 'group',
       label: 'Introduction Section',
       fields: [
         {
-          name: 'introduction_subtitle',
+          name: 'subtitle',
           type: 'text',
           localized: true,
         },
         {
-          name: 'introduction_title',
+          name: 'title',
           type: 'text',
-          required: true,
           localized: true,
         },
-        {
-          name: 'introduction_content',
-          type: 'array',
-          label: 'Introduction Items',
-          maxRows: 10,
-          fields: [
-            {
-              name: 'content',
-              type: 'richText',
-              required: true,
-              localized: true,
-            },
-            {
-              name: 'image',
-              type: 'upload',
-              relationTo: 'media',
-            },
-          ],
-        },
+        InfoSectionsField(),
       ],
     },
     {
@@ -73,48 +37,41 @@ export const PlanYourVisitPage: GlobalConfig = {
       label: 'Location Section',
       fields: [
         {
-          name: 'location_map_link',
+          name: 'mapUrl',
           type: 'text',
           admin: {
             description: 'Google Maps embed URL for the iframe src',
           },
+          validate: (value: string | undefined) => {
+            if (value && value.trim()) {
+              try {
+                new URL(value)
+                return true
+              } catch {
+                return 'Please enter a valid URL'
+              }
+            }
+            return true
+          },
         },
         {
-          name: 'location_description',
+          name: 'address',
           type: 'richText',
           localized: true,
         },
       ],
     },
     {
-      name: 'hours',
+      name: 'schedule',
       type: 'group',
-      label: 'Hours Section',
+      label: 'Schedule Section',
       fields: [
         {
-          name: 'hours_title',
+          name: 'title',
           type: 'text',
           localized: true,
         },
-        {
-          name: 'hours_content',
-          type: 'array',
-          label: 'Hours Items',
-          maxRows: 10,
-          fields: [
-            {
-              name: 'content',
-              type: 'richText',
-              required: true,
-              localized: true,
-            },
-            {
-              name: 'image',
-              type: 'upload',
-              relationTo: 'media',
-            },
-          ],
-        },
+        InfoSectionsField(),
       ],
     },
   ],

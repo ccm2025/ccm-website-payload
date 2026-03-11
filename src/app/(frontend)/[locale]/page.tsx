@@ -54,7 +54,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* Intro Section Part 1 */}
-      <section className="bg-white py-12 sm:py-16 md:py-20">
+      <section className="bg-white my-12 sm:my-16 md:my-20">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 md:px-8 text-center">
           <StyledText data={page.intro.part1} />
         </div>
@@ -62,7 +62,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       {/* Video Section */}
       {page.intro.videoUrl && (
-        <section className="bg-[rgb(var(--website-theme-color1))] py-12 sm:py-16 md:py-20">
+        <section className="bg-[rgb(var(--website-theme-color1))] my-12 sm:my-16 md:my-20">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="mx-auto max-w-4xl rounded-lg border border-gray-700 bg-gray-900/80 p-3 sm:p-4 md:p-5 shadow-2xl backdrop-blur-sm">
               <div className="aspect-video overflow-hidden rounded-md bg-black/80">
@@ -81,14 +81,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       )}
 
       {/* Intro Section Part 2 */}
-      <section className="bg-white py-12 sm:py-16 md:py-20">
+      <section className="bg-white my-12 sm:my-16 md:my-20">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 md:px-8 text-center">
           <StyledText data={page.intro.part2} />
         </div>
       </section>
 
       {/* Meet With Us Section */}
-      <section className="bg-white py-12 sm:py-16 md:py-20">
+      <section className="bg-white my-12 sm:my-16 md:my-20">
         <div className="container mx-auto px-4 sm:px-6 md:px-8">
           <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-bold tracking-wider">
             {page.meet.title}

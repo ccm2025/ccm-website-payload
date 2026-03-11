@@ -15,7 +15,7 @@ export async function generateMetadata({
   const page = await loadPage(locale)
 
   return {
-    title: page.hero.hero_title,
+    title: page.hero.title,
   }
 }
 
@@ -28,10 +28,10 @@ export default async function SupportPage({ params }: { params: Promise<{ locale
       {/* Hero Section */}
       <section className="relative flex h-64 sm:h-72 md:h-80 items-center justify-center text-center text-white">
         <div className="absolute inset-0">
-          {typeof page.hero.hero_image === 'object' && (
+          {typeof page.hero.backgroundImage === 'object' && (
             <img
-              src={page.hero.hero_image.url}
-              alt={page.hero.hero_image.alt}
+              src={page.hero.backgroundImage.url}
+              alt={page.hero.backgroundImage.alt}
               className="h-full w-full object-cover"
             />
           )}
@@ -39,19 +39,19 @@ export default async function SupportPage({ params }: { params: Promise<{ locale
         </div>
         <div className="relative z-10 px-4 sm:px-6 md:px-8">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight">
-            {page.hero.hero_title}
+            {page.hero.title}
           </h1>
         </div>
       </section>
 
       {/* Info Sections */}
       <div className="bg-white">
-        {page.content.info_sections.map((section, i) => (
-          <section key={section.id} className="py-10 sm:py-14 md:py-16\">
+        {page.infoSections.map((section, i) => (
+          <section key={section.id} className="my-10 sm:my-14 md:my-16">
             <div className="container mx-auto max-w-6xl px-6 sm:px-8 md:px-12 lg:px-16">
               <div className="grid grid-cols-1 items-center gap-6 sm:gap-8 md:grid-cols-2 md:gap-10 lg:gap-14">
                 <div className={`w-full ${i % 2 !== 0 ? 'md:order-last' : ''}`}>
-                  {typeof section.image === 'object' && (
+                  {section.image && typeof section.image === 'object' && (
                     <img
                       src={section.image.url}
                       alt={section.image.alt}
@@ -61,12 +61,6 @@ export default async function SupportPage({ params }: { params: Promise<{ locale
                 </div>
 
                 <div className="text-center md:text-left">
-                  <p className="text-sm sm:text-base md:text-base font-semibold text-[rgb(var(--website-theme-color2))] tracking-wide">
-                    {section.title}
-                  </p>
-                  <h2 className="mt-2 mb-4 sm:mb-5 md:mb-6 text-2xl sm:text-3xl md:text-4xl font-bold tracking-wider text-[rgb(var(--website-theme-color1))]">
-                    {section.subtitle}
-                  </h2>
                   <StyledText data={section.content} />
                 </div>
               </div>
