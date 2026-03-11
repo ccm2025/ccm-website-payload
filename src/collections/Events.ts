@@ -222,15 +222,6 @@ export const Events: CollectionConfig = {
                 return 'Please enter a valid registration URL'
               }
             }
-            // If registration not required but URL provided, validate it
-            if (value && value.trim()) {
-              try {
-                new URL(value)
-                return true
-              } catch {
-                return 'Please enter a valid URL'
-              }
-            }
             return true
           },
           admin: {
