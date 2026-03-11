@@ -16,7 +16,7 @@ export async function generateMetadata({
   const page = await loadPage(locale)
 
   return {
-    title: page.hero.hero_title,
+    title: page.hero.title,
   }
 }
 
@@ -29,10 +29,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Hero Section */}
       <section className="relative flex h-[calc(100vh-80px)] min-h-125 items-center justify-center text-center text-white">
         <div className="absolute inset-0">
-          {typeof page.hero.hero_background_image === 'object' && (
+          {typeof page.hero.backgroundImage === 'object' && (
             <img
-              src={page.hero.hero_background_image.url}
-              alt={page.hero.hero_background_image.alt}
+              src={page.hero.backgroundImage.url}
+              alt={page.hero.backgroundImage.alt}
               className="h-full w-full object-cover"
             />
           )}
@@ -40,15 +40,15 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
         <div className="relative z-10 px-4 sm:px-6 md:px-8 text-left">
           <h1 className="mb-6 sm:mb-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight">
-            {page.hero.hero_title}
+            {page.hero.title}
           </h1>
-          <StyledText data={page.hero.hero_subtitle} />
+          <StyledText data={page.hero.subtitle} />
           <Link
             className="mt-10 sm:mt-12 md:mt-14 inline-block rounded-full border-2 border-white px-6 sm:px-8 py-2 sm:py-3 text-base sm:text-lg font-semibold transition-all duration-300 hover:bg-white hover:text-[rgb(var(--website-theme-color2))]"
             href={`/${locale}/plan-your-visit`}
-            aria-label={page.hero.hero_button_text}
+            aria-label={page.hero.buttonText}
           >
-            {page.hero.hero_button_text}
+            {page.hero.buttonText}
           </Link>
         </div>
       </section>
@@ -56,12 +56,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Intro Section Part 1 */}
       <section className="bg-white py-12 sm:py-16 md:py-20">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 md:px-8 text-center">
-          <StyledText data={page.content.introduction_part1} />
+          <StyledText data={page.intro.part1} />
         </div>
       </section>
 
       {/* Video Section */}
-      {page.content.introduction_video_url && (
+      {page.intro.videoUrl && (
         <section className="bg-[rgb(var(--website-theme-color1))] py-12 sm:py-16 md:py-20">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="mx-auto max-w-4xl rounded-lg border border-gray-700 bg-gray-900/80 p-3 sm:p-4 md:p-5 shadow-2xl backdrop-blur-sm">
@@ -69,7 +69,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <iframe
                   loading="lazy"
                   className="aspect-video w-full"
-                  src={page.content.introduction_video_url}
+                  src={page.intro.videoUrl}
                   title="YouTube video player"
                   allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -83,7 +83,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Intro Section Part 2 */}
       <section className="bg-white py-12 sm:py-16 md:py-20">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 md:px-8 text-center">
-          <StyledText data={page.content.introduction_part2} />
+          <StyledText data={page.intro.part2} />
         </div>
       </section>
 
@@ -91,10 +91,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section className="bg-white py-12 sm:py-16 md:py-20">
         <div className="container mx-auto px-4 sm:px-6 md:px-8">
           <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-bold tracking-wider">
-            {page.meet.meet_title}
+            {page.meet.title}
           </h2>
           <div className="mt-8 sm:mt-10 md:mt-12 grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3">
-            {page.meet.meet_cards.map((card) => (
+            {page.meet.cards.map((card) => (
               <Link
                 key={card.id}
                 href={`/${locale}/${card.slug}`}
@@ -120,7 +120,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             ))}
           </div>
           <div className="mt-12 sm:mt-14 md:mt-16 text-center text-lg sm:text-xl md:text-2xl">
-            <StyledText data={page.content.conclusion} />
+            <StyledText data={page.intro.conclusion} />
           </div>
         </div>
       </section>

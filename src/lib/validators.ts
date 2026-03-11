@@ -13,7 +13,7 @@ export function isAllowedLocale(locale: string): locale is Config['locale'] {
  */
 export function validateLocale(locale: unknown): Config['locale'] {
   if (typeof locale !== 'string' || !isAllowedLocale(locale)) {
-    throw new Error(`Invalid locale: ${locale}`)
+    return supportedLocales[0] as Config['locale'] // Return default locale if invalid
   }
   return locale
 }

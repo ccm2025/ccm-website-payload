@@ -7,6 +7,10 @@ const TextColorFeature = TextStateFeature({
         label: 'Black',
         css: { color: '#000000' },
       },
+      white: {
+        label: 'White',
+        css: { color: '#ffffff' },
+      },
       red: {
         label: 'Red',
         css: { color: '#ff0000' },
@@ -43,7 +47,6 @@ const TextColorFeature = TextStateFeature({
         label: 'Gray',
         css: { color: '#808080' },
       },
-      // Theme colors
       'theme-green': {
         label: 'Theme Dark Green',
         css: { color: 'rgb(21, 78, 48)' },

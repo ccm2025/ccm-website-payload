@@ -1,4 +1,5 @@
 import { publicAccess, contentManagerAccess } from '@/access'
+import { HeroField } from '@/fields'
 import { type GlobalConfig } from 'payload'
 
 export const AboutPage: GlobalConfig = {
@@ -11,45 +12,25 @@ export const AboutPage: GlobalConfig = {
     update: contentManagerAccess,
   },
   fields: [
+    HeroField(),
     {
-      name: 'hero',
-      type: 'group',
-      label: 'Hero Section',
-      fields: [
-        {
-          name: 'hero_title',
-          type: 'text',
-          required: true,
-          localized: true,
-        },
-        {
-          name: 'hero_image',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-        },
-      ],
-    },
-    {
-      name: 'introduction',
+      name: 'intro',
       type: 'group',
       label: 'Introduction Section',
       fields: [
         {
-          name: 'introduction_subtitle',
+          name: 'subtitle',
           type: 'text',
           localized: true,
         },
         {
-          name: 'introduction_title',
+          name: 'title',
           type: 'text',
-          required: true,
           localized: true,
         },
         {
-          name: 'introduction_content',
+          name: 'content',
           type: 'richText',
-          required: true,
           localized: true,
         },
       ],
@@ -60,20 +41,19 @@ export const AboutPage: GlobalConfig = {
       label: 'History Section',
       fields: [
         {
-          name: 'history_subtitle',
+          name: 'subtitle',
           type: 'text',
           localized: true,
         },
         {
-          name: 'history_title',
+          name: 'title',
           type: 'text',
           localized: true,
         },
         {
-          name: 'history_section',
+          name: 'items',
           type: 'array',
           label: 'History Items',
-          maxRows: 10,
           fields: [
             {
               name: 'image',
@@ -82,7 +62,7 @@ export const AboutPage: GlobalConfig = {
               required: true,
             },
             {
-              name: 'content',
+              name: 'description',
               type: 'richText',
               required: true,
               localized: true,
@@ -97,20 +77,19 @@ export const AboutPage: GlobalConfig = {
       label: 'Team Section',
       fields: [
         {
-          name: 'team_subtitle',
+          name: 'subtitle',
           type: 'text',
           localized: true,
         },
         {
-          name: 'team_title',
+          name: 'title',
           type: 'text',
           localized: true,
         },
         {
-          name: 'team_section',
+          name: 'members',
           type: 'array',
           label: 'Team Members',
-          maxRows: 20,
           fields: [
             {
               name: 'name',
@@ -127,11 +106,6 @@ export const AboutPage: GlobalConfig = {
               type: 'upload',
               relationTo: 'media',
               required: true,
-            },
-            {
-              name: 'bio',
-              type: 'richText',
-              localized: true,
             },
           ],
         },

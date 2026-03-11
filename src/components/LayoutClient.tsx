@@ -1,13 +1,12 @@
 'use client'
 
 import { useMenu } from '@/components/MenuContext'
-import type { Global, Media } from '@/payload-types'
+import type { Global } from '@/payload-types'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
 import { LangButton } from './LangButton'
 import { NavList } from './NavList'
-import { StyledText } from './StyledText'
 
 interface LayoutClientProps {
   locale: string
@@ -43,11 +42,6 @@ export function LayoutClient({ locale, data, children }: LayoutClientProps) {
 
   const nav = data?.navigation
   const footer = data?.footer
-  const logoUrl =
-    nav?.logo && typeof nav.logo === 'object' ? ((nav.logo as Media).url ?? undefined) : undefined
-
-  const siteTitle = 'CCM' // You can add this to Global config later
-  const siteTitleEn = 'Campus Christian Movement'
 
   return (
     <div className="min-h-screen bg-white text-gray-800">
@@ -57,27 +51,20 @@ export function LayoutClient({ locale, data, children }: LayoutClientProps) {
           <div className="flex h-20 sm:h-24 md:h-25 items-center justify-between">
             {/* Logo */}
             <Link href={`/${locale}`} className="flex items-center space-x-2 sm:space-x-3">
-              {logoUrl ? (
+              {typeof nav.logo === 'object' ? (
                 <img
-                  src={logoUrl}
-                  alt={siteTitleEn}
+                  src={nav.logo.url}
+                  alt={nav.logo.alt}
                   className="rounded-full"
                   style={{ width: '120px', height: '120px' }}
                 />
-              ) : (
-                <img
-                  src="/logo.jpg"
-                  alt={siteTitleEn}
-                  className="rounded-full"
-                  style={{ width: '120px', height: '120px' }}
-                />
-              )}
+              ) : null}
               <div>
                 <div className="text-lg sm:text-xl md:text-2xl font-medium tracking-wider text-[rgb(var(--website-theme-color1))]">
-                  {locale === 'zh-Hans' ? '学园传道会' : siteTitle}
+                  {nav.websiteTitleCN}
                 </div>
                 <div className="text-[10px] sm:text-xs font-medium tracking-wider text-[rgb(var(--website-theme-color1))]">
-                  {siteTitleEn}
+                  {nav.websiteTitleEN}
                 </div>
               </div>
             </Link>
@@ -115,32 +102,24 @@ export function LayoutClient({ locale, data, children }: LayoutClientProps) {
       {/* Footer */}
       <footer className="bg-[rgb(var(--website-theme-color1))] text-gray-200">
         <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-10 md:py-14">
-          <div className="grid grid-cols-1 gap-8 sm:gap-10 md:gap-12 text-center md:grid-cols-2 md:text-left lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-8 sm:gap-10 md:gap-12 text-center md:grid-cols-2 md:text-left lg:grid-cols-3">
             <div className="flex flex-col items-center md:items-start">
               <Link href={`/${locale}`} className="flex items-center space-x-3">
-                {logoUrl ? (
+                {typeof nav.logo === 'object' ? (
                   <img
-                    src={logoUrl}
-                    alt={siteTitleEn}
+                    src={nav.logo.url}
+                    alt={nav.logo.alt}
                     className="rounded-full bg-white"
                     width="40"
                     height="40"
                   />
-                ) : (
-                  <img
-                    src="/logo.jpg"
-                    alt={siteTitleEn}
-                    className="rounded-full bg-white"
-                    width="40"
-                    height="40"
-                  />
-                )}
+                ) : null}
                 <div>
                   <div className="text-lg font-bold leading-tight text-white">
-                    {locale === 'zh-Hans' ? '学园传道会' : siteTitle}
+                    {nav.websiteTitleCN}
                   </div>
                   <div className="text-xs font-medium tracking-wider text-gray-200">
-                    {siteTitleEn}
+                    {nav.websiteTitleEN}
                   </div>
                 </div>
               </Link>
@@ -247,16 +226,6 @@ export function LayoutClient({ locale, data, children }: LayoutClientProps) {
               )}
             </div>
 
-            {/* Footer Description */}
-            {footer?.description && (
-              <div>
-                <h3 className="mb-4 text-xl font-bold text-white">About</h3>
-                <div className="text-gray-300">
-                  <StyledText data={footer.description} />
-                </div>
-              </div>
-            )}
-
             {/* Contact Info */}
             {footer?.contactInfo && (
               <div>
@@ -283,7 +252,12 @@ export function LayoutClient({ locale, data, children }: LayoutClientProps) {
               <div>
                 <h3 className="mb-4 text-xl font-bold text-white">Navigation</h3>
                 <nav className="space-y-2">
-                  <NavList items={nav.menuItems} locale={locale} />
+                  <NavList
+                    items={nav.menuItems}
+                    locale={locale}
+                    columns={2}
+                    textColor="text-gray-300"
+                  />
                 </nav>
               </div>
             )}
@@ -291,7 +265,7 @@ export function LayoutClient({ locale, data, children }: LayoutClientProps) {
 
           {/* Copyright */}
           {footer?.copyrightText && (
-            <div className="mt-8 border-t border-gray-600 pt-8 text-center text-gray-300">
+            <div className="mt-4 border-t border-gray-600 pt-4 text-center text-gray-300">
               <p>{footer.copyrightText}</p>
             </div>
           )}

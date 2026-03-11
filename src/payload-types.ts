@@ -501,6 +501,8 @@ export interface Global {
      * Site logo
      */
     logo?: (number | null) | Media;
+    websiteTitleCN?: string | null;
+    websiteTitleEN?: string | null;
     menuItems?:
       | {
           label: string;
@@ -508,33 +510,20 @@ export interface Global {
            * Internal path (e.g., /about) or external URL
            */
           href: string;
-          openInNewTab?: boolean | null;
           id?: string | null;
         }[]
       | null;
   };
   footer?: {
-    /**
-     * Footer description text
-     */
-    description?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
     contactInfo?: {
       address?: string | null;
+      /**
+       * Contact phone number, e.g., +1 (555) 123-4567
+       */
       phone?: string | null;
+      /**
+       * Contact email address, e.g., info@ccm.org
+       */
       email?: string | null;
     };
     socialMedia?:
@@ -556,14 +545,12 @@ export interface Global {
 export interface HomePage {
   id: number;
   hero: {
+    title?: string | null;
     /**
-     * Main hero title
+     * Hero background image
      */
-    hero_title: string;
-    /**
-     * Hero subtitle content
-     */
-    hero_subtitle?: {
+    backgroundImage: number | Media;
+    subtitle?: {
       root: {
         type: string;
         children: {
@@ -579,19 +566,19 @@ export interface HomePage {
       [k: string]: unknown;
     } | null;
     /**
-     * Hero background image
-     */
-    hero_background_image: number | Media;
-    /**
      * Hero call-to-action button text
      */
-    hero_button_text?: string | null;
+    buttonText?: string | null;
+    /**
+     * Hero call-to-action button URL
+     */
+    buttonUrl?: string | null;
   };
-  content: {
+  intro?: {
     /**
      * First introduction section
      */
-    introduction_part1: {
+    part1?: {
       root: {
         type: string;
         children: {
@@ -605,15 +592,15 @@ export interface HomePage {
         version: number;
       };
       [k: string]: unknown;
-    };
+    } | null;
     /**
      * YouTube embed URL for introduction video
      */
-    introduction_video_url?: string | null;
+    videoUrl?: string | null;
     /**
      * Second introduction section (after video)
      */
-    introduction_part2?: {
+    part2?: {
       root: {
         type: string;
         children: {
@@ -647,12 +634,9 @@ export interface HomePage {
       [k: string]: unknown;
     } | null;
   };
-  meet: {
-    /**
-     * Title for the meet with us section
-     */
-    meet_title: string;
-    meet_cards?:
+  meet?: {
+    title?: string | null;
+    cards?:
       | {
           title: string;
           /**
@@ -674,13 +658,16 @@ export interface HomePage {
 export interface AboutPage {
   id: number;
   hero: {
-    hero_title: string;
-    hero_image: number | Media;
+    title?: string | null;
+    /**
+     * Hero background image
+     */
+    backgroundImage: number | Media;
   };
-  introduction: {
-    introduction_subtitle?: string | null;
-    introduction_title: string;
-    introduction_content: {
+  intro?: {
+    subtitle?: string | null;
+    title?: string | null;
+    content?: {
       root: {
         type: string;
         children: {
@@ -694,15 +681,15 @@ export interface AboutPage {
         version: number;
       };
       [k: string]: unknown;
-    };
+    } | null;
   };
   history?: {
-    history_subtitle?: string | null;
-    history_title?: string | null;
-    history_section?:
+    subtitle?: string | null;
+    title?: string | null;
+    items?:
       | {
           image: number | Media;
-          content: {
+          description: {
             root: {
               type: string;
               children: {
@@ -722,28 +709,13 @@ export interface AboutPage {
       | null;
   };
   team?: {
-    team_subtitle?: string | null;
-    team_title?: string | null;
-    team_section?:
+    subtitle?: string | null;
+    title?: string | null;
+    members?:
       | {
           name: string;
           position?: string | null;
           photo: number | Media;
-          bio?: {
-            root: {
-              type: string;
-              children: {
-                type: any;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          } | null;
           id?: string | null;
         }[]
       | null;
@@ -1197,19 +1169,19 @@ export interface GlobalSelect<T extends boolean = true> {
     | T
     | {
         logo?: T;
+        websiteTitleCN?: T;
+        websiteTitleEN?: T;
         menuItems?:
           | T
           | {
               label?: T;
               href?: T;
-              openInNewTab?: T;
               id?: T;
             };
       };
   footer?:
     | T
     | {
-        description?: T;
         contactInfo?:
           | T
           | {
@@ -1238,24 +1210,25 @@ export interface HomePageSelect<T extends boolean = true> {
   hero?:
     | T
     | {
-        hero_title?: T;
-        hero_subtitle?: T;
-        hero_background_image?: T;
-        hero_button_text?: T;
+        title?: T;
+        backgroundImage?: T;
+        subtitle?: T;
+        buttonText?: T;
+        buttonUrl?: T;
       };
-  content?:
+  intro?:
     | T
     | {
-        introduction_part1?: T;
-        introduction_video_url?: T;
-        introduction_part2?: T;
+        part1?: T;
+        videoUrl?: T;
+        part2?: T;
         conclusion?: T;
       };
   meet?:
     | T
     | {
-        meet_title?: T;
-        meet_cards?:
+        title?: T;
+        cards?:
           | T
           | {
               title?: T;
@@ -1276,41 +1249,40 @@ export interface AboutPageSelect<T extends boolean = true> {
   hero?:
     | T
     | {
-        hero_title?: T;
-        hero_image?: T;
+        title?: T;
+        backgroundImage?: T;
       };
-  introduction?:
+  intro?:
     | T
     | {
-        introduction_subtitle?: T;
-        introduction_title?: T;
-        introduction_content?: T;
+        subtitle?: T;
+        title?: T;
+        content?: T;
       };
   history?:
     | T
     | {
-        history_subtitle?: T;
-        history_title?: T;
-        history_section?:
+        subtitle?: T;
+        title?: T;
+        items?:
           | T
           | {
               image?: T;
-              content?: T;
+              description?: T;
               id?: T;
             };
       };
   team?:
     | T
     | {
-        team_subtitle?: T;
-        team_title?: T;
-        team_section?:
+        subtitle?: T;
+        title?: T;
+        members?:
           | T
           | {
               name?: T;
               position?: T;
               photo?: T;
-              bio?: T;
               id?: T;
             };
       };

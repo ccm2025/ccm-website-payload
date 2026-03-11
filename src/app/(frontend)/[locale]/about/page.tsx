@@ -16,7 +16,7 @@ export async function generateMetadata({
   const page = await loadPage(locale)
 
   return {
-    title: page.hero.hero_title,
+    title: page.hero.title,
   }
 }
 
@@ -29,10 +29,10 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       {/* Hero Section */}
       <section className="relative flex h-64 sm:h-72 md:h-80 items-center justify-center text-center text-white">
         <div className="absolute inset-0">
-          {typeof page.hero.hero_image === 'object' && (
+          {typeof page.hero.backgroundImage === 'object' && (
             <img
-              src={page.hero.hero_image.url}
-              alt={page.hero.hero_image.alt}
+              src={page.hero.backgroundImage.url}
+              alt={page.hero.backgroundImage.alt}
               className="h-full w-full object-cover"
             />
           )}
@@ -40,7 +40,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         </div>
         <div className="relative z-10 px-4 sm:px-6 md:px-8">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight">
-            {page.hero.hero_title}
+            {page.hero.title}
           </h1>
         </div>
       </section>
@@ -49,41 +49,41 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       <section className="bg-white py-12 sm:py-16 md:py-20">
         <div className="container mx-auto max-w-5xl px-4 sm:px-6 md:px-8 text-center">
           <h2 className="text-base sm:text-lg md:text-xl font-semibold text-[rgb(var(--website-theme-color2))]">
-            {page.introduction.introduction_subtitle}
+            {page.intro.subtitle}
           </h2>
           <p className="mt-2 mb-6 text-2xl sm:text-3xl md:text-4xl font-bold tracking-wide text-[rgb(var(--website-theme-color1))]">
-            {page.introduction.introduction_title}
+            {page.intro.title}
           </p>
-          <StyledText data={page.introduction.introduction_content} />
+          <StyledText data={page.intro.content} />
         </div>
       </section>
 
       {/* History Section */}
-      {page.history.history_section && page.history.history_section.length > 0 && (
+      {page.history.items && page.history.items.length > 0 && (
         <section className="bg-gray-50 py-12 sm:py-16 md:py-20">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="mx-auto max-w-4xl text-center">
               <h2 className="text-base sm:text-lg md:text-xl font-semibold text-[rgb(var(--website-theme-color2))]">
-                {page.history.history_subtitle}
+                {page.history.subtitle}
               </h2>
               <p className="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold tracking-wider text-[rgb(var(--website-theme-color1))]">
-                {page.history.history_title}
+                {page.history.title}
               </p>
             </div>
             <div className="mt-8 sm:mt-10 md:mt-12 grid grid-cols-1 items-center gap-6 sm:gap-8 md:grid-cols-2 md:gap-12">
-              {page.history.history_section.map((section) => (
-                <Fragment key={section.id}>
+              {page.history.items.map((item) => (
+                <Fragment key={item.id}>
                   <div className="w-full">
-                    {typeof section.image === 'object' && (
+                    {typeof item.image === 'object' && (
                       <img
-                        src={section.image.url}
-                        alt={section.image.alt}
+                        src={item.image.url}
+                        alt={item.image.alt}
                         className="h-auto w-full rounded-lg object-cover shadow-md"
                       />
                     )}
                   </div>
                   <div className="rounded-lg bg-yellow-50 p-6 md:p-8">
-                    <StyledText data={section.content} />
+                    <StyledText data={item.description} />
                   </div>
                 </Fragment>
               ))}
@@ -93,20 +93,20 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       )}
 
       {/* Team Section */}
-      {page.team.team_section && page.team.team_section.length > 0 && (
+      {page.team.members && page.team.members.length > 0 && (
         <section className="bg-white py-12 sm:py-16 md:py-20">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="mx-auto max-w-4xl text-center">
               <h2 className="text-base sm:text-lg md:text-xl font-semibold text-[rgb(var(--website-theme-color2))]">
-                {page.team.team_subtitle}
+                {page.team.subtitle}
               </h2>
               <p className="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold tracking-wider text-[rgb(var(--website-theme-color1))]">
-                {page.team.team_title}
+                {page.team.title}
               </p>
             </div>
 
             <div className="mt-8 sm:mt-10 md:mt-12 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12">
-              {page.team.team_section.map((member) => (
+              {page.team.members.map((member) => (
                 <div key={member.id} className="text-center">
                   {typeof member.photo === 'object' && (
                     <img
@@ -121,11 +121,6 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                   <p className="mt-2 text-sm sm:text-base text-[rgb(var(--website-theme-color2))]">
                     {member.position}
                   </p>
-                  {member.bio && (
-                    <div className="mt-3">
-                      <StyledText data={member.bio} className="text-sm text-gray-600" />
-                    </div>
-                  )}
                 </div>
               ))}
             </div>
