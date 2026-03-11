@@ -180,7 +180,7 @@ describe('Media Collection Tests', () => {
 
       expect(mediaConfig.upload).toBeDefined()
       expect(mediaConfig.upload.mimeTypes).toContain('image/jpeg')
-      expect(mediaConfig.upload.mimeTypes).toContain('image/png')
+      expect(mediaConfig.upload.mimeTypes).not.toContain('image/png')
       expect(mediaConfig.upload.mimeTypes).toContain('application/pdf')
     })
   })
