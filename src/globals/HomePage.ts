@@ -1,5 +1,6 @@
 import { publicAccess, contentManagerAccess } from '@/access'
 import { type GlobalConfig } from 'payload'
+import { HeroField } from '@/fields'
 
 export const HomePage: GlobalConfig = {
   slug: 'home-page',
@@ -11,64 +12,43 @@ export const HomePage: GlobalConfig = {
     update: contentManagerAccess,
   },
   fields: [
+    HeroField([
+      {
+        name: 'subtitle',
+        type: 'richText',
+        localized: true,
+      },
+      {
+        name: 'buttonText',
+        type: 'text',
+        localized: true,
+        admin: {
+          description: 'Hero call-to-action button text',
+        },
+      },
+      {
+        name: 'buttonUrl',
+        type: 'text',
+        admin: {
+          description: 'Hero call-to-action button URL',
+        },
+      },
+    ]),
     {
-      name: 'hero',
+      name: 'intro',
       type: 'group',
-      label: 'Hero Section',
+      label: 'Introduction Section',
       fields: [
         {
-          name: 'hero_title',
-          type: 'text',
-          required: true,
-          localized: true,
-          admin: {
-            description: 'Main hero title',
-          },
-        },
-        {
-          name: 'hero_subtitle',
+          name: 'part1',
           type: 'richText',
-          localized: true,
-          admin: {
-            description: 'Hero subtitle content',
-          },
-        },
-        {
-          name: 'hero_background_image',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-          admin: {
-            description: 'Hero background image',
-          },
-        },
-        {
-          name: 'hero_button_text',
-          type: 'text',
-          localized: true,
-          defaultValue: 'Plan Your Visit',
-          admin: {
-            description: 'Hero call-to-action button text',
-          },
-        },
-      ],
-    },
-    {
-      name: 'content',
-      type: 'group',
-      label: 'Page Content',
-      fields: [
-        {
-          name: 'introduction_part1',
-          type: 'richText',
-          required: true,
           localized: true,
           admin: {
             description: 'First introduction section',
           },
         },
         {
-          name: 'introduction_video_url',
+          name: 'videoUrl',
           type: 'text',
           admin: {
             description: 'YouTube embed URL for introduction video',
@@ -87,7 +67,7 @@ export const HomePage: GlobalConfig = {
           },
         },
         {
-          name: 'introduction_part2',
+          name: 'part2',
           type: 'richText',
           localized: true,
           admin: {
@@ -110,19 +90,13 @@ export const HomePage: GlobalConfig = {
       label: 'Meet With Us Section',
       fields: [
         {
-          name: 'meet_title',
+          name: 'title',
           type: 'text',
-          required: true,
           localized: true,
-          admin: {
-            description: 'Title for the meet with us section',
-          },
         },
         {
-          name: 'meet_cards',
+          name: 'cards',
           type: 'array',
-          label: 'Meet Cards',
-          maxRows: 6,
           fields: [
             {
               name: 'title',

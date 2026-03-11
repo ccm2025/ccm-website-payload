@@ -1,9 +1,10 @@
 'use client'
 
-import { supportedLocales } from '@/payload.config'
 import { Languages } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+
+const supportedLocales = ['en', 'zh-Hans']
 
 interface LangButtonProps {
   variant?: 'header' | 'menu'

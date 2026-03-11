@@ -11,19 +11,8 @@ import {
 import { r2Storage } from '@payloadcms/storage-r2'
 import { GetPlatformProxyOptions } from 'wrangler'
 
-import { Users, Media, Events } from '@/collections'
-import {
-  SiteGlobal,
-  HomePage,
-  AboutPage,
-  EventsPage,
-  VolunteerPage,
-  GivePage,
-  SupportPage,
-  FreshmanPage,
-  PlanYourVisitPage,
-  ThankYouPage,
-} from '@/globals'
+import * as Collections from '@/collections'
+import * as Globals from '@/globals'
 
 import TextColorFeature from './features/TextColor'
 
@@ -65,23 +54,23 @@ export const supportedLocales = ['en', 'zh-Hans']
 
 export default buildConfig({
   admin: {
-    user: Users.slug,
+    user: Collections.Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Events],
+  collections: [Collections.Users, Collections.Media, Collections.Events],
   globals: [
-    SiteGlobal,
-    HomePage,
-    AboutPage,
-    EventsPage,
-    VolunteerPage,
-    GivePage,
-    SupportPage,
-    FreshmanPage,
-    PlanYourVisitPage,
-    ThankYouPage,
+    Globals.SiteGlobal,
+    Globals.HomePage,
+    Globals.AboutPage,
+    Globals.EventsPage,
+    Globals.VolunteerPage,
+    Globals.GivePage,
+    Globals.SupportPage,
+    Globals.FreshmanPage,
+    Globals.PlanYourVisitPage,
+    Globals.ThankYouPage,
   ],
   localization: {
     locales: supportedLocales,

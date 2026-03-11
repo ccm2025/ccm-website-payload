@@ -14,7 +14,6 @@ export const SiteGlobal: GlobalConfig = {
     {
       name: 'navigation',
       type: 'group',
-      label: 'Navigation',
       fields: [
         {
           name: 'logo',
@@ -25,11 +24,18 @@ export const SiteGlobal: GlobalConfig = {
           },
         },
         {
+          name: 'websiteTitleCN',
+          label: 'Website Title (Chinese)',
+          type: 'text',
+        },
+        {
+          name: 'websiteTitleEN',
+          label: 'Website Title (English)',
+          type: 'text',
+        },
+        {
           name: 'menuItems',
           type: 'array',
-          label: 'Menu Items',
-          minRows: 1,
-          maxRows: 10,
           fields: [
             {
               name: 'label',
@@ -45,11 +51,6 @@ export const SiteGlobal: GlobalConfig = {
                 description: 'Internal path (e.g., /about) or external URL',
               },
             },
-            {
-              name: 'openInNewTab',
-              type: 'checkbox',
-              defaultValue: false,
-            },
           ],
         },
       ],
@@ -57,16 +58,7 @@ export const SiteGlobal: GlobalConfig = {
     {
       name: 'footer',
       type: 'group',
-      label: 'Footer',
       fields: [
-        {
-          name: 'description',
-          type: 'richText',
-          localized: true,
-          admin: {
-            description: 'Footer description text',
-          },
-        },
         {
           name: 'contactInfo',
           type: 'group',
@@ -79,10 +71,16 @@ export const SiteGlobal: GlobalConfig = {
             {
               name: 'phone',
               type: 'text',
+              admin: {
+                description: 'Contact phone number, e.g., +1 (555) 123-4567',
+              },
             },
             {
               name: 'email',
               type: 'email',
+              admin: {
+                description: 'Contact email address, e.g., info@ccm.org',
+              },
             },
           ],
         },
@@ -113,8 +111,6 @@ export const SiteGlobal: GlobalConfig = {
         {
           name: 'copyrightText',
           type: 'text',
-          localized: true,
-          defaultValue: '© 2024 CCM Website. All rights reserved.',
         },
       ],
     },
