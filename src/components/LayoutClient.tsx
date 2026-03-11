@@ -273,50 +273,56 @@ export function LayoutClient({ locale, data, children }: LayoutClientProps) {
       </footer>
 
       {/* Side Menu Overlay */}
-      {isMenuOpen && (
-        <>
-          <button
-            type="button"
-            aria-label="Close menu overlay"
-            className="fixed inset-0 z-40 cursor-default bg-black/40"
-            onClick={toggleMenu}
-            tabIndex={0}
-          />
+      <button
+        type="button"
+        aria-label="Close menu overlay"
+        className={`fixed inset-0 z-40 cursor-default bg-black/40 transition-opacity duration-300 ease-in-out ${
+          isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={toggleMenu}
+        tabIndex={isMenuOpen ? 0 : -1}
+      />
 
-          {/* Mobile Menu (slides from top) */}
-          <div className="fixed left-0 right-0 top-0 z-50 transform bg-[rgb(var(--website-theme-color2))] shadow-lg transition-transform duration-300 ease-in-out md:hidden">
-            <div className="p-6 sm:p-8">
-              <div className="flex items-center justify-end">
-                <button onClick={toggleMenu} className="p-2 text-white" aria-label="Close menu">
-                  <X className="w-9 h-9" />
-                </button>
-              </div>
-
-              <LangButton variant="menu" />
-
-              <hr className="my-4 sm:my-5" />
-
-              <nav className="flex flex-col space-y-3 sm:space-y-4 text-xl sm:text-2xl text-white">
-                <NavList items={nav?.menuItems} locale={locale} onItemClick={toggleMenu} />
-              </nav>
-            </div>
+      {/* Mobile Menu (slides from top) */}
+      <div
+        className={`fixed left-0 right-0 top-0 z-50 bg-[rgb(var(--website-theme-color2))] shadow-lg transition-all duration-300 ease-in-out md:hidden transform ${
+          isMenuOpen ? 'translate-y-0' : '-translate-y-full'
+        }`}
+      >
+        <div className="p-6 sm:p-8">
+          <div className="flex items-center justify-end">
+            <button onClick={toggleMenu} className="p-2 text-white" aria-label="Close menu">
+              <X className="w-9 h-9" />
+            </button>
           </div>
 
-          {/* Desktop Menu (slides from right) */}
-          <div className="fixed right-0 top-0 z-50 hidden h-full w-80 max-w-sm bg-[rgb(var(--website-theme-color2))] md:block">
-            <div className="p-8 lg:p-12">
-              <div className="mb-2 flex items-center justify-end">
-                <button onClick={toggleMenu} className="p-2 text-white" aria-label="Close menu">
-                  <X className="w-11 h-11" />
-                </button>
-              </div>
-              <nav className="flex flex-col space-y-4 text-xl lg:text-2xl text-white">
-                <NavList items={nav?.menuItems} locale={locale} onItemClick={toggleMenu} />
-              </nav>
-            </div>
+          <LangButton variant="menu" />
+
+          <hr className="my-4 sm:my-5" />
+
+          <nav className="flex flex-col space-y-3 sm:space-y-4 text-xl sm:text-2xl text-white">
+            <NavList items={nav?.menuItems} locale={locale} onItemClick={toggleMenu} />
+          </nav>
+        </div>
+      </div>
+
+      {/* Desktop Menu (slides from right) */}
+      <div
+        className={`fixed right-0 top-0 z-50 h-full w-80 max-w-sm bg-[rgb(var(--website-theme-color2))] shadow-2xl transition-all duration-300 ease-in-out hidden md:block transform ${
+          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="p-8 lg:p-12">
+          <div className="mb-2 flex items-center justify-end">
+            <button onClick={toggleMenu} className="p-2 text-white" aria-label="Close menu">
+              <X className="w-11 h-11" />
+            </button>
           </div>
-        </>
-      )}
+          <nav className="flex flex-col space-y-4 text-xl lg:text-2xl text-white">
+            <NavList items={nav?.menuItems} locale={locale} onItemClick={toggleMenu} />
+          </nav>
+        </div>
+      </div>
     </div>
   )
 }
