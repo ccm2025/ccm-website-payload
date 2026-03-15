@@ -22,11 +22,11 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid request body' }, { status: 400 })
   }
 
-  const { lang, amount } = body as { lang: string; amount: string }
+  const { locale, amount } = body as { locale: string; amount: string }
 
-  if (!isAllowedLocale(lang)) {
-    console.warn('Suspicious request with invalid lang:', {
-      lang,
+  if (!isAllowedLocale(locale)) {
+    console.warn('Suspicious request with invalid locale:', {
+      locale,
       ip: request.headers.get('x-forwarded-for'),
     })
     return NextResponse.json({ error: 'Invalid language parameter' }, { status: 400 })
@@ -44,9 +44,9 @@ export async function POST(request: NextRequest) {
 
   const hostedPaymentReturnOptions = {
     showReceipt: true,
-    url: `${AUTHNET_RETURN_URL}/${lang}/thank-you`,
+    url: `${AUTHNET_RETURN_URL}/${locale}/thank-you`,
     urlText: 'Continue',
-    cancelUrl: `${AUTHNET_RETURN_URL}/${lang}/give`,
+    cancelUrl: `${AUTHNET_RETURN_URL}/${locale}/give`,
     cancelUrlText: 'Cancel',
   }
 
