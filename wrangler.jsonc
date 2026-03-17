@@ -9,12 +9,13 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS",
   },
+  "workers_dev": true,
   "d1_databases": [
     {
       "binding": "D1",
-      "database_id": "0e22f8dc-56be-4cf7-ac1a-054bdac89d73",
+      "database_id": "a1666626-bd94-4087-9ca0-4a77eba45e98",
       "database_name": "payload-db",
-      "remote": false,
+      "remote": true,
     },
   ],
   "r2_buckets": [

@@ -49,8 +49,7 @@ const jsxConverter = () => ({
       Object.assign(styles, bgColorMap[node.$.backgroundColor as keyof typeof bgColorMap])
     }
 
-    let formattedText = text
-    let element = <span>{formattedText}</span>
+    let element = <span>{text}</span>
 
     if (node.format & 1) {
       element = <strong>{element}</strong>
