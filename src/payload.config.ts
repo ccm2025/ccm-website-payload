@@ -75,6 +75,7 @@ export default buildConfig({
   localization: {
     locales: supportedLocales,
     defaultLocale: supportedLocales[0],
+    fallback: true,
   },
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [...defaultFeatures, TextColorFeature],

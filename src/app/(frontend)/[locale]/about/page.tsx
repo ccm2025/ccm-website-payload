@@ -68,7 +68,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               {page.history.infoSections.map((section) => (
                 <Fragment key={section.id}>
                   <div className="w-full">
-                    {typeof section.image === 'object' && (
+                    {section.image && typeof section.image === 'object' && (
                       <img
                         src={section.image.url}
                         alt={section.image.alt}

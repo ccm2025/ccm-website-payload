@@ -863,6 +863,9 @@ export interface GivePage {
     };
     [k: string]: unknown;
   } | null;
+  /**
+   * The 1st letter should be the most recent Chinese letter. The 2nd letter should be the most recent English letter.
+   */
   letters?: {
     pdfs?:
       | {
