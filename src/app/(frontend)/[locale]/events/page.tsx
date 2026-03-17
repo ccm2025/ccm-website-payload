@@ -20,7 +20,6 @@ async function loadPage(locale: string) {
       },
     },
     sort: '-date',
-    limit: 20,
   })
 
   return {

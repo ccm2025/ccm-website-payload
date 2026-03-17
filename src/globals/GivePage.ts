@@ -14,98 +14,31 @@ export const GivePage: GlobalConfig = {
   fields: [
     HeroField(),
     {
-      name: 'content',
-      type: 'group',
-      label: 'Page Content',
-      fields: [
-        {
-          name: 'introduction_subtitle',
-          type: 'text',
-          localized: true,
-        },
-        {
-          name: 'introduction_title',
-          type: 'text',
-          required: true,
-          localized: true,
-        },
-        {
-          name: 'introduction_content',
-          type: 'richText',
-          required: true,
-          localized: true,
-        },
-        {
-          name: 'donation_button_text',
-          type: 'text',
-          localized: true,
-          defaultValue: 'Donate Now',
-        },
-        {
-          name: 'donation_button_url',
-          type: 'text',
-          admin: {
-            description: 'URL to donation form or payment processor',
-          },
-          validate: (value: string | undefined) => {
-            if (value && value.trim()) {
-              try {
-                new URL(value)
-                return true
-              } catch {
-                return 'Please enter a valid URL'
-              }
-            }
-            return true
-          },
-        },
-      ],
+      name: 'intro',
+      type: 'richText',
+      label: 'Introduction',
+      localized: true,
     },
     {
       name: 'payment_methods',
-      type: 'group',
+      type: 'richText',
       label: 'Payment Methods',
-      fields: [
-        {
-          name: 'zelle_title',
-          type: 'text',
-          localized: true,
-          defaultValue: 'Zelle',
-        },
-        {
-          name: 'zelle_content',
-          type: 'richText',
-          localized: true,
-        },
-        {
-          name: 'check_title',
-          type: 'text',
-          localized: true,
-          defaultValue: 'Check',
-        },
-        {
-          name: 'check_content',
-          type: 'richText',
-          localized: true,
-        },
-      ],
+      localized: true,
     },
     {
-      name: 'resources',
+      name: 'letters',
       type: 'group',
-      label: 'Resources',
+      label: 'Prayer Letters',
       fields: [
         {
-          name: 'pdf_links',
+          name: 'pdfs',
           type: 'array',
           label: 'PDF Documents',
-          maxRows: 5,
           fields: [
             {
               name: 'title',
               type: 'text',
               required: true,
-              localized: true,
             },
             {
               name: 'file',

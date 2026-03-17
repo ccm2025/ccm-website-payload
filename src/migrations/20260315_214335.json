@@ -1763,14 +1763,6 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
-        },
-        "open_in_new_tab": {
-          "name": "open_in_new_tab",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": false
         }
       },
       "indexes": {
@@ -1960,6 +1952,20 @@
           "notNull": false,
           "autoincrement": false
         },
+        "navigation_website_title_c_n": {
+          "name": "navigation_website_title_c_n",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "navigation_website_title_e_n": {
+          "name": "navigation_website_title_e_n",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "footer_contact_info_phone": {
           "name": "footer_contact_info_phone",
           "type": "text",
@@ -1969,6 +1975,13 @@
         },
         "footer_contact_info_email": {
           "name": "footer_contact_info_email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "footer_copyright_text": {
+          "name": "footer_copyright_text",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -2020,27 +2033,12 @@
     "global_locales": {
       "name": "global_locales",
       "columns": {
-        "footer_description": {
-          "name": "footer_description",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
         "footer_contact_info_address": {
           "name": "footer_contact_info_address",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
-        },
-        "footer_copyright_text": {
-          "name": "footer_copyright_text",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": "'© 2024 CCM Website. All rights reserved.'"
         },
         "id": {
           "name": "id",
@@ -2093,8 +2091,8 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "home_page_meet_meet_cards": {
-      "name": "home_page_meet_meet_cards",
+    "home_page_meet_cards": {
+      "name": "home_page_meet_cards",
       "columns": {
         "_order": {
           "name": "_order",
@@ -2133,22 +2131,22 @@
         }
       },
       "indexes": {
-        "home_page_meet_meet_cards_order_idx": {
-          "name": "home_page_meet_meet_cards_order_idx",
+        "home_page_meet_cards_order_idx": {
+          "name": "home_page_meet_cards_order_idx",
           "columns": [
             "_order"
           ],
           "isUnique": false
         },
-        "home_page_meet_meet_cards_parent_id_idx": {
-          "name": "home_page_meet_meet_cards_parent_id_idx",
+        "home_page_meet_cards_parent_id_idx": {
+          "name": "home_page_meet_cards_parent_id_idx",
           "columns": [
             "_parent_id"
           ],
           "isUnique": false
         },
-        "home_page_meet_meet_cards_image_idx": {
-          "name": "home_page_meet_meet_cards_image_idx",
+        "home_page_meet_cards_image_idx": {
+          "name": "home_page_meet_cards_image_idx",
           "columns": [
             "image_id"
           ],
@@ -2156,9 +2154,9 @@
         }
       },
       "foreignKeys": {
-        "home_page_meet_meet_cards_image_id_media_id_fk": {
-          "name": "home_page_meet_meet_cards_image_id_media_id_fk",
-          "tableFrom": "home_page_meet_meet_cards",
+        "home_page_meet_cards_image_id_media_id_fk": {
+          "name": "home_page_meet_cards_image_id_media_id_fk",
+          "tableFrom": "home_page_meet_cards",
           "tableTo": "media",
           "columnsFrom": [
             "image_id"
@@ -2169,9 +2167,9 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "home_page_meet_meet_cards_parent_id_fk": {
-          "name": "home_page_meet_meet_cards_parent_id_fk",
-          "tableFrom": "home_page_meet_meet_cards",
+        "home_page_meet_cards_parent_id_fk": {
+          "name": "home_page_meet_cards_parent_id_fk",
+          "tableFrom": "home_page_meet_cards",
           "tableTo": "home_page",
           "columnsFrom": [
             "_parent_id"
@@ -2187,8 +2185,8 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "home_page_meet_meet_cards_locales": {
-      "name": "home_page_meet_meet_cards_locales",
+    "home_page_meet_cards_locales": {
+      "name": "home_page_meet_cards_locales",
       "columns": {
         "title": {
           "name": "title",
@@ -2220,8 +2218,8 @@
         }
       },
       "indexes": {
-        "home_page_meet_meet_cards_locales_locale_parent_id_unique": {
-          "name": "home_page_meet_meet_cards_locales_locale_parent_id_unique",
+        "home_page_meet_cards_locales_locale_parent_id_unique": {
+          "name": "home_page_meet_cards_locales_locale_parent_id_unique",
           "columns": [
             "_locale",
             "_parent_id"
@@ -2230,10 +2228,10 @@
         }
       },
       "foreignKeys": {
-        "home_page_meet_meet_cards_locales_parent_id_fk": {
-          "name": "home_page_meet_meet_cards_locales_parent_id_fk",
-          "tableFrom": "home_page_meet_meet_cards_locales",
-          "tableTo": "home_page_meet_meet_cards",
+        "home_page_meet_cards_locales_parent_id_fk": {
+          "name": "home_page_meet_cards_locales_parent_id_fk",
+          "tableFrom": "home_page_meet_cards_locales",
+          "tableTo": "home_page_meet_cards",
           "columnsFrom": [
             "_parent_id"
           ],
@@ -2258,15 +2256,22 @@
           "notNull": true,
           "autoincrement": false
         },
-        "hero_hero_background_image_id": {
-          "name": "hero_hero_background_image_id",
+        "hero_background_image_id": {
+          "name": "hero_background_image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
-        "content_introduction_video_url": {
-          "name": "content_introduction_video_url",
+        "hero_button_url": {
+          "name": "hero_button_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "intro_video_url": {
+          "name": "intro_video_url",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -2288,21 +2293,21 @@
         }
       },
       "indexes": {
-        "home_page_hero_hero_hero_background_image_idx": {
-          "name": "home_page_hero_hero_hero_background_image_idx",
+        "home_page_hero_hero_background_image_idx": {
+          "name": "home_page_hero_hero_background_image_idx",
           "columns": [
-            "hero_hero_background_image_id"
+            "hero_background_image_id"
           ],
           "isUnique": false
         }
       },
       "foreignKeys": {
-        "home_page_hero_hero_background_image_id_media_id_fk": {
-          "name": "home_page_hero_hero_background_image_id_media_id_fk",
+        "home_page_hero_background_image_id_media_id_fk": {
+          "name": "home_page_hero_background_image_id_media_id_fk",
           "tableFrom": "home_page",
           "tableTo": "media",
           "columnsFrom": [
-            "hero_hero_background_image_id"
+            "hero_background_image_id"
           ],
           "columnsTo": [
             "id"
@@ -2318,54 +2323,53 @@
     "home_page_locales": {
       "name": "home_page_locales",
       "columns": {
-        "hero_hero_title": {
-          "name": "hero_hero_title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "hero_hero_subtitle": {
-          "name": "hero_hero_subtitle",
+        "hero_title": {
+          "name": "hero_title",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "hero_hero_button_text": {
-          "name": "hero_hero_button_text",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": "'Plan Your Visit'"
-        },
-        "content_introduction_part1": {
-          "name": "content_introduction_part1",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "content_introduction_part2": {
-          "name": "content_introduction_part2",
+        "hero_subtitle": {
+          "name": "hero_subtitle",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "content_conclusion": {
-          "name": "content_conclusion",
+        "hero_button_text": {
+          "name": "hero_button_text",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "meet_meet_title": {
-          "name": "meet_meet_title",
+        "intro_part1": {
+          "name": "intro_part1",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "intro_part2": {
+          "name": "intro_part2",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "intro_conclusion": {
+          "name": "intro_conclusion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "meet_title": {
+          "name": "meet_title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         },
         "id": {
@@ -2419,8 +2423,8 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "about_page_history_history_section": {
-      "name": "about_page_history_history_section",
+    "about_page_history_info_sections": {
+      "name": "about_page_history_info_sections",
       "columns": {
         "_order": {
           "name": "_order",
@@ -2443,31 +2447,54 @@
           "notNull": true,
           "autoincrement": false
         },
+        "localize_image": {
+          "name": "localize_image",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
+        },
         "image_id": {
           "name": "image_id",
           "type": "integer",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "has_button": {
+          "name": "has_button",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
+        },
+        "button_url": {
+          "name": "button_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         }
       },
       "indexes": {
-        "about_page_history_history_section_order_idx": {
-          "name": "about_page_history_history_section_order_idx",
+        "about_page_history_info_sections_order_idx": {
+          "name": "about_page_history_info_sections_order_idx",
           "columns": [
             "_order"
           ],
           "isUnique": false
         },
-        "about_page_history_history_section_parent_id_idx": {
-          "name": "about_page_history_history_section_parent_id_idx",
+        "about_page_history_info_sections_parent_id_idx": {
+          "name": "about_page_history_info_sections_parent_id_idx",
           "columns": [
             "_parent_id"
           ],
           "isUnique": false
         },
-        "about_page_history_history_section_image_idx": {
-          "name": "about_page_history_history_section_image_idx",
+        "about_page_history_info_sections_image_idx": {
+          "name": "about_page_history_info_sections_image_idx",
           "columns": [
             "image_id"
           ],
@@ -2475,9 +2502,9 @@
         }
       },
       "foreignKeys": {
-        "about_page_history_history_section_image_id_media_id_fk": {
-          "name": "about_page_history_history_section_image_id_media_id_fk",
-          "tableFrom": "about_page_history_history_section",
+        "about_page_history_info_sections_image_id_media_id_fk": {
+          "name": "about_page_history_info_sections_image_id_media_id_fk",
+          "tableFrom": "about_page_history_info_sections",
           "tableTo": "media",
           "columnsFrom": [
             "image_id"
@@ -2488,9 +2515,9 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "about_page_history_history_section_parent_id_fk": {
-          "name": "about_page_history_history_section_parent_id_fk",
-          "tableFrom": "about_page_history_history_section",
+        "about_page_history_info_sections_parent_id_fk": {
+          "name": "about_page_history_info_sections_parent_id_fk",
+          "tableFrom": "about_page_history_info_sections",
           "tableTo": "about_page",
           "columnsFrom": [
             "_parent_id"
@@ -2506,14 +2533,28 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "about_page_history_history_section_locales": {
-      "name": "about_page_history_history_section_locales",
+    "about_page_history_info_sections_locales": {
+      "name": "about_page_history_info_sections_locales",
       "columns": {
         "content": {
           "name": "content",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "image_localized_id": {
+          "name": "image_localized_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "button_text": {
+          "name": "button_text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         },
         "id": {
@@ -2539,8 +2580,16 @@
         }
       },
       "indexes": {
-        "about_page_history_history_section_locales_locale_parent_id_": {
-          "name": "about_page_history_history_section_locales_locale_parent_id_",
+        "about_page_history_info_sections_image_localized_idx": {
+          "name": "about_page_history_info_sections_image_localized_idx",
+          "columns": [
+            "image_localized_id",
+            "_locale"
+          ],
+          "isUnique": false
+        },
+        "about_page_history_info_sections_locales_locale_parent_id_un": {
+          "name": "about_page_history_info_sections_locales_locale_parent_id_un",
           "columns": [
             "_locale",
             "_parent_id"
@@ -2549,10 +2598,23 @@
         }
       },
       "foreignKeys": {
-        "about_page_history_history_section_locales_parent_id_fk": {
-          "name": "about_page_history_history_section_locales_parent_id_fk",
-          "tableFrom": "about_page_history_history_section_locales",
-          "tableTo": "about_page_history_history_section",
+        "about_page_history_info_sections_locales_image_localized_id_media_id_fk": {
+          "name": "about_page_history_info_sections_locales_image_localized_id_media_id_fk",
+          "tableFrom": "about_page_history_info_sections_locales",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_localized_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "about_page_history_info_sections_locales_parent_id_fk": {
+          "name": "about_page_history_info_sections_locales_parent_id_fk",
+          "tableFrom": "about_page_history_info_sections_locales",
+          "tableTo": "about_page_history_info_sections",
           "columnsFrom": [
             "_parent_id"
           ],
@@ -2567,8 +2629,8 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "about_page_team_team_section": {
-      "name": "about_page_team_team_section",
+    "about_page_team_members": {
+      "name": "about_page_team_members",
       "columns": {
         "_order": {
           "name": "_order",
@@ -2588,13 +2650,6 @@
           "name": "id",
           "type": "text",
           "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "name": {
-          "name": "name",
-          "type": "text",
-          "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
@@ -2602,27 +2657,27 @@
           "name": "photo_id",
           "type": "integer",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         }
       },
       "indexes": {
-        "about_page_team_team_section_order_idx": {
-          "name": "about_page_team_team_section_order_idx",
+        "about_page_team_members_order_idx": {
+          "name": "about_page_team_members_order_idx",
           "columns": [
             "_order"
           ],
           "isUnique": false
         },
-        "about_page_team_team_section_parent_id_idx": {
-          "name": "about_page_team_team_section_parent_id_idx",
+        "about_page_team_members_parent_id_idx": {
+          "name": "about_page_team_members_parent_id_idx",
           "columns": [
             "_parent_id"
           ],
           "isUnique": false
         },
-        "about_page_team_team_section_photo_idx": {
-          "name": "about_page_team_team_section_photo_idx",
+        "about_page_team_members_photo_idx": {
+          "name": "about_page_team_members_photo_idx",
           "columns": [
             "photo_id"
           ],
@@ -2630,9 +2685,9 @@
         }
       },
       "foreignKeys": {
-        "about_page_team_team_section_photo_id_media_id_fk": {
-          "name": "about_page_team_team_section_photo_id_media_id_fk",
-          "tableFrom": "about_page_team_team_section",
+        "about_page_team_members_photo_id_media_id_fk": {
+          "name": "about_page_team_members_photo_id_media_id_fk",
+          "tableFrom": "about_page_team_members",
           "tableTo": "media",
           "columnsFrom": [
             "photo_id"
@@ -2643,9 +2698,9 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "about_page_team_team_section_parent_id_fk": {
-          "name": "about_page_team_team_section_parent_id_fk",
-          "tableFrom": "about_page_team_team_section",
+        "about_page_team_members_parent_id_fk": {
+          "name": "about_page_team_members_parent_id_fk",
+          "tableFrom": "about_page_team_members",
           "tableTo": "about_page",
           "columnsFrom": [
             "_parent_id"
@@ -2661,18 +2716,18 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "about_page_team_team_section_locales": {
-      "name": "about_page_team_team_section_locales",
+    "about_page_team_members_locales": {
+      "name": "about_page_team_members_locales",
       "columns": {
-        "position": {
-          "name": "position",
+        "name": {
+          "name": "name",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
-        "bio": {
-          "name": "bio",
+        "position": {
+          "name": "position",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -2701,8 +2756,8 @@
         }
       },
       "indexes": {
-        "about_page_team_team_section_locales_locale_parent_id_unique": {
-          "name": "about_page_team_team_section_locales_locale_parent_id_unique",
+        "about_page_team_members_locales_locale_parent_id_unique": {
+          "name": "about_page_team_members_locales_locale_parent_id_unique",
           "columns": [
             "_locale",
             "_parent_id"
@@ -2711,10 +2766,10 @@
         }
       },
       "foreignKeys": {
-        "about_page_team_team_section_locales_parent_id_fk": {
-          "name": "about_page_team_team_section_locales_parent_id_fk",
-          "tableFrom": "about_page_team_team_section_locales",
-          "tableTo": "about_page_team_team_section",
+        "about_page_team_members_locales_parent_id_fk": {
+          "name": "about_page_team_members_locales_parent_id_fk",
+          "tableFrom": "about_page_team_members_locales",
+          "tableTo": "about_page_team_members",
           "columnsFrom": [
             "_parent_id"
           ],
@@ -2739,8 +2794,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "hero_hero_image_id": {
-          "name": "hero_hero_image_id",
+        "hero_background_image_id": {
+          "name": "hero_background_image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
@@ -2762,21 +2817,21 @@
         }
       },
       "indexes": {
-        "about_page_hero_hero_hero_image_idx": {
-          "name": "about_page_hero_hero_hero_image_idx",
+        "about_page_hero_hero_background_image_idx": {
+          "name": "about_page_hero_hero_background_image_idx",
           "columns": [
-            "hero_hero_image_id"
+            "hero_background_image_id"
           ],
           "isUnique": false
         }
       },
       "foreignKeys": {
-        "about_page_hero_hero_image_id_media_id_fk": {
-          "name": "about_page_hero_hero_image_id_media_id_fk",
+        "about_page_hero_background_image_id_media_id_fk": {
+          "name": "about_page_hero_background_image_id_media_id_fk",
           "tableFrom": "about_page",
           "tableTo": "media",
           "columnsFrom": [
-            "hero_hero_image_id"
+            "hero_background_image_id"
           ],
           "columnsTo": [
             "id"
@@ -2792,57 +2847,43 @@
     "about_page_locales": {
       "name": "about_page_locales",
       "columns": {
-        "hero_hero_title": {
-          "name": "hero_hero_title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "introduction_introduction_subtitle": {
-          "name": "introduction_introduction_subtitle",
+        "hero_title": {
+          "name": "hero_title",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "introduction_introduction_title": {
-          "name": "introduction_introduction_title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "introduction_introduction_content": {
-          "name": "introduction_introduction_content",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "history_history_subtitle": {
-          "name": "history_history_subtitle",
+        "intro": {
+          "name": "intro",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "history_history_title": {
-          "name": "history_history_title",
+        "history_subtitle": {
+          "name": "history_subtitle",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "team_team_subtitle": {
-          "name": "team_team_subtitle",
+        "history_title": {
+          "name": "history_title",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "team_team_title": {
-          "name": "team_team_title",
+        "team_subtitle": {
+          "name": "team_subtitle",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "team_title": {
+          "name": "team_title",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -3083,6 +3124,212 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
+    "volunteer_page_info_sections": {
+      "name": "volunteer_page_info_sections",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "localize_image": {
+          "name": "localize_image",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
+        },
+        "image_id": {
+          "name": "image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "has_button": {
+          "name": "has_button",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
+        },
+        "button_url": {
+          "name": "button_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "volunteer_page_info_sections_order_idx": {
+          "name": "volunteer_page_info_sections_order_idx",
+          "columns": [
+            "_order"
+          ],
+          "isUnique": false
+        },
+        "volunteer_page_info_sections_parent_id_idx": {
+          "name": "volunteer_page_info_sections_parent_id_idx",
+          "columns": [
+            "_parent_id"
+          ],
+          "isUnique": false
+        },
+        "volunteer_page_info_sections_image_idx": {
+          "name": "volunteer_page_info_sections_image_idx",
+          "columns": [
+            "image_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "volunteer_page_info_sections_image_id_media_id_fk": {
+          "name": "volunteer_page_info_sections_image_id_media_id_fk",
+          "tableFrom": "volunteer_page_info_sections",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "volunteer_page_info_sections_parent_id_fk": {
+          "name": "volunteer_page_info_sections_parent_id_fk",
+          "tableFrom": "volunteer_page_info_sections",
+          "tableTo": "volunteer_page",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "volunteer_page_info_sections_locales": {
+      "name": "volunteer_page_info_sections_locales",
+      "columns": {
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "image_localized_id": {
+          "name": "image_localized_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "button_text": {
+          "name": "button_text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "_locale": {
+          "name": "_locale",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "volunteer_page_info_sections_image_localized_idx": {
+          "name": "volunteer_page_info_sections_image_localized_idx",
+          "columns": [
+            "image_localized_id",
+            "_locale"
+          ],
+          "isUnique": false
+        },
+        "volunteer_page_info_sections_locales_locale_parent_id_unique": {
+          "name": "volunteer_page_info_sections_locales_locale_parent_id_unique",
+          "columns": [
+            "_locale",
+            "_parent_id"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "volunteer_page_info_sections_locales_image_localized_id_media_id_fk": {
+          "name": "volunteer_page_info_sections_locales_image_localized_id_media_id_fk",
+          "tableFrom": "volunteer_page_info_sections_locales",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_localized_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "volunteer_page_info_sections_locales_parent_id_fk": {
+          "name": "volunteer_page_info_sections_locales_parent_id_fk",
+          "tableFrom": "volunteer_page_info_sections_locales",
+          "tableTo": "volunteer_page_info_sections",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
     "volunteer_page": {
       "name": "volunteer_page",
       "columns": {
@@ -3093,18 +3340,11 @@
           "notNull": true,
           "autoincrement": false
         },
-        "hero_hero_image_id": {
-          "name": "hero_hero_image_id",
+        "hero_background_image_id": {
+          "name": "hero_background_image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false
-        },
-        "application_application_button_url": {
-          "name": "application_application_button_url",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
           "autoincrement": false
         },
         "updated_at": {
@@ -3123,21 +3363,21 @@
         }
       },
       "indexes": {
-        "volunteer_page_hero_hero_hero_image_idx": {
-          "name": "volunteer_page_hero_hero_hero_image_idx",
+        "volunteer_page_hero_hero_background_image_idx": {
+          "name": "volunteer_page_hero_hero_background_image_idx",
           "columns": [
-            "hero_hero_image_id"
+            "hero_background_image_id"
           ],
           "isUnique": false
         }
       },
       "foreignKeys": {
-        "volunteer_page_hero_hero_image_id_media_id_fk": {
-          "name": "volunteer_page_hero_hero_image_id_media_id_fk",
+        "volunteer_page_hero_background_image_id_media_id_fk": {
+          "name": "volunteer_page_hero_background_image_id_media_id_fk",
           "tableFrom": "volunteer_page",
           "tableTo": "media",
           "columnsFrom": [
-            "hero_hero_image_id"
+            "hero_background_image_id"
           ],
           "columnsTo": [
             "id"
@@ -3153,51 +3393,8 @@
     "volunteer_page_locales": {
       "name": "volunteer_page_locales",
       "columns": {
-        "hero_hero_title": {
-          "name": "hero_hero_title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "introduction_introduction_subtitle": {
-          "name": "introduction_introduction_subtitle",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "introduction_introduction_title": {
-          "name": "introduction_introduction_title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "introduction_introduction_content": {
-          "name": "introduction_introduction_content",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "application_application_button_text": {
-          "name": "application_application_button_text",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": "'Apply Now'"
-        },
-        "volunteer_volunteer_title": {
-          "name": "volunteer_volunteer_title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "volunteer_volunteer_content": {
-          "name": "volunteer_volunteer_content",
+        "hero_title": {
+          "name": "hero_title",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -3412,8 +3609,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "hero_hero_image_id": {
-          "name": "hero_hero_image_id",
+        "hero_background_image_id": {
+          "name": "hero_background_image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
@@ -3442,21 +3639,21 @@
         }
       },
       "indexes": {
-        "give_page_hero_hero_hero_image_idx": {
-          "name": "give_page_hero_hero_hero_image_idx",
+        "give_page_hero_hero_background_image_idx": {
+          "name": "give_page_hero_hero_background_image_idx",
           "columns": [
-            "hero_hero_image_id"
+            "hero_background_image_id"
           ],
           "isUnique": false
         }
       },
       "foreignKeys": {
-        "give_page_hero_hero_image_id_media_id_fk": {
-          "name": "give_page_hero_hero_image_id_media_id_fk",
+        "give_page_hero_background_image_id_media_id_fk": {
+          "name": "give_page_hero_background_image_id_media_id_fk",
           "tableFrom": "give_page",
           "tableTo": "media",
           "columnsFrom": [
-            "hero_hero_image_id"
+            "hero_background_image_id"
           ],
           "columnsTo": [
             "id"
@@ -3472,11 +3669,11 @@
     "give_page_locales": {
       "name": "give_page_locales",
       "columns": {
-        "hero_hero_title": {
-          "name": "hero_hero_title",
+        "hero_title": {
+          "name": "hero_title",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "content_introduction_subtitle": {
@@ -3589,8 +3786,8 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "support_page_content_info_sections": {
-      "name": "support_page_content_info_sections",
+    "support_page_info_sections": {
+      "name": "support_page_info_sections",
       "columns": {
         "_order": {
           "name": "_order",
@@ -3613,31 +3810,54 @@
           "notNull": true,
           "autoincrement": false
         },
+        "localize_image": {
+          "name": "localize_image",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
+        },
         "image_id": {
           "name": "image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
+        },
+        "has_button": {
+          "name": "has_button",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
+        },
+        "button_url": {
+          "name": "button_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
         }
       },
       "indexes": {
-        "support_page_content_info_sections_order_idx": {
-          "name": "support_page_content_info_sections_order_idx",
+        "support_page_info_sections_order_idx": {
+          "name": "support_page_info_sections_order_idx",
           "columns": [
             "_order"
           ],
           "isUnique": false
         },
-        "support_page_content_info_sections_parent_id_idx": {
-          "name": "support_page_content_info_sections_parent_id_idx",
+        "support_page_info_sections_parent_id_idx": {
+          "name": "support_page_info_sections_parent_id_idx",
           "columns": [
             "_parent_id"
           ],
           "isUnique": false
         },
-        "support_page_content_info_sections_image_idx": {
-          "name": "support_page_content_info_sections_image_idx",
+        "support_page_info_sections_image_idx": {
+          "name": "support_page_info_sections_image_idx",
           "columns": [
             "image_id"
           ],
@@ -3645,9 +3865,9 @@
         }
       },
       "foreignKeys": {
-        "support_page_content_info_sections_image_id_media_id_fk": {
-          "name": "support_page_content_info_sections_image_id_media_id_fk",
-          "tableFrom": "support_page_content_info_sections",
+        "support_page_info_sections_image_id_media_id_fk": {
+          "name": "support_page_info_sections_image_id_media_id_fk",
+          "tableFrom": "support_page_info_sections",
           "tableTo": "media",
           "columnsFrom": [
             "image_id"
@@ -3658,9 +3878,9 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "support_page_content_info_sections_parent_id_fk": {
-          "name": "support_page_content_info_sections_parent_id_fk",
-          "tableFrom": "support_page_content_info_sections",
+        "support_page_info_sections_parent_id_fk": {
+          "name": "support_page_info_sections_parent_id_fk",
+          "tableFrom": "support_page_info_sections",
           "tableTo": "support_page",
           "columnsFrom": [
             "_parent_id"
@@ -3676,28 +3896,28 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "support_page_content_info_sections_locales": {
-      "name": "support_page_content_info_sections_locales",
+    "support_page_info_sections_locales": {
+      "name": "support_page_info_sections_locales",
       "columns": {
-        "title": {
-          "name": "title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "subtitle": {
-          "name": "subtitle",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
         "content": {
           "name": "content",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "image_localized_id": {
+          "name": "image_localized_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "button_text": {
+          "name": "button_text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         },
         "id": {
@@ -3723,8 +3943,16 @@
         }
       },
       "indexes": {
-        "support_page_content_info_sections_locales_locale_parent_id_": {
-          "name": "support_page_content_info_sections_locales_locale_parent_id_",
+        "support_page_info_sections_image_localized_idx": {
+          "name": "support_page_info_sections_image_localized_idx",
+          "columns": [
+            "image_localized_id",
+            "_locale"
+          ],
+          "isUnique": false
+        },
+        "support_page_info_sections_locales_locale_parent_id_unique": {
+          "name": "support_page_info_sections_locales_locale_parent_id_unique",
           "columns": [
             "_locale",
             "_parent_id"
@@ -3733,10 +3961,23 @@
         }
       },
       "foreignKeys": {
-        "support_page_content_info_sections_locales_parent_id_fk": {
-          "name": "support_page_content_info_sections_locales_parent_id_fk",
-          "tableFrom": "support_page_content_info_sections_locales",
-          "tableTo": "support_page_content_info_sections",
+        "support_page_info_sections_locales_image_localized_id_media_id_fk": {
+          "name": "support_page_info_sections_locales_image_localized_id_media_id_fk",
+          "tableFrom": "support_page_info_sections_locales",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_localized_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "support_page_info_sections_locales_parent_id_fk": {
+          "name": "support_page_info_sections_locales_parent_id_fk",
+          "tableFrom": "support_page_info_sections_locales",
+          "tableTo": "support_page_info_sections",
           "columnsFrom": [
             "_parent_id"
           ],
@@ -3761,8 +4002,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "hero_hero_image_id": {
-          "name": "hero_hero_image_id",
+        "hero_background_image_id": {
+          "name": "hero_background_image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
@@ -3784,21 +4025,21 @@
         }
       },
       "indexes": {
-        "support_page_hero_hero_hero_image_idx": {
-          "name": "support_page_hero_hero_hero_image_idx",
+        "support_page_hero_hero_background_image_idx": {
+          "name": "support_page_hero_hero_background_image_idx",
           "columns": [
-            "hero_hero_image_id"
+            "hero_background_image_id"
           ],
           "isUnique": false
         }
       },
       "foreignKeys": {
-        "support_page_hero_hero_image_id_media_id_fk": {
-          "name": "support_page_hero_hero_image_id_media_id_fk",
+        "support_page_hero_background_image_id_media_id_fk": {
+          "name": "support_page_hero_background_image_id_media_id_fk",
           "tableFrom": "support_page",
           "tableTo": "media",
           "columnsFrom": [
-            "hero_hero_image_id"
+            "hero_background_image_id"
           ],
           "columnsTo": [
             "id"
@@ -3814,11 +4055,11 @@
     "support_page_locales": {
       "name": "support_page_locales",
       "columns": {
-        "hero_hero_title": {
-          "name": "hero_hero_title",
+        "hero_title": {
+          "name": "hero_title",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "id": {
@@ -3872,8 +4113,8 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "freshman_page_content_info_sections": {
-      "name": "freshman_page_content_info_sections",
+    "freshman_page_info_sections": {
+      "name": "freshman_page_info_sections",
       "columns": {
         "_order": {
           "name": "_order",
@@ -3896,12 +4137,28 @@
           "notNull": true,
           "autoincrement": false
         },
+        "localize_image": {
+          "name": "localize_image",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
+        },
         "image_id": {
           "name": "image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
+        },
+        "has_button": {
+          "name": "has_button",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
         },
         "button_url": {
           "name": "button_url",
@@ -3912,22 +4169,22 @@
         }
       },
       "indexes": {
-        "freshman_page_content_info_sections_order_idx": {
-          "name": "freshman_page_content_info_sections_order_idx",
+        "freshman_page_info_sections_order_idx": {
+          "name": "freshman_page_info_sections_order_idx",
           "columns": [
             "_order"
           ],
           "isUnique": false
         },
-        "freshman_page_content_info_sections_parent_id_idx": {
-          "name": "freshman_page_content_info_sections_parent_id_idx",
+        "freshman_page_info_sections_parent_id_idx": {
+          "name": "freshman_page_info_sections_parent_id_idx",
           "columns": [
             "_parent_id"
           ],
           "isUnique": false
         },
-        "freshman_page_content_info_sections_image_idx": {
-          "name": "freshman_page_content_info_sections_image_idx",
+        "freshman_page_info_sections_image_idx": {
+          "name": "freshman_page_info_sections_image_idx",
           "columns": [
             "image_id"
           ],
@@ -3935,9 +4192,9 @@
         }
       },
       "foreignKeys": {
-        "freshman_page_content_info_sections_image_id_media_id_fk": {
-          "name": "freshman_page_content_info_sections_image_id_media_id_fk",
-          "tableFrom": "freshman_page_content_info_sections",
+        "freshman_page_info_sections_image_id_media_id_fk": {
+          "name": "freshman_page_info_sections_image_id_media_id_fk",
+          "tableFrom": "freshman_page_info_sections",
           "tableTo": "media",
           "columnsFrom": [
             "image_id"
@@ -3948,9 +4205,9 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "freshman_page_content_info_sections_parent_id_fk": {
-          "name": "freshman_page_content_info_sections_parent_id_fk",
-          "tableFrom": "freshman_page_content_info_sections",
+        "freshman_page_info_sections_parent_id_fk": {
+          "name": "freshman_page_info_sections_parent_id_fk",
+          "tableFrom": "freshman_page_info_sections",
           "tableTo": "freshman_page",
           "columnsFrom": [
             "_parent_id"
@@ -3966,28 +4223,21 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "freshman_page_content_info_sections_locales": {
-      "name": "freshman_page_content_info_sections_locales",
+    "freshman_page_info_sections_locales": {
+      "name": "freshman_page_info_sections_locales",
       "columns": {
-        "title": {
-          "name": "title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "subtitle": {
-          "name": "subtitle",
+        "content": {
+          "name": "content",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "content": {
-          "name": "content",
-          "type": "text",
+        "image_localized_id": {
+          "name": "image_localized_id",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "button_text": {
@@ -4020,8 +4270,16 @@
         }
       },
       "indexes": {
-        "freshman_page_content_info_sections_locales_locale_parent_id": {
-          "name": "freshman_page_content_info_sections_locales_locale_parent_id",
+        "freshman_page_info_sections_image_localized_idx": {
+          "name": "freshman_page_info_sections_image_localized_idx",
+          "columns": [
+            "image_localized_id",
+            "_locale"
+          ],
+          "isUnique": false
+        },
+        "freshman_page_info_sections_locales_locale_parent_id_unique": {
+          "name": "freshman_page_info_sections_locales_locale_parent_id_unique",
           "columns": [
             "_locale",
             "_parent_id"
@@ -4030,10 +4288,23 @@
         }
       },
       "foreignKeys": {
-        "freshman_page_content_info_sections_locales_parent_id_fk": {
-          "name": "freshman_page_content_info_sections_locales_parent_id_fk",
-          "tableFrom": "freshman_page_content_info_sections_locales",
-          "tableTo": "freshman_page_content_info_sections",
+        "freshman_page_info_sections_locales_image_localized_id_media_id_fk": {
+          "name": "freshman_page_info_sections_locales_image_localized_id_media_id_fk",
+          "tableFrom": "freshman_page_info_sections_locales",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_localized_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "freshman_page_info_sections_locales_parent_id_fk": {
+          "name": "freshman_page_info_sections_locales_parent_id_fk",
+          "tableFrom": "freshman_page_info_sections_locales",
+          "tableTo": "freshman_page_info_sections",
           "columnsFrom": [
             "_parent_id"
           ],
@@ -4058,8 +4329,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "hero_hero_image_id": {
-          "name": "hero_hero_image_id",
+        "hero_background_image_id": {
+          "name": "hero_background_image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
@@ -4081,21 +4352,21 @@
         }
       },
       "indexes": {
-        "freshman_page_hero_hero_hero_image_idx": {
-          "name": "freshman_page_hero_hero_hero_image_idx",
+        "freshman_page_hero_hero_background_image_idx": {
+          "name": "freshman_page_hero_hero_background_image_idx",
           "columns": [
-            "hero_hero_image_id"
+            "hero_background_image_id"
           ],
           "isUnique": false
         }
       },
       "foreignKeys": {
-        "freshman_page_hero_hero_image_id_media_id_fk": {
-          "name": "freshman_page_hero_hero_image_id_media_id_fk",
+        "freshman_page_hero_background_image_id_media_id_fk": {
+          "name": "freshman_page_hero_background_image_id_media_id_fk",
           "tableFrom": "freshman_page",
           "tableTo": "media",
           "columnsFrom": [
-            "hero_hero_image_id"
+            "hero_background_image_id"
           ],
           "columnsTo": [
             "id"
@@ -4111,43 +4382,8 @@
     "freshman_page_locales": {
       "name": "freshman_page_locales",
       "columns": {
-        "hero_hero_title": {
-          "name": "hero_hero_title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "hero_hero_subtitle": {
-          "name": "hero_hero_subtitle",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "content_introduction_title": {
-          "name": "content_introduction_title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "content_introduction_content": {
-          "name": "content_introduction_content",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "content_resources_title": {
-          "name": "content_resources_title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "content_resources_content": {
-          "name": "content_resources_content",
+        "hero_title": {
+          "name": "hero_title",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -4204,8 +4440,8 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "plan_your_visit_page_introduction_introduction_content": {
-      "name": "plan_your_visit_page_introduction_introduction_content",
+    "plan_your_visit_page_intro_info_sections": {
+      "name": "plan_your_visit_page_intro_info_sections",
       "columns": {
         "_order": {
           "name": "_order",
@@ -4228,31 +4464,54 @@
           "notNull": true,
           "autoincrement": false
         },
+        "localize_image": {
+          "name": "localize_image",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
+        },
         "image_id": {
           "name": "image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
+        },
+        "has_button": {
+          "name": "has_button",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
+        },
+        "button_url": {
+          "name": "button_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
         }
       },
       "indexes": {
-        "plan_your_visit_page_introduction_introduction_content_order_idx": {
-          "name": "plan_your_visit_page_introduction_introduction_content_order_idx",
+        "plan_your_visit_page_intro_info_sections_order_idx": {
+          "name": "plan_your_visit_page_intro_info_sections_order_idx",
           "columns": [
             "_order"
           ],
           "isUnique": false
         },
-        "plan_your_visit_page_introduction_introduction_content_parent_id_idx": {
-          "name": "plan_your_visit_page_introduction_introduction_content_parent_id_idx",
+        "plan_your_visit_page_intro_info_sections_parent_id_idx": {
+          "name": "plan_your_visit_page_intro_info_sections_parent_id_idx",
           "columns": [
             "_parent_id"
           ],
           "isUnique": false
         },
-        "plan_your_visit_page_introduction_introduction_content_i_idx": {
-          "name": "plan_your_visit_page_introduction_introduction_content_i_idx",
+        "plan_your_visit_page_intro_info_sections_image_idx": {
+          "name": "plan_your_visit_page_intro_info_sections_image_idx",
           "columns": [
             "image_id"
           ],
@@ -4260,9 +4519,9 @@
         }
       },
       "foreignKeys": {
-        "plan_your_visit_page_introduction_introduction_content_image_id_media_id_fk": {
-          "name": "plan_your_visit_page_introduction_introduction_content_image_id_media_id_fk",
-          "tableFrom": "plan_your_visit_page_introduction_introduction_content",
+        "plan_your_visit_page_intro_info_sections_image_id_media_id_fk": {
+          "name": "plan_your_visit_page_intro_info_sections_image_id_media_id_fk",
+          "tableFrom": "plan_your_visit_page_intro_info_sections",
           "tableTo": "media",
           "columnsFrom": [
             "image_id"
@@ -4273,9 +4532,9 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "plan_your_visit_page_introduction_introduction_content_parent_id_fk": {
-          "name": "plan_your_visit_page_introduction_introduction_content_parent_id_fk",
-          "tableFrom": "plan_your_visit_page_introduction_introduction_content",
+        "plan_your_visit_page_intro_info_sections_parent_id_fk": {
+          "name": "plan_your_visit_page_intro_info_sections_parent_id_fk",
+          "tableFrom": "plan_your_visit_page_intro_info_sections",
           "tableTo": "plan_your_visit_page",
           "columnsFrom": [
             "_parent_id"
@@ -4291,14 +4550,28 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "plan_your_visit_page_introduction_introduction_content_locales": {
-      "name": "plan_your_visit_page_introduction_introduction_content_locales",
+    "plan_your_visit_page_intro_info_sections_locales": {
+      "name": "plan_your_visit_page_intro_info_sections_locales",
       "columns": {
         "content": {
           "name": "content",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "image_localized_id": {
+          "name": "image_localized_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "button_text": {
+          "name": "button_text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         },
         "id": {
@@ -4324,8 +4597,16 @@
         }
       },
       "indexes": {
-        "plan_your_visit_page_introduction_introduction_content_local": {
-          "name": "plan_your_visit_page_introduction_introduction_content_local",
+        "plan_your_visit_page_intro_info_sections_image_localized_idx": {
+          "name": "plan_your_visit_page_intro_info_sections_image_localized_idx",
+          "columns": [
+            "image_localized_id",
+            "_locale"
+          ],
+          "isUnique": false
+        },
+        "plan_your_visit_page_intro_info_sections_locales_locale_pare": {
+          "name": "plan_your_visit_page_intro_info_sections_locales_locale_pare",
           "columns": [
             "_locale",
             "_parent_id"
@@ -4334,10 +4615,23 @@
         }
       },
       "foreignKeys": {
-        "plan_your_visit_page_introduction_introduction_content_lo_fk": {
-          "name": "plan_your_visit_page_introduction_introduction_content_lo_fk",
-          "tableFrom": "plan_your_visit_page_introduction_introduction_content_locales",
-          "tableTo": "plan_your_visit_page_introduction_introduction_content",
+        "plan_your_visit_page_intro_info_sections_locales_image_localized_id_media_id_fk": {
+          "name": "plan_your_visit_page_intro_info_sections_locales_image_localized_id_media_id_fk",
+          "tableFrom": "plan_your_visit_page_intro_info_sections_locales",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_localized_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "plan_your_visit_page_intro_info_sections_locales_parent_i_fk": {
+          "name": "plan_your_visit_page_intro_info_sections_locales_parent_i_fk",
+          "tableFrom": "plan_your_visit_page_intro_info_sections_locales",
+          "tableTo": "plan_your_visit_page_intro_info_sections",
           "columnsFrom": [
             "_parent_id"
           ],
@@ -4352,8 +4646,8 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "plan_your_visit_page_hours_hours_content": {
-      "name": "plan_your_visit_page_hours_hours_content",
+    "plan_your_visit_page_schedule_info_sections": {
+      "name": "plan_your_visit_page_schedule_info_sections",
       "columns": {
         "_order": {
           "name": "_order",
@@ -4376,31 +4670,54 @@
           "notNull": true,
           "autoincrement": false
         },
+        "localize_image": {
+          "name": "localize_image",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
+        },
         "image_id": {
           "name": "image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
+        },
+        "has_button": {
+          "name": "has_button",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
+        },
+        "button_url": {
+          "name": "button_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
         }
       },
       "indexes": {
-        "plan_your_visit_page_hours_hours_content_order_idx": {
-          "name": "plan_your_visit_page_hours_hours_content_order_idx",
+        "plan_your_visit_page_schedule_info_sections_order_idx": {
+          "name": "plan_your_visit_page_schedule_info_sections_order_idx",
           "columns": [
             "_order"
           ],
           "isUnique": false
         },
-        "plan_your_visit_page_hours_hours_content_parent_id_idx": {
-          "name": "plan_your_visit_page_hours_hours_content_parent_id_idx",
+        "plan_your_visit_page_schedule_info_sections_parent_id_idx": {
+          "name": "plan_your_visit_page_schedule_info_sections_parent_id_idx",
           "columns": [
             "_parent_id"
           ],
           "isUnique": false
         },
-        "plan_your_visit_page_hours_hours_content_image_idx": {
-          "name": "plan_your_visit_page_hours_hours_content_image_idx",
+        "plan_your_visit_page_schedule_info_sections_image_idx": {
+          "name": "plan_your_visit_page_schedule_info_sections_image_idx",
           "columns": [
             "image_id"
           ],
@@ -4408,9 +4725,9 @@
         }
       },
       "foreignKeys": {
-        "plan_your_visit_page_hours_hours_content_image_id_media_id_fk": {
-          "name": "plan_your_visit_page_hours_hours_content_image_id_media_id_fk",
-          "tableFrom": "plan_your_visit_page_hours_hours_content",
+        "plan_your_visit_page_schedule_info_sections_image_id_media_id_fk": {
+          "name": "plan_your_visit_page_schedule_info_sections_image_id_media_id_fk",
+          "tableFrom": "plan_your_visit_page_schedule_info_sections",
           "tableTo": "media",
           "columnsFrom": [
             "image_id"
@@ -4421,9 +4738,9 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "plan_your_visit_page_hours_hours_content_parent_id_fk": {
-          "name": "plan_your_visit_page_hours_hours_content_parent_id_fk",
-          "tableFrom": "plan_your_visit_page_hours_hours_content",
+        "plan_your_visit_page_schedule_info_sections_parent_id_fk": {
+          "name": "plan_your_visit_page_schedule_info_sections_parent_id_fk",
+          "tableFrom": "plan_your_visit_page_schedule_info_sections",
           "tableTo": "plan_your_visit_page",
           "columnsFrom": [
             "_parent_id"
@@ -4439,14 +4756,28 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "plan_your_visit_page_hours_hours_content_locales": {
-      "name": "plan_your_visit_page_hours_hours_content_locales",
+    "plan_your_visit_page_schedule_info_sections_locales": {
+      "name": "plan_your_visit_page_schedule_info_sections_locales",
       "columns": {
         "content": {
           "name": "content",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "image_localized_id": {
+          "name": "image_localized_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "button_text": {
+          "name": "button_text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         },
         "id": {
@@ -4472,8 +4803,16 @@
         }
       },
       "indexes": {
-        "plan_your_visit_page_hours_hours_content_locales_locale_pare": {
-          "name": "plan_your_visit_page_hours_hours_content_locales_locale_pare",
+        "plan_your_visit_page_schedule_info_sections_image_locali_idx": {
+          "name": "plan_your_visit_page_schedule_info_sections_image_locali_idx",
+          "columns": [
+            "image_localized_id",
+            "_locale"
+          ],
+          "isUnique": false
+        },
+        "plan_your_visit_page_schedule_info_sections_locales_locale_p": {
+          "name": "plan_your_visit_page_schedule_info_sections_locales_locale_p",
           "columns": [
             "_locale",
             "_parent_id"
@@ -4482,10 +4821,23 @@
         }
       },
       "foreignKeys": {
-        "plan_your_visit_page_hours_hours_content_locales_parent_i_fk": {
-          "name": "plan_your_visit_page_hours_hours_content_locales_parent_i_fk",
-          "tableFrom": "plan_your_visit_page_hours_hours_content_locales",
-          "tableTo": "plan_your_visit_page_hours_hours_content",
+        "plan_your_visit_page_schedule_info_sections_locales_image_localized_id_media_id_fk": {
+          "name": "plan_your_visit_page_schedule_info_sections_locales_image_localized_id_media_id_fk",
+          "tableFrom": "plan_your_visit_page_schedule_info_sections_locales",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_localized_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "plan_your_visit_page_schedule_info_sections_locales_paren_fk": {
+          "name": "plan_your_visit_page_schedule_info_sections_locales_paren_fk",
+          "tableFrom": "plan_your_visit_page_schedule_info_sections_locales",
+          "tableTo": "plan_your_visit_page_schedule_info_sections",
           "columnsFrom": [
             "_parent_id"
           ],
@@ -4510,15 +4862,15 @@
           "notNull": true,
           "autoincrement": false
         },
-        "hero_hero_image_id": {
-          "name": "hero_hero_image_id",
+        "hero_background_image_id": {
+          "name": "hero_background_image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
-        "location_location_map_link": {
-          "name": "location_location_map_link",
+        "location_map_url": {
+          "name": "location_map_url",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -4540,21 +4892,21 @@
         }
       },
       "indexes": {
-        "plan_your_visit_page_hero_hero_hero_image_idx": {
-          "name": "plan_your_visit_page_hero_hero_hero_image_idx",
+        "plan_your_visit_page_hero_hero_background_image_idx": {
+          "name": "plan_your_visit_page_hero_hero_background_image_idx",
           "columns": [
-            "hero_hero_image_id"
+            "hero_background_image_id"
           ],
           "isUnique": false
         }
       },
       "foreignKeys": {
-        "plan_your_visit_page_hero_hero_image_id_media_id_fk": {
-          "name": "plan_your_visit_page_hero_hero_image_id_media_id_fk",
+        "plan_your_visit_page_hero_background_image_id_media_id_fk": {
+          "name": "plan_your_visit_page_hero_background_image_id_media_id_fk",
           "tableFrom": "plan_your_visit_page",
           "tableTo": "media",
           "columnsFrom": [
-            "hero_hero_image_id"
+            "hero_background_image_id"
           ],
           "columnsTo": [
             "id"
@@ -4570,36 +4922,36 @@
     "plan_your_visit_page_locales": {
       "name": "plan_your_visit_page_locales",
       "columns": {
-        "hero_hero_title": {
-          "name": "hero_hero_title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "introduction_introduction_subtitle": {
-          "name": "introduction_introduction_subtitle",
+        "hero_title": {
+          "name": "hero_title",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "introduction_introduction_title": {
-          "name": "introduction_introduction_title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "location_location_description": {
-          "name": "location_location_description",
+        "intro_subtitle": {
+          "name": "intro_subtitle",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "hours_hours_title": {
-          "name": "hours_hours_title",
+        "intro_title": {
+          "name": "intro_title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "location_address": {
+          "name": "location_address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "schedule_title": {
+          "name": "schedule_title",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -4666,8 +5018,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "hero_hero_image_id": {
-          "name": "hero_hero_image_id",
+        "hero_background_image_id": {
+          "name": "hero_background_image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
@@ -4689,21 +5041,21 @@
         }
       },
       "indexes": {
-        "thank_you_page_hero_hero_hero_image_idx": {
-          "name": "thank_you_page_hero_hero_hero_image_idx",
+        "thank_you_page_hero_hero_background_image_idx": {
+          "name": "thank_you_page_hero_hero_background_image_idx",
           "columns": [
-            "hero_hero_image_id"
+            "hero_background_image_id"
           ],
           "isUnique": false
         }
       },
       "foreignKeys": {
-        "thank_you_page_hero_hero_image_id_media_id_fk": {
-          "name": "thank_you_page_hero_hero_image_id_media_id_fk",
+        "thank_you_page_hero_background_image_id_media_id_fk": {
+          "name": "thank_you_page_hero_background_image_id_media_id_fk",
           "tableFrom": "thank_you_page",
           "tableTo": "media",
           "columnsFrom": [
-            "hero_hero_image_id"
+            "hero_background_image_id"
           ],
           "columnsTo": [
             "id"
@@ -4719,15 +5071,8 @@
     "thank_you_page_locales": {
       "name": "thank_you_page_locales",
       "columns": {
-        "hero_hero_title": {
-          "name": "hero_hero_title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "hero_hero_subtitle": {
-          "name": "hero_hero_subtitle",
+        "hero_title": {
+          "name": "hero_title",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -4824,6 +5169,6 @@
   "internal": {
     "indexes": {}
   },
-  "id": "b69843b8-5b8f-4b27-88ee-c8283008776f",
+  "id": "12a158dd-e035-4138-a62a-20dfeadca339",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }

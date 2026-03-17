@@ -55,8 +55,7 @@ export function LayoutClient({ locale, data, children }: LayoutClientProps) {
                 <img
                   src={nav.logo.url}
                   alt={nav.logo.alt}
-                  className="rounded-full"
-                  style={{ width: '120px', height: '120px' }}
+                  className="rounded-full w-16 h-16 sm:w-20 sm:h-20 md:w-25 md:h-25"
                 />
               ) : null}
               <div>

@@ -833,66 +833,38 @@ export interface GivePage {
      */
     backgroundImage: number | Media;
   };
-  content: {
-    introduction_subtitle?: string | null;
-    introduction_title: string;
-    introduction_content: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
+  intro?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
         version: number;
-      };
-      [k: string]: unknown;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
     };
-    donation_button_text?: string | null;
-    /**
-     * URL to donation form or payment processor
-     */
-    donation_button_url?: string | null;
-  };
+    [k: string]: unknown;
+  } | null;
   payment_methods?: {
-    zelle_title?: string | null;
-    zelle_content?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
+    root: {
+      type: string;
+      children: {
+        type: any;
         version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    check_title?: string | null;
-    check_content?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-  };
-  resources?: {
-    pdf_links?:
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  letters?: {
+    pdfs?:
       | {
           title: string;
           file: number | Media;
@@ -1132,28 +1104,21 @@ export interface ThankYouPage {
      */
     backgroundImage: number | Media;
   };
-  content: {
-    content_title: string;
-    content: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
         version: number;
-      };
-      [k: string]: unknown;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
     };
-  };
-  navigation?: {
-    home_button_text?: string | null;
-    contact_button_text?: string | null;
-  };
+    [k: string]: unknown;
+  } | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1359,27 +1324,12 @@ export interface GivePageSelect<T extends boolean = true> {
         title?: T;
         backgroundImage?: T;
       };
-  content?:
+  intro?: T;
+  payment_methods?: T;
+  letters?:
     | T
     | {
-        introduction_subtitle?: T;
-        introduction_title?: T;
-        introduction_content?: T;
-        donation_button_text?: T;
-        donation_button_url?: T;
-      };
-  payment_methods?:
-    | T
-    | {
-        zelle_title?: T;
-        zelle_content?: T;
-        check_title?: T;
-        check_content?: T;
-      };
-  resources?:
-    | T
-    | {
-        pdf_links?:
+        pdfs?:
           | T
           | {
               title?: T;
@@ -1512,18 +1462,7 @@ export interface ThankYouPageSelect<T extends boolean = true> {
         title?: T;
         backgroundImage?: T;
       };
-  content?:
-    | T
-    | {
-        content_title?: T;
-        content?: T;
-      };
-  navigation?:
-    | T
-    | {
-        home_button_text?: T;
-        contact_button_text?: T;
-      };
+  content?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
