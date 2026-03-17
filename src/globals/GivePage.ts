@@ -29,6 +29,10 @@ export const GivePage: GlobalConfig = {
       name: 'letters',
       type: 'group',
       label: 'Prayer Letters',
+      admin: {
+        description:
+          'The 1st letter should be the most recent Chinese letter. The 2nd letter should be the most recent English letter.',
+      },
       fields: [
         {
           name: 'pdfs',
