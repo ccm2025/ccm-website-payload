@@ -5,7 +5,7 @@ import type { Global } from '@/payload-types'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
-import { LangButton } from './LangButton'
+import { LocaleButton } from './LocaleButton'
 import { NavList } from './NavList'
 
 interface LayoutClientProps {
@@ -70,7 +70,7 @@ export function LayoutClient({ locale, data, children }: LayoutClientProps) {
 
             {/* Desktop Navigation */}
             <nav className="hidden items-center space-x-8 md:space-x-12 lg:space-x-16 md:flex">
-              <LangButton />
+              <LocaleButton />
               <button
                 className="flex items-center space-x-2 text-xl md:text-2xl font-bold text-[rgb(var(--website-theme-color1))] transition-colors duration-300 hover:text-[rgb(var(--website-theme-color1)/0.8)]"
                 onClick={toggleMenu}
@@ -295,7 +295,7 @@ export function LayoutClient({ locale, data, children }: LayoutClientProps) {
             </button>
           </div>
 
-          <LangButton variant="menu" />
+          <LocaleButton variant="menu" />
 
           <hr className="my-4 sm:my-5" />
 

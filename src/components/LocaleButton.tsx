@@ -3,6 +3,7 @@
 import { Languages } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 const supportedLocales = ['en', 'zh-Hans']
 
@@ -10,20 +11,38 @@ interface LangButtonProps {
   variant?: 'header' | 'menu'
 }
 
-export function LangButton({ variant = 'header' }: LangButtonProps) {
-  const [currentLang, setCurrentLang] = useState<string>('')
-  const [nextLangUrl, setNextLangUrl] = useState<string>('')
+export function LocaleButton({ variant = 'header' }: LangButtonProps) {
+  const pathname = usePathname()
+  const [currentLocale, setCurrentLocale] = useState<string>('en')
+  const [mounted, setMounted] = useState(false)
 
+  // 同步pathname到currentLocale状态，避免hydration mismatch和路由不同步
   useEffect(() => {
-    const pathSegments = window.location.pathname.split('/').filter(Boolean)
+    const pathSegments = pathname.split('/').filter(Boolean)
     const firstSegment = pathSegments[0]
-    const lang = supportedLocales.includes(firstSegment) ? firstSegment : supportedLocales[0]
-    setCurrentLang(lang)
+    const locale = supportedLocales.includes(firstSegment) ? firstSegment : supportedLocales[0]
+    setCurrentLocale(locale)
+    setMounted(true)
+  }, [pathname])
 
-    const nextLang = supportedLocales.find((l) => l !== lang) || supportedLocales[0]
-    const url = `/${nextLang}${window.location.pathname.replace(new RegExp(`^\/(${supportedLocales.join('|')})`), '')}`
-    setNextLangUrl(url)
-  }, [])
+  const getNextLocale = () => {
+    return supportedLocales.find((l) => l !== currentLocale) || supportedLocales[0]
+  }
+
+  const getLangUrl = (locale: string) => {
+    // 从pathname中移除locale前缀，再添加新的locale
+    const pathWithoutLocale =
+      pathname.replace(new RegExp(`^\/(${supportedLocales.join('|')})`), '') || '/'
+    return `/${locale}${pathWithoutLocale}`
+  }
+
+  // 防止hydration mismatch，等待客户端mount后再渲染
+  if (!mounted) {
+    return null
+  }
+
+  const nextLocale = getNextLocale()
+  const nextLocaleUrl = getLangUrl(nextLocale)
 
   const langLabels: Record<string, string> = {
     en: 'EN',
@@ -39,19 +58,17 @@ export function LangButton({ variant = 'header' }: LangButtonProps) {
     menu: 'w-full space-x-2 border-2 border-white bg-white/10 px-4 py-3 text-base text-white hover:bg-white hover:text-[rgb(var(--website-theme-color2))]',
   }
 
-  const nextLang = supportedLocales.find((lang) => lang !== currentLang) || supportedLocales[0]
-
   return (
     <Link
-      href={nextLangUrl}
+      href={nextLocaleUrl}
       className={`${baseClasses} ${variantClasses[variant]}`}
-      aria-label={`Switch to ${nextLang}`}
+      aria-label={`Switch to ${nextLocale}`}
     >
       <Languages
         className={`transition-transform duration-300 group-hover:rotate-12 ${variant === 'header' ? 'w-4 h-4 sm:w-5 sm:h-5' : 'w-5 h-5'}`}
       />
       <span className={variant === 'header' ? 'hidden xs:inline sm:inline' : ''}>
-        {langLabels[nextLang]}
+        {langLabels[nextLocale]}
       </span>
     </Link>
   )
