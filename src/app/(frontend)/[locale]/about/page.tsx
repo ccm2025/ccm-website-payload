@@ -46,7 +46,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       </section>
 
       {/* Introduction Section */}
-      <section className="bg-white py-12 sm:py-16 md:py-20">
+      <section className="bg-white my-12 sm:my-16 md:my-20">
         <div className="container mx-auto max-w-5xl px-4 sm:px-6 md:px-8 text-center">
           <StyledText data={page.intro} />
         </div>
@@ -54,7 +54,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
       {/* History Section */}
       {page.history.infoSections && page.history.infoSections.length > 0 && (
-        <section className="bg-gray-50 py-12 sm:py-16 md:py-20">
+        <section className="bg-gray-50 my-12 sm:my-16 md:my-20">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="mx-auto max-w-4xl text-center">
               <h2 className="text-base sm:text-lg md:text-xl font-semibold text-[rgb(var(--website-theme-color2))]">
@@ -88,7 +88,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
       {/* Team Section */}
       {page.team.members && page.team.members.length > 0 && (
-        <section className="bg-white py-12 sm:py-16 md:py-20">
+        <section className="bg-white my-12 sm:my-16 md:my-20">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="mx-auto max-w-4xl text-center">
               <h2 className="text-base sm:text-lg md:text-xl font-semibold text-[rgb(var(--website-theme-color2))]">
@@ -106,6 +106,12 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                     <img
                       src={member.photo.url}
                       alt={member.photo.alt}
+                      className="mx-auto h-32 w-32 sm:h-36 sm:w-36 md:h-40 md:w-40 rounded-full border-4 border-white object-cover shadow-lg"
+                    />
+                  )}
+                  {!member.photo && (
+                    <img
+                      src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
                       className="mx-auto h-32 w-32 sm:h-36 sm:w-36 md:h-40 md:w-40 rounded-full border-4 border-white object-cover shadow-lg"
                     />
                   )}
