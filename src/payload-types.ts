@@ -699,18 +699,7 @@ export interface AboutPage {
             };
             [k: string]: unknown;
           } | null;
-          /**
-           * Enable this to use different images for different locales
-           */
-          localizeImage?: boolean | null;
-          /**
-           * This image will be used for all locales
-           */
           image?: (number | null) | Media;
-          /**
-           * This image can be different for each locale
-           */
-          imageLocalized?: (number | null) | Media;
           hasButton?: boolean | null;
           buttonText?: string | null;
           buttonUrl?: string | null;
@@ -799,18 +788,7 @@ export interface VolunteerPage {
           };
           [k: string]: unknown;
         } | null;
-        /**
-         * Enable this to use different images for different locales
-         */
-        localizeImage?: boolean | null;
-        /**
-         * This image will be used for all locales
-         */
         image?: (number | null) | Media;
-        /**
-         * This image can be different for each locale
-         */
-        imageLocalized?: (number | null) | Media;
         hasButton?: boolean | null;
         buttonText?: string | null;
         buttonUrl?: string | null;
@@ -908,18 +886,7 @@ export interface SupportPage {
           };
           [k: string]: unknown;
         } | null;
-        /**
-         * Enable this to use different images for different locales
-         */
-        localizeImage?: boolean | null;
-        /**
-         * This image will be used for all locales
-         */
         image?: (number | null) | Media;
-        /**
-         * This image can be different for each locale
-         */
-        imageLocalized?: (number | null) | Media;
         hasButton?: boolean | null;
         buttonText?: string | null;
         buttonUrl?: string | null;
@@ -959,18 +926,7 @@ export interface FreshmanPage {
           };
           [k: string]: unknown;
         } | null;
-        /**
-         * Enable this to use different images for different locales
-         */
-        localizeImage?: boolean | null;
-        /**
-         * This image will be used for all locales
-         */
         image?: (number | null) | Media;
-        /**
-         * This image can be different for each locale
-         */
-        imageLocalized?: (number | null) | Media;
         hasButton?: boolean | null;
         buttonText?: string | null;
         buttonUrl?: string | null;
@@ -1013,18 +969,7 @@ export interface PlanYourVisitPage {
             };
             [k: string]: unknown;
           } | null;
-          /**
-           * Enable this to use different images for different locales
-           */
-          localizeImage?: boolean | null;
-          /**
-           * This image will be used for all locales
-           */
           image?: (number | null) | Media;
-          /**
-           * This image can be different for each locale
-           */
-          imageLocalized?: (number | null) | Media;
           hasButton?: boolean | null;
           buttonText?: string | null;
           buttonUrl?: string | null;
@@ -1072,18 +1017,7 @@ export interface PlanYourVisitPage {
             };
             [k: string]: unknown;
           } | null;
-          /**
-           * Enable this to use different images for different locales
-           */
-          localizeImage?: boolean | null;
-          /**
-           * This image will be used for all locales
-           */
           image?: (number | null) | Media;
-          /**
-           * This image can be different for each locale
-           */
-          imageLocalized?: (number | null) | Media;
           hasButton?: boolean | null;
           buttonText?: string | null;
           buttonUrl?: string | null;
@@ -1227,9 +1161,7 @@ export interface AboutPageSelect<T extends boolean = true> {
           | T
           | {
               content?: T;
-              localizeImage?: T;
               image?: T;
-              imageLocalized?: T;
               hasButton?: T;
               buttonText?: T;
               buttonUrl?: T;
@@ -1304,9 +1236,7 @@ export interface VolunteerPageSelect<T extends boolean = true> {
     | T
     | {
         content?: T;
-        localizeImage?: T;
         image?: T;
-        imageLocalized?: T;
         hasButton?: T;
         buttonText?: T;
         buttonUrl?: T;
@@ -1359,9 +1289,7 @@ export interface SupportPageSelect<T extends boolean = true> {
     | T
     | {
         content?: T;
-        localizeImage?: T;
         image?: T;
-        imageLocalized?: T;
         hasButton?: T;
         buttonText?: T;
         buttonUrl?: T;
@@ -1386,9 +1314,7 @@ export interface FreshmanPageSelect<T extends boolean = true> {
     | T
     | {
         content?: T;
-        localizeImage?: T;
         image?: T;
-        imageLocalized?: T;
         hasButton?: T;
         buttonText?: T;
         buttonUrl?: T;
@@ -1418,9 +1344,7 @@ export interface PlanYourVisitPageSelect<T extends boolean = true> {
           | T
           | {
               content?: T;
-              localizeImage?: T;
               image?: T;
-              imageLocalized?: T;
               hasButton?: T;
               buttonText?: T;
               buttonUrl?: T;
@@ -1441,9 +1365,7 @@ export interface PlanYourVisitPageSelect<T extends boolean = true> {
           | T
           | {
               content?: T;
-              localizeImage?: T;
               image?: T;
-              imageLocalized?: T;
               hasButton?: T;
               buttonText?: T;
               buttonUrl?: T;
