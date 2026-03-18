@@ -729,31 +729,53 @@ export interface AboutPage {
 export interface EventsPage {
   id: number;
   hero: {
-    hero_title: string;
-    hero_image: number | Media;
+    title?: string | null;
+    /**
+     * Hero background image
+     */
+    backgroundImage: number | Media;
   };
-  upcomingEvents: {
-    upcoming_events_subtitle?: string | null;
-    upcoming_events_title: string;
+  upcomingEvents?: {
+    title?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
     /**
      * Message to show when no upcoming events
      */
-    no_events_message?: string | null;
+    empty_message?: string | null;
   };
-  pastEvents: {
-    past_events_subtitle?: string | null;
-    past_events_title: string;
-    view_all_text?: string | null;
+  pastEvents?: {
+    title?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
     /**
      * Message to show when no past events
      */
-    past_events_empty_text?: string | null;
-  };
-  seo?: {
-    /**
-     * Meta description for events page
-     */
-    description?: string | null;
+    empty_message?: string | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1194,28 +1216,20 @@ export interface EventsPageSelect<T extends boolean = true> {
   hero?:
     | T
     | {
-        hero_title?: T;
-        hero_image?: T;
+        title?: T;
+        backgroundImage?: T;
       };
   upcomingEvents?:
     | T
     | {
-        upcoming_events_subtitle?: T;
-        upcoming_events_title?: T;
-        no_events_message?: T;
+        title?: T;
+        empty_message?: T;
       };
   pastEvents?:
     | T
     | {
-        past_events_subtitle?: T;
-        past_events_title?: T;
-        view_all_text?: T;
-        past_events_empty_text?: T;
-      };
-  seo?:
-    | T
-    | {
-        description?: T;
+        title?: T;
+        empty_message?: T;
       };
   updatedAt?: T;
   createdAt?: T;

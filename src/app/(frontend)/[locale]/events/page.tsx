@@ -8,7 +8,7 @@ async function loadPage(locale: string) {
   const upcomingEvents = await fetchCollection('events', validateLocale(locale), {
     where: {
       date: {
-        greater_than_or_equal_to: new Date().toISOString(),
+        greater_than_equal: new Date().toISOString(),
       },
     },
     sort: '-date',
@@ -20,6 +20,7 @@ async function loadPage(locale: string) {
       },
     },
     sort: '-date',
+    limit: 20,
   })
 
   return {
@@ -38,7 +39,7 @@ export async function generateMetadata({
   const page = await loadPage(locale)
 
   return {
-    title: page.hero.hero_title,
+    title: page.hero.title,
   }
 }
 
@@ -51,10 +52,10 @@ export default async function EventsPage({ params }: { params: Promise<{ locale:
       {/* Hero Section */}
       <section className="relative flex h-64 sm:h-72 md:h-80 items-center justify-center text-center text-white">
         <div className="absolute inset-0">
-          {typeof page.hero.hero_image === 'object' && (
+          {typeof page.hero.backgroundImage === 'object' && (
             <img
-              src={page.hero.hero_image.url}
-              alt={page.hero.hero_image.alt}
+              src={page.hero.backgroundImage.url}
+              alt={page.hero.backgroundImage.alt}
               className="h-full w-full object-cover"
             />
           )}
@@ -62,7 +63,7 @@ export default async function EventsPage({ params }: { params: Promise<{ locale:
         </div>
         <div className="relative z-10 px-4 sm:px-6 md:px-8">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight">
-            {page.hero.hero_title}
+            {page.hero.title}
           </h1>
         </div>
       </section>
@@ -71,12 +72,7 @@ export default async function EventsPage({ params }: { params: Promise<{ locale:
       <section className="bg-gray-50 py-10 sm:py-14 md:py-16">
         <div className="container mx-auto max-w-6xl px-6 sm:px-8 md:px-12 lg:px-16">
           <div className="mx-auto max-w-6xl text-center">
-            <p className="text-sm sm:text-base md:text-base font-semibold text-[rgb(var(--website-theme-color2))] tracking-wide">
-              {page.upcomingEvents.upcoming_events_subtitle}
-            </p>
-            <p className="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold tracking-wider text-[rgb(var(--website-theme-color1))]">
-              {page.upcomingEvents.upcoming_events_title}
-            </p>
+            <StyledText data={page.upcomingEvents.title} />
           </div>
 
           {page.upcoming_events.length > 0 ? (
@@ -109,7 +105,7 @@ export default async function EventsPage({ params }: { params: Promise<{ locale:
               ))}
             </div>
           ) : (
-            <p className="mt-12 text-center text-3xl">{page.upcomingEvents.no_events_message}</p>
+            <p className="mt-12 text-center text-3xl">{page.upcomingEvents.empty_message}</p>
           )}
         </div>
       </section>
@@ -118,12 +114,7 @@ export default async function EventsPage({ params }: { params: Promise<{ locale:
       <section className="bg-white py-10 sm:py-14 md:py-16">
         <div className="container mx-auto max-w-6xl px-6 sm:px-8 md:px-12 lg:px-16">
           <div className="mx-auto max-w-6xl text-center">
-            <p className="text-sm sm:text-base md:text-base font-semibold text-[rgb(var(--website-theme-color2))] tracking-wide">
-              {page.pastEvents.past_events_subtitle}
-            </p>
-            <p className="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold tracking-wider text-[rgb(var(--website-theme-color1))]">
-              {page.pastEvents.past_events_title}
-            </p>
+            <StyledText data={page.pastEvents.title} />
           </div>
 
           {page.past_events.length > 0 ? (
@@ -156,7 +147,7 @@ export default async function EventsPage({ params }: { params: Promise<{ locale:
               ))}
             </div>
           ) : (
-            <p className="mt-12 text-center text-3xl">{page.pastEvents.past_events_empty_text}</p>
+            <p className="mt-12 text-center text-3xl">{page.pastEvents.empty_message}</p>
           )}
         </div>
       </section>
