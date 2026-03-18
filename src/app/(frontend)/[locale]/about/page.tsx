@@ -54,7 +54,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
       {/* History Section */}
       {page.history.infoSections && page.history.infoSections.length > 0 && (
-        <section className="bg-gray-50 my-12 sm:my-16 md:my-20">
+        <section className="bg-gray-50 py-12 sm:py-16 md:py-20">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="mx-auto max-w-4xl text-center">
               <h2 className="text-base sm:text-lg md:text-xl font-semibold text-[rgb(var(--website-theme-color2))]">
