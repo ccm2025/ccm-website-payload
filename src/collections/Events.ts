@@ -209,8 +209,8 @@ export const Events: CollectionConfig = {
         {
           name: 'url',
           type: 'text',
+          required: true,
           validate: (value: string | undefined, { siblingData }: any) => {
-            // If registration is required, URL must be provided and valid
             if (siblingData?.required) {
               if (!value || !value.trim()) {
                 return 'Registration URL is required when registration is enabled'
@@ -232,6 +232,7 @@ export const Events: CollectionConfig = {
         {
           name: 'deadline',
           type: 'date',
+          required: true,
           admin: {
             condition: (data, siblingData) => siblingData?.required,
             description: 'Registration deadline',
