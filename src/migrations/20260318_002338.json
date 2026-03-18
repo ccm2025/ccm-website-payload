@@ -2447,21 +2447,6 @@
           "notNull": true,
           "autoincrement": false
         },
-        "localize_image": {
-          "name": "localize_image",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": false
-        },
-        "image_id": {
-          "name": "image_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
         "has_button": {
           "name": "has_button",
           "type": "integer",
@@ -2492,29 +2477,9 @@
             "_parent_id"
           ],
           "isUnique": false
-        },
-        "about_page_history_info_sections_image_idx": {
-          "name": "about_page_history_info_sections_image_idx",
-          "columns": [
-            "image_id"
-          ],
-          "isUnique": false
         }
       },
       "foreignKeys": {
-        "about_page_history_info_sections_image_id_media_id_fk": {
-          "name": "about_page_history_info_sections_image_id_media_id_fk",
-          "tableFrom": "about_page_history_info_sections",
-          "tableTo": "media",
-          "columnsFrom": [
-            "image_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "set null",
-          "onUpdate": "no action"
-        },
         "about_page_history_info_sections_parent_id_fk": {
           "name": "about_page_history_info_sections_parent_id_fk",
           "tableFrom": "about_page_history_info_sections",
@@ -2543,8 +2508,8 @@
           "notNull": false,
           "autoincrement": false
         },
-        "image_localized_id": {
-          "name": "image_localized_id",
+        "image_id": {
+          "name": "image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
@@ -2580,10 +2545,10 @@
         }
       },
       "indexes": {
-        "about_page_history_info_sections_image_localized_idx": {
-          "name": "about_page_history_info_sections_image_localized_idx",
+        "about_page_history_info_sections_image_idx": {
+          "name": "about_page_history_info_sections_image_idx",
           "columns": [
-            "image_localized_id",
+            "image_id",
             "_locale"
           ],
           "isUnique": false
@@ -2598,12 +2563,12 @@
         }
       },
       "foreignKeys": {
-        "about_page_history_info_sections_locales_image_localized_id_media_id_fk": {
-          "name": "about_page_history_info_sections_locales_image_localized_id_media_id_fk",
+        "about_page_history_info_sections_locales_image_id_media_id_fk": {
+          "name": "about_page_history_info_sections_locales_image_id_media_id_fk",
           "tableFrom": "about_page_history_info_sections_locales",
           "tableTo": "media",
           "columnsFrom": [
-            "image_localized_id"
+            "image_id"
           ],
           "columnsTo": [
             "id"
@@ -3148,21 +3113,6 @@
           "notNull": true,
           "autoincrement": false
         },
-        "localize_image": {
-          "name": "localize_image",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": false
-        },
-        "image_id": {
-          "name": "image_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
         "has_button": {
           "name": "has_button",
           "type": "integer",
@@ -3193,29 +3143,9 @@
             "_parent_id"
           ],
           "isUnique": false
-        },
-        "volunteer_page_info_sections_image_idx": {
-          "name": "volunteer_page_info_sections_image_idx",
-          "columns": [
-            "image_id"
-          ],
-          "isUnique": false
         }
       },
       "foreignKeys": {
-        "volunteer_page_info_sections_image_id_media_id_fk": {
-          "name": "volunteer_page_info_sections_image_id_media_id_fk",
-          "tableFrom": "volunteer_page_info_sections",
-          "tableTo": "media",
-          "columnsFrom": [
-            "image_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "set null",
-          "onUpdate": "no action"
-        },
         "volunteer_page_info_sections_parent_id_fk": {
           "name": "volunteer_page_info_sections_parent_id_fk",
           "tableFrom": "volunteer_page_info_sections",
@@ -3244,8 +3174,8 @@
           "notNull": false,
           "autoincrement": false
         },
-        "image_localized_id": {
-          "name": "image_localized_id",
+        "image_id": {
+          "name": "image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
@@ -3281,10 +3211,10 @@
         }
       },
       "indexes": {
-        "volunteer_page_info_sections_image_localized_idx": {
-          "name": "volunteer_page_info_sections_image_localized_idx",
+        "volunteer_page_info_sections_image_idx": {
+          "name": "volunteer_page_info_sections_image_idx",
           "columns": [
-            "image_localized_id",
+            "image_id",
             "_locale"
           ],
           "isUnique": false
@@ -3299,12 +3229,12 @@
         }
       },
       "foreignKeys": {
-        "volunteer_page_info_sections_locales_image_localized_id_media_id_fk": {
-          "name": "volunteer_page_info_sections_locales_image_localized_id_media_id_fk",
+        "volunteer_page_info_sections_locales_image_id_media_id_fk": {
+          "name": "volunteer_page_info_sections_locales_image_id_media_id_fk",
           "tableFrom": "volunteer_page_info_sections_locales",
           "tableTo": "media",
           "columnsFrom": [
-            "image_localized_id"
+            "image_id"
           ],
           "columnsTo": [
             "id"
@@ -3451,8 +3381,8 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "give_page_resources_pdf_links": {
-      "name": "give_page_resources_pdf_links",
+    "give_page_letters_pdfs": {
+      "name": "give_page_letters_pdfs",
       "columns": {
         "_order": {
           "name": "_order",
@@ -3475,6 +3405,13 @@
           "notNull": true,
           "autoincrement": false
         },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "file_id": {
           "name": "file_id",
           "type": "integer",
@@ -3484,22 +3421,22 @@
         }
       },
       "indexes": {
-        "give_page_resources_pdf_links_order_idx": {
-          "name": "give_page_resources_pdf_links_order_idx",
+        "give_page_letters_pdfs_order_idx": {
+          "name": "give_page_letters_pdfs_order_idx",
           "columns": [
             "_order"
           ],
           "isUnique": false
         },
-        "give_page_resources_pdf_links_parent_id_idx": {
-          "name": "give_page_resources_pdf_links_parent_id_idx",
+        "give_page_letters_pdfs_parent_id_idx": {
+          "name": "give_page_letters_pdfs_parent_id_idx",
           "columns": [
             "_parent_id"
           ],
           "isUnique": false
         },
-        "give_page_resources_pdf_links_file_idx": {
-          "name": "give_page_resources_pdf_links_file_idx",
+        "give_page_letters_pdfs_file_idx": {
+          "name": "give_page_letters_pdfs_file_idx",
           "columns": [
             "file_id"
           ],
@@ -3507,9 +3444,9 @@
         }
       },
       "foreignKeys": {
-        "give_page_resources_pdf_links_file_id_media_id_fk": {
-          "name": "give_page_resources_pdf_links_file_id_media_id_fk",
-          "tableFrom": "give_page_resources_pdf_links",
+        "give_page_letters_pdfs_file_id_media_id_fk": {
+          "name": "give_page_letters_pdfs_file_id_media_id_fk",
+          "tableFrom": "give_page_letters_pdfs",
           "tableTo": "media",
           "columnsFrom": [
             "file_id"
@@ -3520,71 +3457,10 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "give_page_resources_pdf_links_parent_id_fk": {
-          "name": "give_page_resources_pdf_links_parent_id_fk",
-          "tableFrom": "give_page_resources_pdf_links",
+        "give_page_letters_pdfs_parent_id_fk": {
+          "name": "give_page_letters_pdfs_parent_id_fk",
+          "tableFrom": "give_page_letters_pdfs",
           "tableTo": "give_page",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
-    "give_page_resources_pdf_links_locales": {
-      "name": "give_page_resources_pdf_links_locales",
-      "columns": {
-        "title": {
-          "name": "title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "_locale": {
-          "name": "_locale",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "_parent_id": {
-          "name": "_parent_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        }
-      },
-      "indexes": {
-        "give_page_resources_pdf_links_locales_locale_parent_id_uniqu": {
-          "name": "give_page_resources_pdf_links_locales_locale_parent_id_uniqu",
-          "columns": [
-            "_locale",
-            "_parent_id"
-          ],
-          "isUnique": true
-        }
-      },
-      "foreignKeys": {
-        "give_page_resources_pdf_links_locales_parent_id_fk": {
-          "name": "give_page_resources_pdf_links_locales_parent_id_fk",
-          "tableFrom": "give_page_resources_pdf_links_locales",
-          "tableTo": "give_page_resources_pdf_links",
           "columnsFrom": [
             "_parent_id"
           ],
@@ -3614,13 +3490,6 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false
-        },
-        "content_donation_button_url": {
-          "name": "content_donation_button_url",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
           "autoincrement": false
         },
         "updated_at": {
@@ -3676,60 +3545,15 @@
           "notNull": false,
           "autoincrement": false
         },
-        "content_introduction_subtitle": {
-          "name": "content_introduction_subtitle",
+        "intro": {
+          "name": "intro",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "content_introduction_title": {
-          "name": "content_introduction_title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "content_introduction_content": {
-          "name": "content_introduction_content",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "content_donation_button_text": {
-          "name": "content_donation_button_text",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": "'Donate Now'"
-        },
-        "payment_methods_zelle_title": {
-          "name": "payment_methods_zelle_title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": "'Zelle'"
-        },
-        "payment_methods_zelle_content": {
-          "name": "payment_methods_zelle_content",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "payment_methods_check_title": {
-          "name": "payment_methods_check_title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": "'Check'"
-        },
-        "payment_methods_check_content": {
-          "name": "payment_methods_check_content",
+        "payment_methods": {
+          "name": "payment_methods",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -3810,21 +3634,6 @@
           "notNull": true,
           "autoincrement": false
         },
-        "localize_image": {
-          "name": "localize_image",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": false
-        },
-        "image_id": {
-          "name": "image_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
         "has_button": {
           "name": "has_button",
           "type": "integer",
@@ -3855,29 +3664,9 @@
             "_parent_id"
           ],
           "isUnique": false
-        },
-        "support_page_info_sections_image_idx": {
-          "name": "support_page_info_sections_image_idx",
-          "columns": [
-            "image_id"
-          ],
-          "isUnique": false
         }
       },
       "foreignKeys": {
-        "support_page_info_sections_image_id_media_id_fk": {
-          "name": "support_page_info_sections_image_id_media_id_fk",
-          "tableFrom": "support_page_info_sections",
-          "tableTo": "media",
-          "columnsFrom": [
-            "image_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "set null",
-          "onUpdate": "no action"
-        },
         "support_page_info_sections_parent_id_fk": {
           "name": "support_page_info_sections_parent_id_fk",
           "tableFrom": "support_page_info_sections",
@@ -3906,8 +3695,8 @@
           "notNull": false,
           "autoincrement": false
         },
-        "image_localized_id": {
-          "name": "image_localized_id",
+        "image_id": {
+          "name": "image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
@@ -3943,10 +3732,10 @@
         }
       },
       "indexes": {
-        "support_page_info_sections_image_localized_idx": {
-          "name": "support_page_info_sections_image_localized_idx",
+        "support_page_info_sections_image_idx": {
+          "name": "support_page_info_sections_image_idx",
           "columns": [
-            "image_localized_id",
+            "image_id",
             "_locale"
           ],
           "isUnique": false
@@ -3961,12 +3750,12 @@
         }
       },
       "foreignKeys": {
-        "support_page_info_sections_locales_image_localized_id_media_id_fk": {
-          "name": "support_page_info_sections_locales_image_localized_id_media_id_fk",
+        "support_page_info_sections_locales_image_id_media_id_fk": {
+          "name": "support_page_info_sections_locales_image_id_media_id_fk",
           "tableFrom": "support_page_info_sections_locales",
           "tableTo": "media",
           "columnsFrom": [
-            "image_localized_id"
+            "image_id"
           ],
           "columnsTo": [
             "id"
@@ -4137,21 +3926,6 @@
           "notNull": true,
           "autoincrement": false
         },
-        "localize_image": {
-          "name": "localize_image",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": false
-        },
-        "image_id": {
-          "name": "image_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
         "has_button": {
           "name": "has_button",
           "type": "integer",
@@ -4182,29 +3956,9 @@
             "_parent_id"
           ],
           "isUnique": false
-        },
-        "freshman_page_info_sections_image_idx": {
-          "name": "freshman_page_info_sections_image_idx",
-          "columns": [
-            "image_id"
-          ],
-          "isUnique": false
         }
       },
       "foreignKeys": {
-        "freshman_page_info_sections_image_id_media_id_fk": {
-          "name": "freshman_page_info_sections_image_id_media_id_fk",
-          "tableFrom": "freshman_page_info_sections",
-          "tableTo": "media",
-          "columnsFrom": [
-            "image_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "set null",
-          "onUpdate": "no action"
-        },
         "freshman_page_info_sections_parent_id_fk": {
           "name": "freshman_page_info_sections_parent_id_fk",
           "tableFrom": "freshman_page_info_sections",
@@ -4233,8 +3987,8 @@
           "notNull": false,
           "autoincrement": false
         },
-        "image_localized_id": {
-          "name": "image_localized_id",
+        "image_id": {
+          "name": "image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
@@ -4270,10 +4024,10 @@
         }
       },
       "indexes": {
-        "freshman_page_info_sections_image_localized_idx": {
-          "name": "freshman_page_info_sections_image_localized_idx",
+        "freshman_page_info_sections_image_idx": {
+          "name": "freshman_page_info_sections_image_idx",
           "columns": [
-            "image_localized_id",
+            "image_id",
             "_locale"
           ],
           "isUnique": false
@@ -4288,12 +4042,12 @@
         }
       },
       "foreignKeys": {
-        "freshman_page_info_sections_locales_image_localized_id_media_id_fk": {
-          "name": "freshman_page_info_sections_locales_image_localized_id_media_id_fk",
+        "freshman_page_info_sections_locales_image_id_media_id_fk": {
+          "name": "freshman_page_info_sections_locales_image_id_media_id_fk",
           "tableFrom": "freshman_page_info_sections_locales",
           "tableTo": "media",
           "columnsFrom": [
-            "image_localized_id"
+            "image_id"
           ],
           "columnsTo": [
             "id"
@@ -4464,21 +4218,6 @@
           "notNull": true,
           "autoincrement": false
         },
-        "localize_image": {
-          "name": "localize_image",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": false
-        },
-        "image_id": {
-          "name": "image_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
         "has_button": {
           "name": "has_button",
           "type": "integer",
@@ -4509,29 +4248,9 @@
             "_parent_id"
           ],
           "isUnique": false
-        },
-        "plan_your_visit_page_intro_info_sections_image_idx": {
-          "name": "plan_your_visit_page_intro_info_sections_image_idx",
-          "columns": [
-            "image_id"
-          ],
-          "isUnique": false
         }
       },
       "foreignKeys": {
-        "plan_your_visit_page_intro_info_sections_image_id_media_id_fk": {
-          "name": "plan_your_visit_page_intro_info_sections_image_id_media_id_fk",
-          "tableFrom": "plan_your_visit_page_intro_info_sections",
-          "tableTo": "media",
-          "columnsFrom": [
-            "image_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "set null",
-          "onUpdate": "no action"
-        },
         "plan_your_visit_page_intro_info_sections_parent_id_fk": {
           "name": "plan_your_visit_page_intro_info_sections_parent_id_fk",
           "tableFrom": "plan_your_visit_page_intro_info_sections",
@@ -4560,8 +4279,8 @@
           "notNull": false,
           "autoincrement": false
         },
-        "image_localized_id": {
-          "name": "image_localized_id",
+        "image_id": {
+          "name": "image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
@@ -4597,10 +4316,10 @@
         }
       },
       "indexes": {
-        "plan_your_visit_page_intro_info_sections_image_localized_idx": {
-          "name": "plan_your_visit_page_intro_info_sections_image_localized_idx",
+        "plan_your_visit_page_intro_info_sections_image_idx": {
+          "name": "plan_your_visit_page_intro_info_sections_image_idx",
           "columns": [
-            "image_localized_id",
+            "image_id",
             "_locale"
           ],
           "isUnique": false
@@ -4615,12 +4334,12 @@
         }
       },
       "foreignKeys": {
-        "plan_your_visit_page_intro_info_sections_locales_image_localized_id_media_id_fk": {
-          "name": "plan_your_visit_page_intro_info_sections_locales_image_localized_id_media_id_fk",
+        "plan_your_visit_page_intro_info_sections_locales_image_id_media_id_fk": {
+          "name": "plan_your_visit_page_intro_info_sections_locales_image_id_media_id_fk",
           "tableFrom": "plan_your_visit_page_intro_info_sections_locales",
           "tableTo": "media",
           "columnsFrom": [
-            "image_localized_id"
+            "image_id"
           ],
           "columnsTo": [
             "id"
@@ -4670,21 +4389,6 @@
           "notNull": true,
           "autoincrement": false
         },
-        "localize_image": {
-          "name": "localize_image",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": false
-        },
-        "image_id": {
-          "name": "image_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
         "has_button": {
           "name": "has_button",
           "type": "integer",
@@ -4715,29 +4419,9 @@
             "_parent_id"
           ],
           "isUnique": false
-        },
-        "plan_your_visit_page_schedule_info_sections_image_idx": {
-          "name": "plan_your_visit_page_schedule_info_sections_image_idx",
-          "columns": [
-            "image_id"
-          ],
-          "isUnique": false
         }
       },
       "foreignKeys": {
-        "plan_your_visit_page_schedule_info_sections_image_id_media_id_fk": {
-          "name": "plan_your_visit_page_schedule_info_sections_image_id_media_id_fk",
-          "tableFrom": "plan_your_visit_page_schedule_info_sections",
-          "tableTo": "media",
-          "columnsFrom": [
-            "image_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "set null",
-          "onUpdate": "no action"
-        },
         "plan_your_visit_page_schedule_info_sections_parent_id_fk": {
           "name": "plan_your_visit_page_schedule_info_sections_parent_id_fk",
           "tableFrom": "plan_your_visit_page_schedule_info_sections",
@@ -4766,8 +4450,8 @@
           "notNull": false,
           "autoincrement": false
         },
-        "image_localized_id": {
-          "name": "image_localized_id",
+        "image_id": {
+          "name": "image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
@@ -4803,10 +4487,10 @@
         }
       },
       "indexes": {
-        "plan_your_visit_page_schedule_info_sections_image_locali_idx": {
-          "name": "plan_your_visit_page_schedule_info_sections_image_locali_idx",
+        "plan_your_visit_page_schedule_info_sections_image_idx": {
+          "name": "plan_your_visit_page_schedule_info_sections_image_idx",
           "columns": [
-            "image_localized_id",
+            "image_id",
             "_locale"
           ],
           "isUnique": false
@@ -4821,12 +4505,12 @@
         }
       },
       "foreignKeys": {
-        "plan_your_visit_page_schedule_info_sections_locales_image_localized_id_media_id_fk": {
-          "name": "plan_your_visit_page_schedule_info_sections_locales_image_localized_id_media_id_fk",
+        "plan_your_visit_page_schedule_info_sections_locales_image_id_media_id_fk": {
+          "name": "plan_your_visit_page_schedule_info_sections_locales_image_id_media_id_fk",
           "tableFrom": "plan_your_visit_page_schedule_info_sections_locales",
           "tableTo": "media",
           "columnsFrom": [
-            "image_localized_id"
+            "image_id"
           ],
           "columnsTo": [
             "id"
@@ -5078,35 +4762,12 @@
           "notNull": false,
           "autoincrement": false
         },
-        "content_content_title": {
-          "name": "content_content_title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "content_content": {
-          "name": "content_content",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "navigation_home_button_text": {
-          "name": "navigation_home_button_text",
+        "content": {
+          "name": "content",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'Return to Home'"
-        },
-        "navigation_contact_button_text": {
-          "name": "navigation_contact_button_text",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": "'Contact Us'"
+          "autoincrement": false
         },
         "id": {
           "name": "id",
@@ -5169,6 +4830,6 @@
   "internal": {
     "indexes": {}
   },
-  "id": "12a158dd-e035-4138-a62a-20dfeadca339",
+  "id": "c15d0f88-7e6f-47c1-818b-10cdb8d9e226",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }

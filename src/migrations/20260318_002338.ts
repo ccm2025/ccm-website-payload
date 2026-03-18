@@ -356,29 +356,25 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	\`_order\` integer NOT NULL,
   	\`_parent_id\` integer NOT NULL,
   	\`id\` text PRIMARY KEY NOT NULL,
-  	\`localize_image\` integer DEFAULT false,
-  	\`image_id\` integer,
   	\`has_button\` integer DEFAULT false,
   	\`button_url\` text,
-  	FOREIGN KEY (\`image_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
   	FOREIGN KEY (\`_parent_id\`) REFERENCES \`about_page\`(\`id\`) ON UPDATE no action ON DELETE cascade
   );
   `)
   await db.run(sql`CREATE INDEX \`about_page_history_info_sections_order_idx\` ON \`about_page_history_info_sections\` (\`_order\`);`)
   await db.run(sql`CREATE INDEX \`about_page_history_info_sections_parent_id_idx\` ON \`about_page_history_info_sections\` (\`_parent_id\`);`)
-  await db.run(sql`CREATE INDEX \`about_page_history_info_sections_image_idx\` ON \`about_page_history_info_sections\` (\`image_id\`);`)
   await db.run(sql`CREATE TABLE \`about_page_history_info_sections_locales\` (
   	\`content\` text,
-  	\`image_localized_id\` integer,
+  	\`image_id\` integer,
   	\`button_text\` text,
   	\`id\` integer PRIMARY KEY NOT NULL,
   	\`_locale\` text NOT NULL,
   	\`_parent_id\` text NOT NULL,
-  	FOREIGN KEY (\`image_localized_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
+  	FOREIGN KEY (\`image_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
   	FOREIGN KEY (\`_parent_id\`) REFERENCES \`about_page_history_info_sections\`(\`id\`) ON UPDATE no action ON DELETE cascade
   );
   `)
-  await db.run(sql`CREATE INDEX \`about_page_history_info_sections_image_localized_idx\` ON \`about_page_history_info_sections_locales\` (\`image_localized_id\`,\`_locale\`);`)
+  await db.run(sql`CREATE INDEX \`about_page_history_info_sections_image_idx\` ON \`about_page_history_info_sections_locales\` (\`image_id\`,\`_locale\`);`)
   await db.run(sql`CREATE UNIQUE INDEX \`about_page_history_info_sections_locales_locale_parent_id_un\` ON \`about_page_history_info_sections_locales\` (\`_locale\`,\`_parent_id\`);`)
   await db.run(sql`CREATE TABLE \`about_page_team_members\` (
   	\`_order\` integer NOT NULL,
@@ -455,29 +451,25 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	\`_order\` integer NOT NULL,
   	\`_parent_id\` integer NOT NULL,
   	\`id\` text PRIMARY KEY NOT NULL,
-  	\`localize_image\` integer DEFAULT false,
-  	\`image_id\` integer,
   	\`has_button\` integer DEFAULT false,
   	\`button_url\` text,
-  	FOREIGN KEY (\`image_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
   	FOREIGN KEY (\`_parent_id\`) REFERENCES \`volunteer_page\`(\`id\`) ON UPDATE no action ON DELETE cascade
   );
   `)
   await db.run(sql`CREATE INDEX \`volunteer_page_info_sections_order_idx\` ON \`volunteer_page_info_sections\` (\`_order\`);`)
   await db.run(sql`CREATE INDEX \`volunteer_page_info_sections_parent_id_idx\` ON \`volunteer_page_info_sections\` (\`_parent_id\`);`)
-  await db.run(sql`CREATE INDEX \`volunteer_page_info_sections_image_idx\` ON \`volunteer_page_info_sections\` (\`image_id\`);`)
   await db.run(sql`CREATE TABLE \`volunteer_page_info_sections_locales\` (
   	\`content\` text,
-  	\`image_localized_id\` integer,
+  	\`image_id\` integer,
   	\`button_text\` text,
   	\`id\` integer PRIMARY KEY NOT NULL,
   	\`_locale\` text NOT NULL,
   	\`_parent_id\` text NOT NULL,
-  	FOREIGN KEY (\`image_localized_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
+  	FOREIGN KEY (\`image_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
   	FOREIGN KEY (\`_parent_id\`) REFERENCES \`volunteer_page_info_sections\`(\`id\`) ON UPDATE no action ON DELETE cascade
   );
   `)
-  await db.run(sql`CREATE INDEX \`volunteer_page_info_sections_image_localized_idx\` ON \`volunteer_page_info_sections_locales\` (\`image_localized_id\`,\`_locale\`);`)
+  await db.run(sql`CREATE INDEX \`volunteer_page_info_sections_image_idx\` ON \`volunteer_page_info_sections_locales\` (\`image_id\`,\`_locale\`);`)
   await db.run(sql`CREATE UNIQUE INDEX \`volunteer_page_info_sections_locales_locale_parent_id_unique\` ON \`volunteer_page_info_sections_locales\` (\`_locale\`,\`_parent_id\`);`)
   await db.run(sql`CREATE TABLE \`volunteer_page\` (
   	\`id\` integer PRIMARY KEY NOT NULL,
@@ -497,31 +489,22 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   );
   `)
   await db.run(sql`CREATE UNIQUE INDEX \`volunteer_page_locales_locale_parent_id_unique\` ON \`volunteer_page_locales\` (\`_locale\`,\`_parent_id\`);`)
-  await db.run(sql`CREATE TABLE \`give_page_resources_pdf_links\` (
+  await db.run(sql`CREATE TABLE \`give_page_letters_pdfs\` (
   	\`_order\` integer NOT NULL,
   	\`_parent_id\` integer NOT NULL,
   	\`id\` text PRIMARY KEY NOT NULL,
+  	\`title\` text NOT NULL,
   	\`file_id\` integer NOT NULL,
   	FOREIGN KEY (\`file_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
   	FOREIGN KEY (\`_parent_id\`) REFERENCES \`give_page\`(\`id\`) ON UPDATE no action ON DELETE cascade
   );
   `)
-  await db.run(sql`CREATE INDEX \`give_page_resources_pdf_links_order_idx\` ON \`give_page_resources_pdf_links\` (\`_order\`);`)
-  await db.run(sql`CREATE INDEX \`give_page_resources_pdf_links_parent_id_idx\` ON \`give_page_resources_pdf_links\` (\`_parent_id\`);`)
-  await db.run(sql`CREATE INDEX \`give_page_resources_pdf_links_file_idx\` ON \`give_page_resources_pdf_links\` (\`file_id\`);`)
-  await db.run(sql`CREATE TABLE \`give_page_resources_pdf_links_locales\` (
-  	\`title\` text NOT NULL,
-  	\`id\` integer PRIMARY KEY NOT NULL,
-  	\`_locale\` text NOT NULL,
-  	\`_parent_id\` text NOT NULL,
-  	FOREIGN KEY (\`_parent_id\`) REFERENCES \`give_page_resources_pdf_links\`(\`id\`) ON UPDATE no action ON DELETE cascade
-  );
-  `)
-  await db.run(sql`CREATE UNIQUE INDEX \`give_page_resources_pdf_links_locales_locale_parent_id_uniqu\` ON \`give_page_resources_pdf_links_locales\` (\`_locale\`,\`_parent_id\`);`)
+  await db.run(sql`CREATE INDEX \`give_page_letters_pdfs_order_idx\` ON \`give_page_letters_pdfs\` (\`_order\`);`)
+  await db.run(sql`CREATE INDEX \`give_page_letters_pdfs_parent_id_idx\` ON \`give_page_letters_pdfs\` (\`_parent_id\`);`)
+  await db.run(sql`CREATE INDEX \`give_page_letters_pdfs_file_idx\` ON \`give_page_letters_pdfs\` (\`file_id\`);`)
   await db.run(sql`CREATE TABLE \`give_page\` (
   	\`id\` integer PRIMARY KEY NOT NULL,
   	\`hero_background_image_id\` integer NOT NULL,
-  	\`content_donation_button_url\` text,
   	\`updated_at\` text,
   	\`created_at\` text,
   	FOREIGN KEY (\`hero_background_image_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null
@@ -530,14 +513,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.run(sql`CREATE INDEX \`give_page_hero_hero_background_image_idx\` ON \`give_page\` (\`hero_background_image_id\`);`)
   await db.run(sql`CREATE TABLE \`give_page_locales\` (
   	\`hero_title\` text,
-  	\`content_introduction_subtitle\` text,
-  	\`content_introduction_title\` text NOT NULL,
-  	\`content_introduction_content\` text NOT NULL,
-  	\`content_donation_button_text\` text DEFAULT 'Donate Now',
-  	\`payment_methods_zelle_title\` text DEFAULT 'Zelle',
-  	\`payment_methods_zelle_content\` text,
-  	\`payment_methods_check_title\` text DEFAULT 'Check',
-  	\`payment_methods_check_content\` text,
+  	\`intro\` text,
+  	\`payment_methods\` text,
   	\`id\` integer PRIMARY KEY NOT NULL,
   	\`_locale\` text NOT NULL,
   	\`_parent_id\` integer NOT NULL,
@@ -549,29 +526,25 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	\`_order\` integer NOT NULL,
   	\`_parent_id\` integer NOT NULL,
   	\`id\` text PRIMARY KEY NOT NULL,
-  	\`localize_image\` integer DEFAULT false,
-  	\`image_id\` integer,
   	\`has_button\` integer DEFAULT false,
   	\`button_url\` text,
-  	FOREIGN KEY (\`image_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
   	FOREIGN KEY (\`_parent_id\`) REFERENCES \`support_page\`(\`id\`) ON UPDATE no action ON DELETE cascade
   );
   `)
   await db.run(sql`CREATE INDEX \`support_page_info_sections_order_idx\` ON \`support_page_info_sections\` (\`_order\`);`)
   await db.run(sql`CREATE INDEX \`support_page_info_sections_parent_id_idx\` ON \`support_page_info_sections\` (\`_parent_id\`);`)
-  await db.run(sql`CREATE INDEX \`support_page_info_sections_image_idx\` ON \`support_page_info_sections\` (\`image_id\`);`)
   await db.run(sql`CREATE TABLE \`support_page_info_sections_locales\` (
   	\`content\` text,
-  	\`image_localized_id\` integer,
+  	\`image_id\` integer,
   	\`button_text\` text,
   	\`id\` integer PRIMARY KEY NOT NULL,
   	\`_locale\` text NOT NULL,
   	\`_parent_id\` text NOT NULL,
-  	FOREIGN KEY (\`image_localized_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
+  	FOREIGN KEY (\`image_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
   	FOREIGN KEY (\`_parent_id\`) REFERENCES \`support_page_info_sections\`(\`id\`) ON UPDATE no action ON DELETE cascade
   );
   `)
-  await db.run(sql`CREATE INDEX \`support_page_info_sections_image_localized_idx\` ON \`support_page_info_sections_locales\` (\`image_localized_id\`,\`_locale\`);`)
+  await db.run(sql`CREATE INDEX \`support_page_info_sections_image_idx\` ON \`support_page_info_sections_locales\` (\`image_id\`,\`_locale\`);`)
   await db.run(sql`CREATE UNIQUE INDEX \`support_page_info_sections_locales_locale_parent_id_unique\` ON \`support_page_info_sections_locales\` (\`_locale\`,\`_parent_id\`);`)
   await db.run(sql`CREATE TABLE \`support_page\` (
   	\`id\` integer PRIMARY KEY NOT NULL,
@@ -595,29 +568,25 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	\`_order\` integer NOT NULL,
   	\`_parent_id\` integer NOT NULL,
   	\`id\` text PRIMARY KEY NOT NULL,
-  	\`localize_image\` integer DEFAULT false,
-  	\`image_id\` integer,
   	\`has_button\` integer DEFAULT false,
   	\`button_url\` text,
-  	FOREIGN KEY (\`image_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
   	FOREIGN KEY (\`_parent_id\`) REFERENCES \`freshman_page\`(\`id\`) ON UPDATE no action ON DELETE cascade
   );
   `)
   await db.run(sql`CREATE INDEX \`freshman_page_info_sections_order_idx\` ON \`freshman_page_info_sections\` (\`_order\`);`)
   await db.run(sql`CREATE INDEX \`freshman_page_info_sections_parent_id_idx\` ON \`freshman_page_info_sections\` (\`_parent_id\`);`)
-  await db.run(sql`CREATE INDEX \`freshman_page_info_sections_image_idx\` ON \`freshman_page_info_sections\` (\`image_id\`);`)
   await db.run(sql`CREATE TABLE \`freshman_page_info_sections_locales\` (
   	\`content\` text,
-  	\`image_localized_id\` integer,
+  	\`image_id\` integer,
   	\`button_text\` text,
   	\`id\` integer PRIMARY KEY NOT NULL,
   	\`_locale\` text NOT NULL,
   	\`_parent_id\` text NOT NULL,
-  	FOREIGN KEY (\`image_localized_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
+  	FOREIGN KEY (\`image_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
   	FOREIGN KEY (\`_parent_id\`) REFERENCES \`freshman_page_info_sections\`(\`id\`) ON UPDATE no action ON DELETE cascade
   );
   `)
-  await db.run(sql`CREATE INDEX \`freshman_page_info_sections_image_localized_idx\` ON \`freshman_page_info_sections_locales\` (\`image_localized_id\`,\`_locale\`);`)
+  await db.run(sql`CREATE INDEX \`freshman_page_info_sections_image_idx\` ON \`freshman_page_info_sections_locales\` (\`image_id\`,\`_locale\`);`)
   await db.run(sql`CREATE UNIQUE INDEX \`freshman_page_info_sections_locales_locale_parent_id_unique\` ON \`freshman_page_info_sections_locales\` (\`_locale\`,\`_parent_id\`);`)
   await db.run(sql`CREATE TABLE \`freshman_page\` (
   	\`id\` integer PRIMARY KEY NOT NULL,
@@ -641,57 +610,49 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	\`_order\` integer NOT NULL,
   	\`_parent_id\` integer NOT NULL,
   	\`id\` text PRIMARY KEY NOT NULL,
-  	\`localize_image\` integer DEFAULT false,
-  	\`image_id\` integer,
   	\`has_button\` integer DEFAULT false,
   	\`button_url\` text,
-  	FOREIGN KEY (\`image_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
   	FOREIGN KEY (\`_parent_id\`) REFERENCES \`plan_your_visit_page\`(\`id\`) ON UPDATE no action ON DELETE cascade
   );
   `)
   await db.run(sql`CREATE INDEX \`plan_your_visit_page_intro_info_sections_order_idx\` ON \`plan_your_visit_page_intro_info_sections\` (\`_order\`);`)
   await db.run(sql`CREATE INDEX \`plan_your_visit_page_intro_info_sections_parent_id_idx\` ON \`plan_your_visit_page_intro_info_sections\` (\`_parent_id\`);`)
-  await db.run(sql`CREATE INDEX \`plan_your_visit_page_intro_info_sections_image_idx\` ON \`plan_your_visit_page_intro_info_sections\` (\`image_id\`);`)
   await db.run(sql`CREATE TABLE \`plan_your_visit_page_intro_info_sections_locales\` (
   	\`content\` text,
-  	\`image_localized_id\` integer,
+  	\`image_id\` integer,
   	\`button_text\` text,
   	\`id\` integer PRIMARY KEY NOT NULL,
   	\`_locale\` text NOT NULL,
   	\`_parent_id\` text NOT NULL,
-  	FOREIGN KEY (\`image_localized_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
+  	FOREIGN KEY (\`image_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
   	FOREIGN KEY (\`_parent_id\`) REFERENCES \`plan_your_visit_page_intro_info_sections\`(\`id\`) ON UPDATE no action ON DELETE cascade
   );
   `)
-  await db.run(sql`CREATE INDEX \`plan_your_visit_page_intro_info_sections_image_localized_idx\` ON \`plan_your_visit_page_intro_info_sections_locales\` (\`image_localized_id\`,\`_locale\`);`)
+  await db.run(sql`CREATE INDEX \`plan_your_visit_page_intro_info_sections_image_idx\` ON \`plan_your_visit_page_intro_info_sections_locales\` (\`image_id\`,\`_locale\`);`)
   await db.run(sql`CREATE UNIQUE INDEX \`plan_your_visit_page_intro_info_sections_locales_locale_pare\` ON \`plan_your_visit_page_intro_info_sections_locales\` (\`_locale\`,\`_parent_id\`);`)
   await db.run(sql`CREATE TABLE \`plan_your_visit_page_schedule_info_sections\` (
   	\`_order\` integer NOT NULL,
   	\`_parent_id\` integer NOT NULL,
   	\`id\` text PRIMARY KEY NOT NULL,
-  	\`localize_image\` integer DEFAULT false,
-  	\`image_id\` integer,
   	\`has_button\` integer DEFAULT false,
   	\`button_url\` text,
-  	FOREIGN KEY (\`image_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
   	FOREIGN KEY (\`_parent_id\`) REFERENCES \`plan_your_visit_page\`(\`id\`) ON UPDATE no action ON DELETE cascade
   );
   `)
   await db.run(sql`CREATE INDEX \`plan_your_visit_page_schedule_info_sections_order_idx\` ON \`plan_your_visit_page_schedule_info_sections\` (\`_order\`);`)
   await db.run(sql`CREATE INDEX \`plan_your_visit_page_schedule_info_sections_parent_id_idx\` ON \`plan_your_visit_page_schedule_info_sections\` (\`_parent_id\`);`)
-  await db.run(sql`CREATE INDEX \`plan_your_visit_page_schedule_info_sections_image_idx\` ON \`plan_your_visit_page_schedule_info_sections\` (\`image_id\`);`)
   await db.run(sql`CREATE TABLE \`plan_your_visit_page_schedule_info_sections_locales\` (
   	\`content\` text,
-  	\`image_localized_id\` integer,
+  	\`image_id\` integer,
   	\`button_text\` text,
   	\`id\` integer PRIMARY KEY NOT NULL,
   	\`_locale\` text NOT NULL,
   	\`_parent_id\` text NOT NULL,
-  	FOREIGN KEY (\`image_localized_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
+  	FOREIGN KEY (\`image_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null,
   	FOREIGN KEY (\`_parent_id\`) REFERENCES \`plan_your_visit_page_schedule_info_sections\`(\`id\`) ON UPDATE no action ON DELETE cascade
   );
   `)
-  await db.run(sql`CREATE INDEX \`plan_your_visit_page_schedule_info_sections_image_locali_idx\` ON \`plan_your_visit_page_schedule_info_sections_locales\` (\`image_localized_id\`,\`_locale\`);`)
+  await db.run(sql`CREATE INDEX \`plan_your_visit_page_schedule_info_sections_image_idx\` ON \`plan_your_visit_page_schedule_info_sections_locales\` (\`image_id\`,\`_locale\`);`)
   await db.run(sql`CREATE UNIQUE INDEX \`plan_your_visit_page_schedule_info_sections_locales_locale_p\` ON \`plan_your_visit_page_schedule_info_sections_locales\` (\`_locale\`,\`_parent_id\`);`)
   await db.run(sql`CREATE TABLE \`plan_your_visit_page\` (
   	\`id\` integer PRIMARY KEY NOT NULL,
@@ -727,10 +688,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.run(sql`CREATE INDEX \`thank_you_page_hero_hero_background_image_idx\` ON \`thank_you_page\` (\`hero_background_image_id\`);`)
   await db.run(sql`CREATE TABLE \`thank_you_page_locales\` (
   	\`hero_title\` text,
-  	\`content_content_title\` text NOT NULL,
-  	\`content_content\` text NOT NULL,
-  	\`navigation_home_button_text\` text DEFAULT 'Return to Home',
-  	\`navigation_contact_button_text\` text DEFAULT 'Contact Us',
+  	\`content\` text,
   	\`id\` integer PRIMARY KEY NOT NULL,
   	\`_locale\` text NOT NULL,
   	\`_parent_id\` integer NOT NULL,
@@ -779,8 +737,7 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   await db.run(sql`DROP TABLE \`volunteer_page_info_sections_locales\`;`)
   await db.run(sql`DROP TABLE \`volunteer_page\`;`)
   await db.run(sql`DROP TABLE \`volunteer_page_locales\`;`)
-  await db.run(sql`DROP TABLE \`give_page_resources_pdf_links\`;`)
-  await db.run(sql`DROP TABLE \`give_page_resources_pdf_links_locales\`;`)
+  await db.run(sql`DROP TABLE \`give_page_letters_pdfs\`;`)
   await db.run(sql`DROP TABLE \`give_page\`;`)
   await db.run(sql`DROP TABLE \`give_page_locales\`;`)
   await db.run(sql`DROP TABLE \`support_page_info_sections\`;`)

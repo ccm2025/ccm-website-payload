@@ -12,35 +12,10 @@ export const InfoSectionsField = (addOn: Field[] = []): Field => {
         localized: true,
       },
       {
-        name: 'localizeImage',
-        type: 'checkbox',
-        label: 'Localize Image',
-        defaultValue: false,
-        admin: {
-          description: 'Enable this to use different images for different locales',
-        },
-      },
-      {
         name: 'image',
         type: 'upload',
         relationTo: 'media',
-        localized: false,
-        label: 'Image (Global)',
-        admin: {
-          condition: (_, siblingData) => !siblingData?.localizeImage,
-          description: 'This image will be used for all locales',
-        },
-      },
-      {
-        name: 'imageLocalized',
-        type: 'upload',
-        relationTo: 'media',
         localized: true,
-        label: 'Image (Localized)',
-        admin: {
-          condition: (_, siblingData) => siblingData?.localizeImage,
-          description: 'This image can be different for each locale',
-        },
       },
       {
         name: 'hasButton',

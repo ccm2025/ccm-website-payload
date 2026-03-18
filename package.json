@@ -30,10 +30,14 @@
     "migrate:create": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:create",
     "sync:d1:up": "pnpm run danger:drop:d1:remote && pnpm run sync:d1:up:schema && pnpm run sync:d1:up:data",
     "sync:d1:up:schema": "wrangler d1 export D1 --output=./temp-local-export.sql --no-data && wrangler d1 execute D1 --file=./temp-local-export.sql --env=$CLOUDFLARE_ENV --remote && rm -f ./temp-local-export.sql",
-    "sync:d1:up:data": "wrangler d1 export D1 --output=./temp-local-export.sql --no-schema && wrangler d1 execute D1 --file=./temp-local-export.sql --env=$CLOUDFLARE_ENV --remote && rm -f ./temp-local-export.sql",
+    "sync:d1:up:data": "pnpm run sync:d1:up:data:export && pnpm run sync:d1:up:data:import && rm -f ./temp-local-export.sql",
+    "sync:d1:up:data:export": "wrangler d1 export D1 --output=./temp-local-export.sql --no-schema",
+    "sync:d1:up:data:import": "wrangler d1 execute D1 --file=./temp-local-export.sql --env=$CLOUDFLARE_ENV --remote",
     "sync:d1:down": "pnpm run danger:drop:d1:local && pnpm run sync:d1:down:schema && pnpm run sync:d1:down:data",
     "sync:d1:down:schema": "wrangler d1 export D1 --env=$CLOUDFLARE_ENV --remote --output=./temp-remote-export.sql --no-data && wrangler d1 execute D1 --file=./temp-remote-export.sql --local && rm -f ./temp-remote-export.sql",
-    "sync:d1:down:data": "wrangler d1 export D1 --env=$CLOUDFLARE_ENV --remote --output=./temp-remote-export.sql --no-schema && wrangler d1 execute D1 --file=./temp-remote-export.sql --local && rm -f ./temp-remote-export.sql"
+    "sync:d1:down:data": "pnpm run sync:d1:down:data:export && pnpm run sync:d1:down:data:import && rm -f ./temp-remote-export.sql",
+    "sync:d1:down:data:export": "wrangler d1 export D1 --env=$CLOUDFLARE_ENV --remote --output=./temp-remote-export.sql --no-schema",
+    "sync:d1:down:data:import": "wrangler d1 execute D1 --file=./temp-remote-export.sql --local"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "^1.17.1",

@@ -41,6 +41,7 @@ next-env.d.ts
 .env
 
 /media
+*.sql
 
 # Playwright
 node_modules/
