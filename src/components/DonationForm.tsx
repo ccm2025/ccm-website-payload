@@ -22,7 +22,7 @@ export function DonationForm({ locale }: DonationFormProps) {
     () => ({
       title: isZh ? '在线捐赠' : 'Online Donation',
       amount: isZh ? '金额 (USD)' : 'Amount (USD)',
-      submit: isZh ? '继续支付' : 'Continue to Payment',
+      submit: isZh ? '前往支付' : 'Continue to Payment',
       processing: isZh ? '处理中...' : 'Processing...',
       minError: isZh ? '请输入大于 0 的金额' : 'Please enter an amount greater than 0',
       genericError: isZh

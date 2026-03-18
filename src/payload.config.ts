@@ -32,7 +32,7 @@ const createLog =
   }
 
 const cloudflareLogger = {
-  level: process.env.PAYLOAD_LOG_LEVEL || 'info',
+  level: process.env.PAYLOAD_LOG_LEVEL || 'debug',
   trace: createLog('trace', console.debug),
   debug: createLog('debug', console.debug),
   info: createLog('info', console.log),
@@ -87,7 +87,7 @@ export default buildConfig({
   db: sqliteD1Adapter({
     binding: cloudflare.env.D1,
   }),
-  logger: isProduction ? cloudflareLogger : undefined,
+  logger: cloudflareLogger,
   plugins: [
     r2Storage({
       bucket: cloudflare.env.R2,
