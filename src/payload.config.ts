@@ -20,7 +20,7 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 const isProduction = process.env.NODE_ENV === 'production'
-const isDev = process.env.npm_lifecycle_event === 'dev'
+const isDev = process.env.npm_lifecycle_event.startsWith('dev')
 
 const createLog =
   (level: string, fn: typeof console.log) => (objOrMsg: object | string, msg?: string) => {

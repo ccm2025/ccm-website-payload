@@ -47,7 +47,7 @@ export default async function GivePage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* Content Section */}
-      <section className="bg-white py-12 sm:py-16 md:py-20">
+      <section className="bg-white my-12 sm:my-16 md:my-20">
         <div className="container mx-auto max-w-4xl px-4 sm:px-6 md:px-8 text-center">
           <div className="max-w-none space-y-4 text-center text-base sm:text-lg">
             <StyledText data={page.intro} />
@@ -56,7 +56,7 @@ export default async function GivePage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* Donation Options Section */}
-      <section className="bg-white py-12 sm:py-16 md:py-20">
+      <section className="bg-white my-12 sm:my-16 md:my-20">
         <div className="container mx-auto max-w-4xl px-4 sm:px-6 md:px-8">
           <div className="grid grid-cols-1 gap-8 sm:gap-10 md:grid-cols-2 md:gap-12 lg:gap-14">
             <div className="space-y-8 sm:space-y-9 md:space-y-10">

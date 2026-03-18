@@ -45,7 +45,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <StyledText data={page.hero.subtitle} />
           <Link
             className="mt-10 sm:mt-12 md:mt-14 inline-block rounded-full border-2 border-white px-6 sm:px-8 py-2 sm:py-3 text-base sm:text-lg font-semibold transition-all duration-300 hover:bg-white hover:text-[rgb(var(--website-theme-color2))]"
-            href={`/${locale}/plan-your-visit`}
+            href={`/${locale}${page.hero.buttonUrl}`}
             aria-label={page.hero.buttonText}
           >
             {page.hero.buttonText}
