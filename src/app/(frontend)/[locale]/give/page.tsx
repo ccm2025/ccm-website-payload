@@ -63,7 +63,7 @@ export default async function GivePage({ params }: { params: Promise<{ locale: s
               <StyledText data={page.payment_methods} />
             </div>
             <div className="space-y-8 sm:space-y-9 md:space-y-10">
-              <DonationForm lang={locale} />
+              <DonationForm locale={locale} />
             </div>
           </div>
         </div>
