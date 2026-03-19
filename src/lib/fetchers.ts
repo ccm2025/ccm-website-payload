@@ -23,6 +23,7 @@ export async function fetchGlobal<TSlug extends GlobalSlug>(
     slug,
     overrideAccess: false,
     locale,
+    depth: 1,
     ...options,
   })
   return global
