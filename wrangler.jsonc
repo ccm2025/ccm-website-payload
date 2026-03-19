@@ -9,7 +9,7 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS",
   },
-  "workers_dev": true,
+  "workers_dev": false,
   "vars": {
     "SITE_URL": "https://ccm-website-payload.ccm-tech-internal.workers.dev",
   },
