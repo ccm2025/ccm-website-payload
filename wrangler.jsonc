@@ -12,7 +12,7 @@
   "workers_dev": false,
   "vars": {
     "SITE_URL": "https://graceccm.org",
-    "PAYLOAD_LOG_LEVEL": "warn",
+    "PAYLOAD_LOG_LEVEL": "error",
   },
   "d1_databases": [
     {
@@ -32,7 +32,7 @@
     "enabled": false,
     "head_sampling_rate": 1,
     "logs": {
-      "enabled": true,
+      "enabled": false,
       "head_sampling_rate": 1,
       "persist": true,
       "invocation_logs": false,

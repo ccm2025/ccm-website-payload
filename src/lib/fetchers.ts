@@ -44,6 +44,7 @@ export async function fetchCollection<TSlug extends keyof Config['collections']>
     collection: slug,
     locale,
     overrideAccess: false,
+    depth: 1,
     ...options,
   })
   return results.docs
