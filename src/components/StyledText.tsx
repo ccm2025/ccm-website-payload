@@ -1,7 +1,6 @@
 import { defaultJSXConverters, RichText } from '@payloadcms/richtext-lexical/react'
 import './StyledText.css'
 import { SerializedTextNode } from '@payloadcms/richtext-lexical'
-import { Subscript } from 'lucide-react'
 
 type RichTextData = Parameters<typeof RichText>[0]['data']
 
