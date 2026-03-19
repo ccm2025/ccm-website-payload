@@ -112,6 +112,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                   {!member.photo && (
                     <img
                       src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                      alt={member.name}
                       className="mx-auto h-32 w-32 sm:h-36 sm:w-36 md:h-40 md:w-40 rounded-full border-4 border-white object-cover shadow-lg"
                     />
                   )}

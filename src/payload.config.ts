@@ -71,6 +71,7 @@ export default buildConfig({
     Globals.FreshmanPage,
     Globals.PlanYourVisitPage,
     Globals.ThankYouPage,
+    Globals.GospelMinistryPage,
   ],
   localization: {
     locales: supportedLocales,
