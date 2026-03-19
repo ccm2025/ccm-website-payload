@@ -100,6 +100,7 @@ export interface Config {
     'freshman-page': FreshmanPage;
     'plan-your-visit-page': PlanYourVisitPage;
     'thank-you-page': ThankYouPage;
+    'gospel-ministry-page': GospelMinistryPage;
   };
   globalsSelect: {
     global: GlobalSelect<false> | GlobalSelect<true>;
@@ -112,6 +113,7 @@ export interface Config {
     'freshman-page': FreshmanPageSelect<false> | FreshmanPageSelect<true>;
     'plan-your-visit-page': PlanYourVisitPageSelect<false> | PlanYourVisitPageSelect<true>;
     'thank-you-page': ThankYouPageSelect<false> | ThankYouPageSelect<true>;
+    'gospel-ministry-page': GospelMinistryPageSelect<false> | GospelMinistryPageSelect<true>;
   };
   locale: 'en' | 'zh-Hans';
   widgets: {
@@ -1083,6 +1085,61 @@ export interface ThankYouPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gospel-ministry-page".
+ */
+export interface GospelMinistryPage {
+  id: number;
+  hero: {
+    title?: string | null;
+    /**
+     * Hero background image
+     */
+    backgroundImage: number | Media;
+  };
+  intro?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  infoSections?:
+    | {
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        image?: (number | null) | Media;
+        hasButton?: boolean | null;
+        buttonText?: string | null;
+        buttonUrl?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "global_select".
  */
 export interface GlobalSelect<T extends boolean = true> {
@@ -1402,6 +1459,32 @@ export interface ThankYouPageSelect<T extends boolean = true> {
         backgroundImage?: T;
       };
   content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gospel-ministry-page_select".
+ */
+export interface GospelMinistryPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        backgroundImage?: T;
+      };
+  intro?: T;
+  infoSections?:
+    | T
+    | {
+        content?: T;
+        image?: T;
+        hasButton?: T;
+        buttonText?: T;
+        buttonUrl?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
