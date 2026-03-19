@@ -1,8 +1,8 @@
-# CCM Website Payload Repo
+# Chinese Collegial Ministry Website Payload Repo
 
 ## Purpose
 
-This repository contains the official CCM nonprofit website, built with Payload CMS and Next.js.
+This repository contains the official Chinese Collegial Ministry nonprofit website, built with Payload CMS and Next.js.
 
 It includes:
 
