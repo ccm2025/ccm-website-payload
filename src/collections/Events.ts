@@ -254,4 +254,13 @@ export const Events: CollectionConfig = {
     },
   ],
   timestamps: true,
+  indexes: [
+    {
+      unique: true,
+      fields: ['slug'],
+    },
+    {
+      fields: ['date'],
+    },
+  ],
 }
