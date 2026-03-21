@@ -2,31 +2,31 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
   "name": "ccm-website-payload",
-  "account_id": "3d8f9763dc23cf40e5515b89ba5720b5",
+  "account_id": "<CLOUDFLARE_ACCOUNT_ID>",
   "compatibility_date": "2025-08-15",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
     "directory": ".open-next/assets",
-    "binding": "ASSETS",
+    "binding": "ASSETS"
   },
   "workers_dev": false,
   "vars": {
-    "SITE_URL": "https://graceccm.org",
-    "PAYLOAD_LOG_LEVEL": "error",
+    "SITE_URL": "<SITE_URL>",
+    "PAYLOAD_LOG_LEVEL": "error"
   },
   "d1_databases": [
     {
       "binding": "D1",
-      "database_id": "a1666626-bd94-4087-9ca0-4a77eba45e98",
-      "remote": true,
-    },
+      "database_id": "<D1_DATABASE_ID>",
+      "remote": true
+    }
   ],
   "r2_buckets": [
     {
       "binding": "R2",
-      "bucket_name": "payload-assets",
-      "remote": true,
-    },
+      "bucket_name": "<R2_BUCKET_NAME>",
+      "remote": true
+    }
   ],
   "observability": {
     "enabled": false,
@@ -35,12 +35,12 @@
       "enabled": false,
       "head_sampling_rate": 1,
       "persist": true,
-      "invocation_logs": false,
+      "invocation_logs": false
     },
     "traces": {
       "enabled": false,
       "persist": true,
-      "head_sampling_rate": 1,
-    },
-  },
+      "head_sampling_rate": 1
+    }
+  }
 }

@@ -53,3 +53,6 @@ node_modules/
 # OpenNext
 .open-next
 .wrangler
+
+# Cloudflare Wrangler local config (contains infra IDs)
+/wrangler.jsonc

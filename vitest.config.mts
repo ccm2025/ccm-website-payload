@@ -10,11 +10,11 @@ export default defineConfig({
     include: ['tests/**/*.test.ts'],
     globals: true,
     pool: 'forks',
-    fileParallelism: false, // 禁用文件并行执行
+    fileParallelism: false,
     sequence: {
-      concurrent: false, // 禁用并发测试
+      concurrent: false,
     },
-    testTimeout: 10000, // 增加超时时间
+    testTimeout: 10000,
   },
   define: {
     global: 'globalThis',
