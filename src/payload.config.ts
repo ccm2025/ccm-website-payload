@@ -59,7 +59,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Collections.Users, Collections.Media, Collections.Events],
+  collections: [Collections.Users, Collections.Media, Collections.Events, Collections.Ministries],
   globals: [
     Globals.SiteGlobal,
     Globals.HomePage,
