@@ -33,6 +33,7 @@ export const Events: CollectionConfig = {
               slug: { equals: data.slug },
             },
             limit: 1,
+            req,
           })
           if (existing.totalDocs > 0) {
             throw new ValidationError({

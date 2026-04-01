@@ -39,7 +39,7 @@ export const InfoSectionsField = (addOn: Field[] = []): Field => {
         validate: (value: string | undefined) => {
           if (value && value.trim()) {
             try {
-              new URL(value)
+              new URL(value, process.env.SITE_URL) // Use SITE_URL as base for relative URLs
               return true
             } catch {
               return 'Please enter a valid URL'
