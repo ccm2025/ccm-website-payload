@@ -46,24 +46,28 @@ async function loadPage(locale: string) {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
 
-  const page = await fetchGlobal('events-page', validateLocale(locale))
-  const upcomingEvents = await fetchCollection('events', validateLocale(locale), {
-    where: {
-      date: {
-        greater_than_equal: today.toISOString(),
+  const validatedLocale = validateLocale(locale)
+
+  const [page, upcomingEvents, pastEvents] = await Promise.all([
+    fetchGlobal('events-page', validatedLocale),
+    fetchCollection('events', validatedLocale, {
+      where: {
+        date: {
+          greater_than_equal: today.toISOString(),
+        },
       },
-    },
-    sort: 'date',
-  })
-  const pastEvents = await fetchCollection('events', validateLocale(locale), {
-    where: {
-      date: {
-        less_than: today.toISOString(),
+      sort: 'date',
+    }),
+    fetchCollection('events', validatedLocale, {
+      where: {
+        date: {
+          less_than: today.toISOString(),
+        },
       },
-    },
-    sort: '-date',
-    limit: 20,
-  })
+      sort: '-date',
+      limit: 20,
+    }),
+  ])
 
   return {
     ...page,

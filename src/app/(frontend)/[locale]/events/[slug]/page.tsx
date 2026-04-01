@@ -79,7 +79,7 @@ export async function generateMetadata({
   const { locale, slug } = await params
   const page = await loadPage(locale, slug)
 
-  return { title: page.title }
+  return { title: page?.title ?? 'Event Not Found' }
 }
 
 export default async function EventDetailPage({

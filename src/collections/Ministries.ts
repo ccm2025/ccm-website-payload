@@ -1,4 +1,4 @@
-import { contentManagerAccess, publicAccess, adminOnlyAccessField } from '@/access'
+import { contentManagerAccess, publicAccess } from '@/access'
 import { HeroField, InfoSectionsField } from '@/fields'
 import { type CollectionConfig, ValidationError } from 'payload'
 
