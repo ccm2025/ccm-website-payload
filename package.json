@@ -21,6 +21,7 @@
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview --env=$CLOUDFLARE_ENV",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "test:perf": "cross-env NODE_OPTIONS=--no-deprecation tsx tests/perf/playwright-load-benchmark.ts",
+    "test:perf:d1-local": "cross-env NODE_OPTIONS=--no-deprecation tsx tests/perf/analyze-local-d1-read.ts",
     "test:unit": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts",
     "login": "wrangler login",
     "danger:clean": "rm -rf node_modules .next .open-next dist",
