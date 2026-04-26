@@ -60,9 +60,8 @@ export default async function MinistryDetailPage({
         </div>
       </section>
 
-      <section className="bg-white my-12 sm:my-16 md:my-20">
-        <div className="container mx-auto max-w-5xl px-4 sm:px-6 md:px-8 text-center">
-          {/* Back Link */}
+      <section className="bg-white py-16 md:py-24">
+        <div className="container mx-auto max-w-4xl px-5 sm:px-6">
           <Link
             href={`/${locale}/gospel-ministry`}
             className="mb-8 inline-flex items-center gap-2 rounded-lg bg-[rgb(var(--website-theme-color1))] px-4 py-2 font-semibold text-white transition-colors hover:bg-[rgb(var(--website-theme-color2))]"
@@ -70,51 +69,53 @@ export default async function MinistryDetailPage({
             ← {locale === 'zh-Hans' ? '返回' : 'Back'}
           </Link>
 
-          {page.intro && (
-            <div className="mt-6 mx-auto max-w-4xl">
-              <StyledText data={page.intro} />
-            </div>
-          )}
-        </div>
-      </section>
+          <div className="container mx-auto max-w-5xl px-4 sm:px-6 md:px-8 text-center">
+            {page.intro && (
+              <div className="mt-6 mx-auto max-w-4xl">
+                <StyledText data={page.intro} />
+              </div>
+            )}
+          </div>
 
-      <div className="bg-white pb-12 sm:pb-16 md:pb-20">
-        {page.infoSections?.map((section) => (
-          <section key={section.id} className="my-10 sm:my-14 md:my-16">
-            <div className="container mx-auto max-w-6xl px-6 sm:px-8 md:px-12 lg:px-16">
-              <div className="grid grid-cols-1 items-center gap-6 sm:gap-8 md:grid-cols-2 md:gap-10 lg:gap-14">
-                <div className="w-full">
-                  {section.image && typeof section.image === 'object' && (
-                    <img
-                      src={section.image.url}
-                      alt={section.image.alt}
-                      className="h-auto w-full rounded-xl object-cover shadow-lg"
-                    />
-                  )}
-                </div>
+          {page.infoSections?.map((section) => (
+            <section key={section.id} className="my-10 sm:my-14 md:my-16">
+              <div className="container mx-auto max-w-6xl px-6 sm:px-8 md:px-12 lg:px-16">
+                <div className="grid grid-cols-1 items-center gap-6 sm:gap-8 md:grid-cols-2 md:gap-10 lg:gap-14">
+                  <div className="w-full">
+                    {section.image && typeof section.image === 'object' && (
+                      <img
+                        src={section.image.url}
+                        alt={section.image.alt}
+                        className="h-auto w-full rounded-xl object-cover shadow-lg"
+                      />
+                    )}
+                  </div>
 
-                <div className="text-center md:text-left">
-                  {section.content && <StyledText data={section.content} />}
-                  {section.hasButton && section.buttonText && section.buttonUrl && (
-                    <a
-                      href={
-                        section.buttonUrl.startsWith('http')
-                          ? section.buttonUrl
-                          : `/${locale}${section.buttonUrl}`
-                      }
-                      target={section.buttonUrl.startsWith('http') ? '_blank' : '_self'}
-                      rel={section.buttonUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      className="mt-6 sm:mt-7 md:mt-8 inline-block rounded-lg bg-[rgb(var(--website-theme-color1))] px-6 py-2.5 sm:px-8 sm:py-3 text-sm sm:text-base font-semibold text-white transition-colors duration-300 hover:bg-[rgb(var(--website-theme-color2))]"
-                    >
-                      {section.buttonText}
-                    </a>
-                  )}
+                  <div className="text-center md:text-left">
+                    {section.content && <StyledText data={section.content} />}
+                    {section.hasButton && section.buttonText && section.buttonUrl && (
+                      <a
+                        href={
+                          section.buttonUrl.startsWith('http')
+                            ? section.buttonUrl
+                            : `/${locale}${section.buttonUrl}`
+                        }
+                        target={section.buttonUrl.startsWith('http') ? '_blank' : '_self'}
+                        rel={
+                          section.buttonUrl.startsWith('http') ? 'noopener noreferrer' : undefined
+                        }
+                        className="mt-6 sm:mt-7 md:mt-8 inline-block rounded-lg bg-[rgb(var(--website-theme-color1))] px-6 py-2.5 sm:px-8 sm:py-3 text-sm sm:text-base font-semibold text-white transition-colors duration-300 hover:bg-[rgb(var(--website-theme-color2))]"
+                      >
+                        {section.buttonText}
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
-        ))}
-      </div>
+            </section>
+          ))}
+        </div>
+      </section>
     </main>
   )
 }
