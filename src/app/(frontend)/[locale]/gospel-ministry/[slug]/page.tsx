@@ -2,6 +2,7 @@ import { StyledText } from '@/components/StyledText'
 import { fetchCollection, validateLocale } from '@/lib'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
 
 async function loadPage(locale: string, slug: string) {
   const events = await fetchCollection('ministries', validateLocale(locale), {
@@ -61,6 +62,14 @@ export default async function MinistryDetailPage({
 
       <section className="bg-white my-12 sm:my-16 md:my-20">
         <div className="container mx-auto max-w-5xl px-4 sm:px-6 md:px-8 text-center">
+          {/* Back Link */}
+          <Link
+            href={`/${locale}/gospel-ministry`}
+            className="mb-8 inline-flex items-center gap-2 rounded-lg bg-[rgb(var(--website-theme-color1))] px-4 py-2 font-semibold text-white transition-colors hover:bg-[rgb(var(--website-theme-color2))]"
+          >
+            ← {locale === 'zh-Hans' ? '返回' : 'Back'}
+          </Link>
+
           {page.intro && (
             <div className="mt-6 mx-auto max-w-4xl">
               <StyledText data={page.intro} />
@@ -88,17 +97,13 @@ export default async function MinistryDetailPage({
                   {section.content && <StyledText data={section.content} />}
                   {section.hasButton && section.buttonText && section.buttonUrl && (
                     <a
-                      href={section.buttonUrl}
-                      target={
-                        /^(?:[a-z][a-z\d+.-]*:|\/\/)/i.test(section.buttonUrl)
-                          ? '_blank'
-                          : undefined
+                      href={
+                        section.buttonUrl.startsWith('http')
+                          ? section.buttonUrl
+                          : `/${locale}${section.buttonUrl}`
                       }
-                      rel={
-                        /^(?:[a-z][a-z\d+.-]*:|\/\/)/i.test(section.buttonUrl)
-                          ? 'noopener noreferrer'
-                          : undefined
-                      }
+                      target={section.buttonUrl.startsWith('http') ? '_blank' : '_self'}
+                      rel={section.buttonUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
                       className="mt-6 sm:mt-7 md:mt-8 inline-block rounded-lg bg-[rgb(var(--website-theme-color1))] px-6 py-2.5 sm:px-8 sm:py-3 text-sm sm:text-base font-semibold text-white transition-colors duration-300 hover:bg-[rgb(var(--website-theme-color2))]"
                     >
                       {section.buttonText}

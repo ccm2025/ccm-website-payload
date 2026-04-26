@@ -76,9 +76,13 @@ export default async function GospelMinistryPage({
                   <StyledText data={section.content} />
                   {section.buttonText && section.buttonUrl && (
                     <a
-                      href={section.buttonUrl.startsWith('http') ? section.buttonUrl : `/${locale}${section.buttonUrl}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href={
+                        section.buttonUrl.startsWith('http')
+                          ? section.buttonUrl
+                          : `/${locale}${section.buttonUrl}`
+                      }
+                      target={section.buttonUrl.startsWith('http') ? '_blank' : '_self'}
+                      rel={section.buttonUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
                       className="mt-6 sm:mt-7 md:mt-8 inline-block rounded-lg bg-[rgb(var(--website-theme-color1))] px-6 py-2.5 sm:px-8 sm:py-3 text-sm sm:text-base font-semibold text-white transition-colors duration-300 hover:bg-[rgb(var(--website-theme-color2))]"
                     >
                       {section.buttonText}

@@ -1,6 +1,7 @@
 import { defaultJSXConverters, RichText } from '@payloadcms/richtext-lexical/react'
 import './StyledText.css'
 import { SerializedTextNode } from '@payloadcms/richtext-lexical'
+import type { CSSProperties } from 'react'
 
 type RichTextData = Parameters<typeof RichText>[0]['data']
 
@@ -24,7 +25,7 @@ const colorMap: Record<string, string> = {
   'theme-gold': 'rgb(233, 170, 28)',
 }
 
-const bgColorMap: Record<string, any> = {
+const bgColorMap: Record<string, CSSProperties> = {
   'highlight-yellow': { backgroundColor: '#ffff00', padding: '2px 4px', borderRadius: '4px' },
   'highlight-blue': { backgroundColor: '#e6f3ff', padding: '2px 4px', borderRadius: '4px' },
   'highlight-green': { backgroundColor: '#e6ffe6', padding: '2px 4px', borderRadius: '4px' },
@@ -34,7 +35,7 @@ const jsxConverter = () => ({
   ...defaultJSXConverters,
   text: ({ node }: { node: SerializedTextNode }) => {
     const text = node.text || ''
-    const styles: any = {}
+    const styles: CSSProperties = {}
 
     if (node.$ && node.$.color && colorMap[node.$.color as keyof typeof colorMap]) {
       styles.color = colorMap[node.$.color as keyof typeof colorMap]

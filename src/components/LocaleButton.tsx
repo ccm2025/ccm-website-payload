@@ -2,7 +2,6 @@
 
 import { Languages } from 'lucide-react'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
 const supportedLocales = ['en', 'zh-Hans']
@@ -13,17 +12,10 @@ interface LangButtonProps {
 
 export function LocaleButton({ variant = 'header' }: LangButtonProps) {
   const pathname = usePathname()
-  const [currentLocale, setCurrentLocale] = useState<string>('en')
-  const [mounted, setMounted] = useState(false)
 
-  // 同步pathname到currentLocale状态，避免hydration mismatch和路由不同步
-  useEffect(() => {
-    const pathSegments = pathname.split('/').filter(Boolean)
-    const firstSegment = pathSegments[0]
-    const locale = supportedLocales.includes(firstSegment) ? firstSegment : supportedLocales[0]
-    setCurrentLocale(locale)
-    setMounted(true)
-  }, [pathname])
+  const pathSegments = pathname.split('/').filter(Boolean)
+  const firstSegment = pathSegments[0] ?? ''
+  const currentLocale = supportedLocales.includes(firstSegment) ? firstSegment : supportedLocales[0]
 
   const getNextLocale = () => {
     return supportedLocales.find((l) => l !== currentLocale) || supportedLocales[0]
@@ -32,13 +24,8 @@ export function LocaleButton({ variant = 'header' }: LangButtonProps) {
   const getLangUrl = (locale: string) => {
     // 从pathname中移除locale前缀，再添加新的locale
     const pathWithoutLocale =
-      pathname.replace(new RegExp(`^\/(${supportedLocales.join('|')})`), '') || '/'
+      pathname.replace(new RegExp(`^/(${supportedLocales.join('|')})`), '') || '/'
     return `/${locale}${pathWithoutLocale}`
-  }
-
-  // 防止hydration mismatch，等待客户端mount后再渲染
-  if (!mounted) {
-    return null
   }
 
   const nextLocale = getNextLocale()
