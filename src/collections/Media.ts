@@ -47,6 +47,6 @@ export const Media: CollectionConfig = {
     crop: false,
     focalPoint: false,
     pasteURL: false,
-    mimeTypes: ['image/jpeg', 'image/webp', 'image/gif', 'application/pdf'],
+    mimeTypes: ['image/jpeg', 'image/webp', 'image/gif', 'application/pdf', 'video/mp4'],
   },
 }
