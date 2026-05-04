@@ -29,7 +29,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       {/* Hero Section */}
       <section className="relative flex h-64 sm:h-72 md:h-80 items-center justify-center text-center text-white">
         <div className="absolute inset-0">
-          {typeof page.hero.backgroundImage === 'object' && (
+          {page.hero.backgroundImage instanceof Object && (
             <img
               src={page.hero.backgroundImage.url}
               alt={page.hero.backgroundImage.alt}
@@ -80,49 +80,6 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                     <StyledText data={section.content} />
                   </div>
                 </Fragment>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Team Section */}
-      {page.team.members && page.team.members.length > 0 && (
-        <section className="bg-white my-12 sm:my-16 md:my-20">
-          <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="mx-auto max-w-4xl text-center">
-              <h2 className="text-base sm:text-lg md:text-xl font-semibold text-[rgb(var(--website-theme-color2))]">
-                {page.team.subtitle}
-              </h2>
-              <p className="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold tracking-wider text-[rgb(var(--website-theme-color1))]">
-                {page.team.title}
-              </p>
-            </div>
-
-            <div className="mt-8 sm:mt-10 md:mt-12 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12">
-              {page.team.members.map((member) => (
-                <div key={member.id} className="text-center">
-                  {member.photo && typeof member.photo === 'object' && (
-                    <img
-                      src={member.photo.url}
-                      alt={member.photo.alt}
-                      className="mx-auto h-32 w-32 sm:h-36 sm:w-36 md:h-40 md:w-40 rounded-full border-4 border-white object-cover shadow-lg"
-                    />
-                  )}
-                  {!member.photo && (
-                    <img
-                      src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-                      alt={member.name}
-                      className="mx-auto h-32 w-32 sm:h-36 sm:w-36 md:h-40 md:w-40 rounded-full border-4 border-white object-cover shadow-lg"
-                    />
-                  )}
-                  <h3 className="mt-4 sm:mt-5 md:mt-6 text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-[rgb(var(--website-theme-color1))]">
-                    {member.name}
-                  </h3>
-                  <p className="mt-2 text-sm sm:text-base text-[rgb(var(--website-theme-color2))]">
-                    {member.position}
-                  </p>
-                </div>
               ))}
             </div>
           </div>

@@ -98,7 +98,7 @@ export default async function EventsPage({ params }: { params: Promise<{ locale:
     <main>
       <section className="relative flex h-56 items-center justify-center text-center text-white sm:h-64 md:h-72">
         <div className="absolute inset-0">
-          {typeof page.hero.backgroundImage === 'object' && (
+          {page.hero.backgroundImage instanceof Object && (
             <img
               src={page.hero.backgroundImage.url}
               alt={page.hero.backgroundImage.alt}

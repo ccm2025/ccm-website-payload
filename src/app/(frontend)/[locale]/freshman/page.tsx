@@ -28,7 +28,7 @@ export default async function FreshmanPage({ params }: { params: Promise<{ local
       {/* Hero Section */}
       <section className="relative flex h-64 sm:h-72 md:h-80 items-center justify-center text-center text-white">
         <div className="absolute inset-0">
-          {typeof page.hero.backgroundImage === 'object' && (
+          {page.hero.backgroundImage instanceof Object && (
             <img
               src={page.hero.backgroundImage.url}
               alt={page.hero.backgroundImage.alt}

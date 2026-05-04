@@ -29,7 +29,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Hero Section */}
       <section className="relative flex h-[calc(100vh-80px)] min-h-125 items-center justify-center text-center text-white">
         <div className="absolute inset-0">
-          {typeof page.hero.backgroundImage === 'object' && (
+          {page.hero.backgroundImage instanceof Object && (
             <img
               src={page.hero.backgroundImage.url}
               alt={page.hero.backgroundImage.alt}

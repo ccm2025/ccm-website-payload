@@ -44,7 +44,7 @@ export default async function MinistryDetailPage({
     <main>
       <section className="relative flex min-h-52 h-56 sm:h-72 md:h-80 items-center justify-center text-center text-white">
         <div className="absolute inset-0">
-          {typeof page.hero.backgroundImage === 'object' && (
+          {page.hero.backgroundImage instanceof Object && (
             <img
               src={page.hero.backgroundImage.url}
               alt={page.hero.backgroundImage.alt}
