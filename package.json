@@ -45,36 +45,36 @@
     "@payloadcms/next": "^3.84.1",
     "@payloadcms/richtext-lexical": "^3.84.1",
     "@payloadcms/storage-r2": "^3.84.1",
-    "@tailwindcss/postcss": "^4.2.4",
+    "@tailwindcss/postcss": "^4.3.0",
     "cross-env": "^10.1.0",
     "dotenv": "^17.4.2",
-    "graphql": "^16.13.2",
+    "graphql": "^16.14.0",
     "lucide-react": "^1.14.0",
     "next": "~15.4.11",
     "payload": "^3.84.1",
-    "react": "~19.2.5",
-    "react-dom": "~19.2.5",
-    "tailwindcss": "^4.2.4"
+    "react": "~19.2.6",
+    "react-dom": "~19.2.6",
+    "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",
     "@eslint/js": "^9.39.4",
-    "@next/eslint-plugin-next": "^15.5.15",
+    "@next/eslint-plugin-next": "^15.5.18",
     "@playwright/test": "^1.59.1",
-    "@types/node": "~22.19.17",
+    "@types/node": "~22.19.18",
     "@types/react": "~19.2.14",
     "@types/react-dom": "~19.2.3",
-    "@typescript-eslint/eslint-plugin": "^8.59.1",
+    "@typescript-eslint/eslint-plugin": "^8.59.2",
     "@vitejs/plugin-react": "~4.5.2",
     "eslint": "^9.39.4",
-    "eslint-config-next": "^15.5.15",
+    "eslint-config-next": "^15.5.18",
     "jsdom": "^28.1.0",
     "prettier": "^3.8.3",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^4.1.5",
-    "wrangler": "^4.87.0"
+    "wrangler": "^4.90.0"
   },
   "engines": {
     "node": "^18.20.2 || >=20.9.0",
@@ -93,5 +93,6 @@
         "description": "Generate a random string using `openssl rand -hex 32`"
       }
     }
-  }
+  },
+  "packageManager": "pnpm@11.0.9+sha512.34ce82e6780233cf9cad8685029a8f81d2e06196c5a9bad98879f7424940c6817c4e4524fb7d38b8553ceed48b9758b8ebaf1abd3600c232c4c8cf7366086f38"
 }
