@@ -41,51 +41,39 @@
   },
   "dependencies": {
     "@opennextjs/cloudflare": "~1.18.1",
-    "@payloadcms/db-d1-sqlite": "^3.84.1",
-    "@payloadcms/next": "^3.84.1",
-    "@payloadcms/richtext-lexical": "^3.84.1",
-    "@payloadcms/storage-r2": "^3.84.1",
-    "@tailwindcss/postcss": "^4.3.0",
+    "@payloadcms/db-d1-sqlite": "^3.88.0",
+    "@payloadcms/next": "^3.88.0",
+    "@payloadcms/richtext-lexical": "^3.88.0",
+    "@payloadcms/storage-r2": "^3.88.0",
+    "@tailwindcss/postcss": "^4.3.3",
     "cross-env": "^10.1.0",
     "dotenv": "^17.4.2",
-    "graphql": "^16.14.0",
-    "lucide-react": "^1.14.0",
-    "next": "~15.4.11",
-    "payload": "^3.84.1",
-    "react": "~19.2.6",
-    "react-dom": "~19.2.6",
-    "tailwindcss": "^4.3.0"
+    "graphql": "^16.14.2",
+    "lucide-react": "^1.39.0",
+    "next": "~16.3.4",
+    "payload": "^3.88.0",
+    "react": "~19.2.8",
+    "react-dom": "~19.2.8",
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.5",
-    "@eslint/js": "^9.39.4",
-    "@next/eslint-plugin-next": "^15.5.18",
-    "@playwright/test": "^1.59.1",
-    "@types/node": "~22.19.18",
-    "@types/react": "~19.2.14",
-    "@types/react-dom": "~19.2.3",
-    "@typescript-eslint/eslint-plugin": "^8.59.2",
-    "@vitejs/plugin-react": "~4.5.2",
-    "eslint": "^9.39.4",
-    "eslint-config-next": "^15.5.18",
-    "jsdom": "^28.1.0",
-    "prettier": "^3.8.3",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
-    "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^4.1.5",
-    "wrangler": "^4.90.0"
+    "@eslint/js": "^9.39.5",
+    "@next/eslint-plugin-next": "^16.3.4",
+    "@playwright/test": "^1.62.1",
+    "@types/node": "~22.19.21",
+    "@types/react": "~19.2.18",
+    "@types/react-dom": "~19.2.5",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.4",
+    "jsdom": "^30.0.1",
+    "prettier": "^3.9.6",
+    "tsx": "^4.23.13",
+    "typescript": "^6.0.3",
+    "wrangler": "^4.128.0"
   },
   "engines": {
-    "node": "^18.20.2 || >=20.9.0",
-    "pnpm": "^10 || ^11"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "sharp",
-      "esbuild",
-      "unrs-resolver"
-    ]
+    "node": "^22",
+    "pnpm": "^11"
   },
   "cloudflare": {
     "bindings": {
@@ -94,5 +82,5 @@
       }
     }
   },
-  "packageManager": "pnpm@11.0.9+sha512.34ce82e6780233cf9cad8685029a8f81d2e06196c5a9bad98879f7424940c6817c4e4524fb7d38b8553ceed48b9758b8ebaf1abd3600c232c4c8cf7366086f38"
+  "packageManager": "pnpm@11.25.0+sha512.5cde925b4f075f725eb71fbae18a42ffe784524789f19b61c731cb8721ec28aaee160e01a8d5af4fedb2a42cdbf300efe23db356b0d4a17b4d63e11f8ab7c956"
 }
